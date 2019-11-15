@@ -23,7 +23,7 @@ ui <- navbarPage("BONUS BLUEWEBS decision support tool",
                  tabPanel("About",
                           titlePanel("About the decision support tool"),
                           mainPanel(
-                            textOutput("This decision support tool has been created as part of the BONUS BLUEWEBS project. It summarizes the ..."))
+                            (textOutput("aboutText")))
                           ),
                  
                  # Predicted time-series 
@@ -86,6 +86,17 @@ ui <- navbarPage("BONUS BLUEWEBS decision support tool",
 # Define server function
 server <- function(input, output, session) {
   
+  
+  
+# DISPLAY THE "ABOUT" TAB
+    output$aboutText <- renderText({
+    "This decision support tool has been created as part of the BONUS BLUEWEBS project. It summarizes the ..."
+  })
+  
+  
+  
+#DISPLAY THE "PREDICTED TIME SERIES" TAB
+
   #The logic here will TENTATIVELY be as follows:
   # - create a large table with all the possible combinations of scenarios & output variables we want to show here
   # - select the correct lines from the data based on user input, visualize 
