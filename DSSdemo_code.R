@@ -6,6 +6,7 @@ library("shiny")
 library("shinyWidgets")
 
 
+# Load data
 datBio <- read.csv("D:/Github/shinyapp/EwE_bio_results.csv")
 datCth <- read.csv("D:/Github/shinyapp/EwE_catch_results.csv")
 
@@ -22,7 +23,7 @@ ui <- navbarPage("BONUS BLUEWEBS decision support tool",
                  tabPanel("About",
                           titlePanel("About the decision support tool"),
                           mainPanel(
-                            textOutput("This decision support tool has been created as part of the BONUS BLUEWEBS  project. It summarizes the ..."))
+                            textOutput("This decision support tool has been created as part of the BONUS BLUEWEBS project. It summarizes the ..."))
                           ),
                  
                  # Predicted time-series 
@@ -51,7 +52,7 @@ ui <- navbarPage("BONUS BLUEWEBS decision support tool",
                                          
                                          # Do two colums of checkbox groups (biomass and catch)
                                          fluidRow(
-                                           column(width = 6,
+                                           column(width = 5,
                                                   checkboxGroupInput(inputId = "bioVars", 
                                                                      label = "Biomass Variables",
                                                                      choiceNames = list("Cod SSB", "Herring SSB", "Sprat SSB", "Zooplankton SSB", "Phytoplankton SSB"),
@@ -59,7 +60,7 @@ ui <- navbarPage("BONUS BLUEWEBS decision support tool",
                                                                      selected = "plotCod")
                                                   ),
                                            
-                                           column(width = 6,
+                                           column(width = 6, offset = 1,
                                                   checkboxGroupInput(inputId = "catchVars", 
                                                                      label = "Catch Size Variables",
                                                                      choiceNames = list("Cod Catch", "Herring Catch", "Sprat Catch"),
@@ -81,6 +82,8 @@ ui <- navbarPage("BONUS BLUEWEBS decision support tool",
                selected="Predicted time series"
 )
 
+
+# Define server function
 server <- function(input, output, session) {
   
   #The logic here will TENTATIVELY be as follows:
@@ -90,7 +93,7 @@ server <- function(input, output, session) {
   #
   # Things to figure out:
   # - Can we show a flexible number of graphs (depending of how many checkboxes the user has checked)
-  # - how to structure the data table and the input form so that is is easy to pick the correct data
+  # - how to structure the data table and the input form so that it is easy to pick the correct data
   
   ## BIOMASS VARIABLES
   
