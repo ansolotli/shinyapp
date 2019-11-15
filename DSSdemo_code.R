@@ -26,7 +26,7 @@ ui <- navbarPage("BONUS BLUEWEBS decision support tool",
                             (textOutput("aboutText")))
                           ),
                  
-                 # Predicted time-series 
+                 # Predicted time-series panel
                  tabPanel("Predicted time series",
                           titlePanel("Explore the predicted biomasses and catches in different management scenarios"),
                           sidebarLayout(
@@ -77,8 +77,22 @@ ui <- navbarPage("BONUS BLUEWEBS decision support tool",
                             )
                           )
                ),
-               tabPanel("Novelty"),
-               tabPanel("Optimize"),
+				 
+				       # Novelty panel
+               tabPanel("Novelty",
+                         titlePanel("Explore the uncertainty of model forecasts under novel conditions"),
+                         mainPanel(
+                           (textOutput("noveltyText")))
+                        ),
+				 
+				       # Optimize panel
+               tabPanel("Optimize",
+                        titlePanel("Explore the scenarios that might be optimal for you"),
+                        mainPanel(
+                          (textOutput("optimalText")))                        
+                        ),
+				 
+				       # select the default panel
                selected="Predicted time series"
 )
 
@@ -90,7 +104,9 @@ server <- function(input, output, session) {
   
 # DISPLAY THE "ABOUT" TAB
     output$aboutText <- renderText({
-    "This decision support tool has been created as part of the BONUS BLUEWEBS project. It summarizes the ..."
+    "This decision support tool has been created as part of the BONUS BLUEWEBS project. 
+      It visualizes and explains the key results of our research, and allows the user to select which 
+      scenarios and variables to explore."
   })
   
   
@@ -251,6 +267,21 @@ server <- function(input, output, session) {
     }
   )
   
+  
+  
+  
+# DISPLAY THE "NOVELTY" TAB
+  output$noveltyText <- renderText({
+    "This page will contain some form of visualization of the novelty data."
+  })
+
+  
+  
+# DISPLAY THE "OPTIMIZE" TAB
+  output$optimalText <- renderText({
+    "This page will help to visualize which scenarios could lead to the wanted outcome."
+  })
+    
 }
 
 shinyApp(ui = ui, server = server)
