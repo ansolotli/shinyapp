@@ -23,7 +23,7 @@ ui <- navbarPage("BONUS BLUEWEBS decision support tool",
                  tabPanel("About",
                           titlePanel("About the decision support tool"),
                           mainPanel(
-                            textOutput("aboutText"))
+                            htmlOutput("aboutText"))
                           ),
                  
                  # Predicted time-series panel
@@ -94,7 +94,7 @@ ui <- navbarPage("BONUS BLUEWEBS decision support tool",
 				 
 				       # Optimize panel
                tabPanel("Optimize",
-                        titlePanel("Explore the scenarios that might be optimal for you"),
+                        titlePanel("Explore the predictions for ecosystem services in different scenarios."),
                         mainPanel(
                           textOutput("optimalText"))                       
                         ),
@@ -111,10 +111,26 @@ server <- function(input, output, session) {
   
 # DISPLAY THE "ABOUT" TAB
     output$aboutText <- renderText({
-    "This decision support tool has been created as part of the BONUS BLUEWEBS project. 
-      It visualizes and explains the key results of our research, and allows the user to select which 
-      scenarios and variables to explore."
-  })
+      HTML("This decision support tool has been created as part of the BONUS BLUEWEBS project. 
+            It aims to visualize and explain the key results of various environmental modelling scenarios.",
+           "<br>",
+           "<br>",
+           "The model behind this application has been used to forecast the impacts of different climatic futures,
+           nutrient load management schemes and fisheries management options in the open Baltic Sea marine ecosystem
+           during the 21st century.",
+           "<br>",
+           "<br>",
+           "The model produces forecasts about the ecosystem services, such as fish catches and profitability of fisheries,
+           and predictions on the probability to achieve good environmental status based on the policy and management decision made.",
+           "<br>",
+           "<br>",
+           "It also predicts which management and climate scenarios are likely to lead to novel i.e. previously unobserved conditions,
+          and demonstrates the uncertainty of any forecasts in such a situation.",
+           "<br>",
+           "<br>",
+           "This decision support tool allows the user to select which scenarios and variables to explore. We hope that it will help
+           decision makers by visualizing the results of different policy and manadement decisions.")
+    })
   
   
   
@@ -136,7 +152,7 @@ server <- function(input, output, session) {
     {
       if("plotCod" %in% input$bioVars){
         tmp <- datBio[(datBio$F == input$F & datBio$Nutr_scen == input$Nutr_scen & datBio$Climate == input$Climate),] 
-        plot(x=tmp$Year, y=tmp$Cod,  xlab="Year", ylab="Biomass", ylim=c(0,3.5), xlim=c(2004,2096), type = 'n', main = "Biomass of cod")
+        plot(x=tmp$Year, y=tmp$Cod,  xlab="Year", ylab="Biomass", ylim=c(0,3.0), xlim=c(2004,2096), type = 'n', main = "Biomass of cod")
         polygon(c(tmp$Year, rev(tmp$Year)), c((tmp$Cod - tmp$CodSD), rev(tmp$Cod + tmp$CodSD)), col = 'grey80', border = NA)
         lines(x=tmp$Year, y=tmp$Cod, col="black")
         abline(h=0.8, col = "red")
@@ -150,7 +166,7 @@ server <- function(input, output, session) {
     {
       if("plotHer" %in% input$bioVars){
         tmp <- datBio[(datBio$F == input$F & datBio$Nutr_scen == input$Nutr_scen & datBio$Climate == input$Climate),]  
-        plot(x=tmp$Year, y=tmp$Herring,  xlab="Year", ylab="Biomass", ylim=c(0,3.5), xlim=c(2004,2096), type = 'n', main = "Biomass of Herring")
+        plot(x=tmp$Year, y=tmp$Herring,  xlab="Year", ylab="Biomass", ylim=c(0,3.0), xlim=c(2004,2096), type = 'n', main = "Biomass of Herring")
         polygon(c(tmp$Year, rev(tmp$Year)), c((tmp$Herring - tmp$HerringSD), rev(tmp$Herring + tmp$HerringSD)), col = 'grey80', border = NA)
         lines(x=tmp$Year, y=tmp$Herring, col="black")
         #abline(h=0.8, col = "red")
@@ -164,7 +180,7 @@ server <- function(input, output, session) {
     {
       if("plotSpr" %in% input$bioVars){
         tmp <- datBio[(datBio$F == input$F & datBio$Nutr_scen == input$Nutr_scen & datBio$Climate == input$Climate),]  
-        plot(x=tmp$Year, y=tmp$Sprat,  xlab="Year", ylab="Biomass", ylim=c(0,3.5), xlim=c(2004,2096), type = 'n', main = "Biomass of Sprat")
+        plot(x=tmp$Year, y=tmp$Sprat,  xlab="Year", ylab="Biomass", ylim=c(0,3.0), xlim=c(2004,2096), type = 'n', main = "Biomass of Sprat")
         # !!!! NOTE In data file there is SpratDS instead of SpratSD
         polygon(c(tmp$Year, rev(tmp$Year)), c((tmp$Sprat - tmp$SpratDS), rev(tmp$Sprat + tmp$SpratDS)), col = 'grey80', border = NA)
         lines(x=tmp$Year, y=tmp$Sprat, col="black")
@@ -302,7 +318,8 @@ server <- function(input, output, session) {
   
 # DISPLAY THE "OPTIMIZE" TAB
   output$optimalText <- renderText({
-    "This page will help to visualize which scenarios could lead to the wanted outcome."
+    "This page will help to visualize predictions for ecosystem services, such as profitability of fisheries, 
+    and the probability to achieve good environmental status in different scenarios."
   })
     
 }
