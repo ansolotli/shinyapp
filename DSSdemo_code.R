@@ -23,7 +23,7 @@ ui <- navbarPage("BONUS BLUEWEBS decision support tool",
                  tabPanel("About",
                           titlePanel("About the decision support tool"),
                           mainPanel(
-                            (textOutput("aboutText")))
+                            textOutput("aboutText"))
                           ),
                  
                  # Predicted time-series panel
@@ -81,15 +81,22 @@ ui <- navbarPage("BONUS BLUEWEBS decision support tool",
 				       # Novelty panel
                tabPanel("Novelty",
                          titlePanel("Explore the uncertainty of model forecasts under novel conditions"),
-                         mainPanel(
-                           (textOutput("noveltyText")))
-                        ),
+                         sidebarLayout(
+                           sidebarPanel(
+                             position="right",
+                             htmlOutput("noveltySidetitle"),
+                             htmlOutput("noveltySidetext")
+                           ),
+                           mainPanel(
+                             plotOutput("noveltyPlot")
+                           )
+                         )),
 				 
 				       # Optimize panel
                tabPanel("Optimize",
                         titlePanel("Explore the scenarios that might be optimal for you"),
                         mainPanel(
-                          (textOutput("optimalText")))                        
+                          textOutput("optimalText"))                       
                         ),
 				 
 				       # select the default panel
@@ -271,8 +278,24 @@ server <- function(input, output, session) {
   
   
 # DISPLAY THE "NOVELTY" TAB
-  output$noveltyText <- renderText({
-    "This page will contain some form of visualization of the novelty data."
+  
+  output$noveltySidetitle <- renderText({
+    # I'm not sure if HTML should be used like this.S
+    HTML("<b>","This is a random testplot!","<b>")
+  })
+  
+  output$noveltySidetext <- renderText({
+    HTML("<br>",
+         "It describes the projected cod catch in the combined scenarios of sustainable fishery policy,
+          Baltic Sea Action Plan nutrient loading policy, and RCP4.5 climate change scenario.",
+         "<br>",
+         "<br>",
+         "This box includes questionable HTML code.")
+  })
+  
+  output$noveltyPlot <- renderPlot({
+    tmp <- datCth[(datCth$F == "Sus"& datCth$Nutr_scen == "BSAP" & datCth$Climate == "RCP4.5"),]
+    plot(x = tmp$Year, y = tmp$CodCatch, main = "Cod Catch")
   })
 
   
