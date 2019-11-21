@@ -94,7 +94,7 @@ ui <- navbarPage("BONUS BLUEWEBS decision support tool",
 				 
 				       # Optimize panel
                tabPanel("Optimize",
-                        titlePanel("Explore the predictions for ecosystem services in different scenarios."),
+                        titlePanel("Explore the predictions for ecosystem services in different scenarios"),
                         mainPanel(
                           textOutput("optimalText"))                       
                         ),
