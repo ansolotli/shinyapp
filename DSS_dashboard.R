@@ -88,7 +88,7 @@ sidebar <- dashboardSidebar(
                  column(width = 9,
                         checkboxGroupInput(inputId = "novelVars", 
                                            label = "Novelty variables",
-                                           choiceNames = list("CodRV", "Temperature", "Not Hypoxia"),
+                                           choiceNames = list("Cod reproductive volume", "Water temperature", "Inverse Hypoxic area"),
                                            choiceValues = list("plotRv", "plotTemp", "plotHyp"),
                                            selected = "plotRv")
                  )
@@ -115,7 +115,7 @@ body <- dashboardBody(
     tabItem("novelty",
             titlePanel("Explore the uncertainty of model forecasts under novel conditions"),
             fluidRow(
-              splitLayout(cellWidths = c("60%", "40%"), uiOutput("novel_plot_list"), uiOutput("novel_info_list"))
+              splitLayout(cellWidths = c("60%", "40%"), uiOutput("novel_plot_list"), uiOutput("novel_info"))
             )
     ),
     tabItem("optimize",
@@ -299,7 +299,7 @@ server <- function(input, output) {
     {
       if("plotRv" %in% input$novelVars){
         tmp <- datNov[(datNov$Nutr_scen == input$Nutr_scen_nov & datNov$Clim_scen == input$Climate_nov),] 
-        plot(x=tmp$Year, y=tmp$codRV,  xlab="Year", ylab="CodRV", ylim=c(0,1550), xlim=c(2004,2096), type = 'n', main = "CodRV novelty")
+        plot(x=tmp$Year, y=tmp$codRV,  xlab="Year", ylab="Cod reproductive volume", ylim=c(0,1550), xlim=c(2004,2096), type = 'n', main = "Novelty for cod reproductive volume")
         #polygon(c(tmp$Year, rev(tmp$Year)), col = 'grey80', border = NA)
         lines(x=tmp$Year, y=tmp$codRV, col="black")
       }
@@ -311,7 +311,7 @@ server <- function(input, output) {
     {
       if("plotTemp" %in% input$novelVars){
         tmp <- datNov[(datNov$Nutr_scen == input$Nutr_scen_nov & datNov$Clim_scen == input$Climate_nov),] 
-        plot(x=tmp$Year, y=tmp$Aug060mT,  xlab="Year", ylab="Temperature", ylim=c(-0.5,2.3), xlim=c(2004,2096), type = 'n', main = "Temperature novelty")
+        plot(x=tmp$Year, y=tmp$Aug060mT,  xlab="Year", ylab="Water (0-60m) temperature", ylim=c(-0.5,2.3), xlim=c(2004,2096), type = 'n', main = "Novelty for August 0-60m water temperature")
         #polygon(c(tmp$Year, rev(tmp$Year)), col = 'grey80', border = NA)
         lines(x=tmp$Year, y=tmp$Aug060mT, col="black")
       }
@@ -322,7 +322,7 @@ server <- function(input, output) {
     {
       if("plotHyp" %in% input$novelVars){
         tmp <- datNov[(datNov$Nutr_scen == input$Nutr_scen_nov & datNov$Clim_scen == input$Climate_nov),]
-        plot(x=tmp$Year, y=tmp$notHypoxicA,  xlab="Year", ylab="Not hypoxic", ylim=c(0,58500), xlim=c(2004,2096), type = 'n', main = "Hypoxia novelty")
+        plot(x=tmp$Year, y=tmp$notHypoxicA,  xlab="Year", ylab="Inverse hypoxic area", ylim=c(0,58500), xlim=c(2004,2096), type = 'n', main = "Novelty for inverse hypoxic area")
         #polygon(c(tmp$Year, rev(tmp$Year)), col = 'grey80', border = NA)
         lines(x=tmp$Year, y=tmp$notHypoxicA, col="black")
       }
@@ -344,33 +344,13 @@ server <- function(input, output) {
   )
   
   
-  output$novel_info_list <- renderUI({
-    {
-      novel_info_output_list <- 
-        list(
+  output$novel_info <- renderUI({
           box(
-            title = "CodRV", width = 12, height = 150, fill = TRUE, background = "purple", 
-            "Here is some info."
-          ),
-          box(
-            title = "Temperature", width = 12, height = 150, fill = TRUE, background = "purple",
-            "Test content."
-          ),
-          box(
-            title = "Hypoxia", width = 12, height = 150, fill = TRUE, background = "purple",
-            "Test content."
+            title = "About novelty", width = 12, height = 320, fill = TRUE, background = "purple", style = "position:fixed",
+            "Novel conditions, i.e. conditions that have not been observed in the past..."
+            
           )
-        )
-      
-      # Convert the list to a tagList - this is necessary for the list of items
-      # to display properly.
-      do.call(tagList, novel_info_output_list)
-    }
   })
-  
-
-  
-  
   
 }
 
