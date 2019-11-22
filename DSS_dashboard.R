@@ -271,7 +271,7 @@ server <- function(input, output) {
     {
       bio_plot_output_list <- lapply(
         input$bioVars, function(plotname) {
-          column(width=12, plotOutput(plotname, height = 300))
+            column(width=12, box(plotOutput(plotname, height = 300), width = 13))
         }
       )
       # Convert the list to a tagList - this is necessary for the list of items
@@ -285,7 +285,7 @@ server <- function(input, output) {
     {
       catch_plot_output_list <- lapply(
         input$catchVars, function(plotname) {
-          column(width=12, plotOutput(plotname, height = 300))
+            column(width=12, box(plotOutput(plotname, height = 300), width = 13))
         }
       )
       do.call(tagList, catch_plot_output_list)
@@ -334,7 +334,7 @@ server <- function(input, output) {
     {
       novel_plot_output_list <- lapply(
         input$novelVars, function(plotname) {
-          column(width=12, box(plotOutput(plotname, height = 300), width = 12))
+          column(width=12, box(plotOutput(plotname, height = 300), width = 13))
         }
       )
       # Convert the list to a tagList - this is necessary for the list of items
