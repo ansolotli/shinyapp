@@ -115,7 +115,7 @@ body <- dashboardBody(
     tabItem("novelty",
             titlePanel("Explore the uncertainty of model forecasts under novel conditions"),
             fluidRow(
-              uiOutput("novel_plot_list")
+              splitLayout(cellWidths = c("60%", "40%"), uiOutput("novel_plot_list"), uiOutput("novel_info_list"))
             )
     ),
     tabItem("optimize",
@@ -334,7 +334,7 @@ server <- function(input, output) {
     {
       novel_plot_output_list <- lapply(
         input$novelVars, function(plotname) {
-          column(width=12, plotOutput(plotname, height = 300))
+          column(width=12, box(plotOutput(plotname, height = 300), width = 12))
         }
       )
       # Convert the list to a tagList - this is necessary for the list of items
@@ -342,6 +342,35 @@ server <- function(input, output) {
       do.call(tagList, novel_plot_output_list)
     }
   )
+  
+  
+  output$novel_info_list <- renderUI({
+    {
+      novel_info_output_list <- 
+        list(
+          box(
+            title = "CodRV", width = 12, height = 150, fill = TRUE, background = "purple", 
+            "Here is some info."
+          ),
+          box(
+            title = "Temperature", width = 12, height = 150, fill = TRUE, background = "purple",
+            "Test content."
+          ),
+          box(
+            title = "Hypoxia", width = 12, height = 150, fill = TRUE, background = "purple",
+            "Test content."
+          )
+        )
+      
+      # Convert the list to a tagList - this is necessary for the list of items
+      # to display properly.
+      do.call(tagList, novel_info_output_list)
+    }
+  })
+  
+
+  
+  
   
 }
 
