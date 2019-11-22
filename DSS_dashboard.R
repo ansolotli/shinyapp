@@ -5,12 +5,13 @@ library(shinydashboard)
 # Load data
 datBio <- read.csv("D:/Github/shinyapp/EwE_bio_results.csv")
 datCth <- read.csv("D:/Github/shinyapp/EwE_catch_results.csv")
+datNov <- read.csv("D:/Github/shinyapp/Corrected_novelty_30_09_2019.csv", row.names = NULL, sep = ";")
 
 
 # Header
 header <- dashboardHeader(title = "BONUS BLUEWEBS decision support tool", titleWidth = 450)
 
-
+# Manually links menuItems to the corresponding tabItems that would otherwise be unlinked
 convertMenuItem <- function(mi,tabName) {
   mi$children[[1]]$attribs['data-toggle']="tab"
   mi$children[[1]]$attribs['data-value'] = tabName
@@ -68,7 +69,31 @@ sidebar <- dashboardSidebar(
     
     
     convertMenuItem(
-      menuItem("Novelty", tabName = "novelty"), tabName = "novelty"),
+      menuItem("Novelty", tabName = "novelty",
+               # Create the dropdowns of scenario options
+               selectInput(inputId = 'Nutr_scen_nov', 
+                           label = "Nutrient Loading Policy",
+                           choices = c("Baltic Sea Action Plan" = "BSAP", "Average 1995-2002" = "Ref"),
+                           selected = "BSAP"
+               ),
+               
+               selectInput(inputId = 'Climate_nov', 
+                           label = "Climate Change Scenario - Representative Concentration Pathways",
+                           choices = c("RCP4.5", "RCP8.5"), 
+                           selected = "RCP4.5"
+               ),
+               
+               # Create the column of checkbox groups (codRV, temp_Aug060, notHypoxic)
+               fluidRow(
+                 column(width = 9,
+                        checkboxGroupInput(inputId = "novelVars", 
+                                           label = "Novelty variables",
+                                           choiceNames = list("CodRV", "Temperature", "Not Hypoxia"),
+                                           choiceValues = list("plotRv", "plotTemp", "plotHyp"),
+                                           selected = "plotRv")
+                 )
+              )
+      ), tabName = "novelty"),
     convertMenuItem(
       menuItem("Optimize", tabName = "optimize"), tabName = "optimize")
   )
@@ -81,23 +106,23 @@ body <- dashboardBody(
             titlePanel("About the decision support tool"),
             htmlOutput("aboutText"), width = 10),
             
-    tabItem("predicted"
-            ,
+    tabItem("predicted",
             titlePanel("Explore the predicted biomasses and catches in different management scenarios"),
             fluidRow(
               splitLayout(cellWidths = c("50%", "50%"), uiOutput("bio_plot_list"), uiOutput("catch_plot_list"))
             )
     ),
     tabItem("novelty",
-            titlePanel("Explore the uncertainty of model forecasts under novel conditions")
-            ),
+            titlePanel("Explore the uncertainty of model forecasts under novel conditions"),
+            fluidRow(
+              uiOutput("novel_plot_list")
+            )
+    ),
     tabItem("optimize",
-            titlePanel("Explore the predictions for ecosystem services in different scenarios"))
+            titlePanel("Explore the predictions for ecosystem services in different scenarios")
+    )
   )
 )
-
-
-
 
 # Create the UI 
 ui <- dashboardPage(header, sidebar, body, skin = "black") #skin determines the colour of the dashboard
@@ -264,6 +289,57 @@ server <- function(input, output) {
         }
       )
       do.call(tagList, catch_plot_output_list)
+    }
+  )
+  
+  
+  # "NOVELTY TAB"
+  
+  output$plotRv <- renderPlot(
+    {
+      if("plotRv" %in% input$novelVars){
+        tmp <- datNov[(datNov$Nutr_scen == input$Nutr_scen_nov & datNov$Clim_scen == input$Climate_nov),] 
+        plot(x=tmp$Year, y=tmp$codRV,  xlab="Year", ylab="CodRV", ylim=c(0,1550), xlim=c(2004,2096), type = 'n', main = "CodRV novelty")
+        #polygon(c(tmp$Year, rev(tmp$Year)), col = 'grey80', border = NA)
+        lines(x=tmp$Year, y=tmp$codRV, col="black")
+      }
+    }
+  )
+  
+  
+  output$plotTemp <- renderPlot(
+    {
+      if("plotTemp" %in% input$novelVars){
+        tmp <- datNov[(datNov$Nutr_scen == input$Nutr_scen_nov & datNov$Clim_scen == input$Climate_nov),] 
+        plot(x=tmp$Year, y=tmp$Aug060mT,  xlab="Year", ylab="Temperature", ylim=c(-0.5,2.3), xlim=c(2004,2096), type = 'n', main = "Temperature novelty")
+        #polygon(c(tmp$Year, rev(tmp$Year)), col = 'grey80', border = NA)
+        lines(x=tmp$Year, y=tmp$Aug060mT, col="black")
+      }
+    }
+  )
+  
+  output$plotHyp <- renderPlot(
+    {
+      if("plotHyp" %in% input$novelVars){
+        tmp <- datNov[(datNov$Nutr_scen == input$Nutr_scen_nov & datNov$Clim_scen == input$Climate_nov),]
+        plot(x=tmp$Year, y=tmp$notHypoxicA,  xlab="Year", ylab="Not hypoxic", ylim=c(0,58500), xlim=c(2004,2096), type = 'n', main = "Hypoxia novelty")
+        #polygon(c(tmp$Year, rev(tmp$Year)), col = 'grey80', border = NA)
+        lines(x=tmp$Year, y=tmp$notHypoxicA, col="black")
+      }
+    }
+  )
+  
+  # Render Novelty variable time-series
+  output$novel_plot_list <- renderUI(
+    {
+      novel_plot_output_list <- lapply(
+        input$novelVars, function(plotname) {
+          column(width=12, plotOutput(plotname, height = 300))
+        }
+      )
+      # Convert the list to a tagList - this is necessary for the list of items
+      # to display properly.
+      do.call(tagList, novel_plot_output_list)
     }
   )
   
