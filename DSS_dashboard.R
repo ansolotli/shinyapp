@@ -83,17 +83,19 @@ sidebar <- dashboardSidebar(
                            selected = "RCP4.5"
                ),
                
-               # Create the column of checkbox groups (codRV, temp_Aug060, notHypoxic)
+               # Create the column of checkbox groups (codRV, temp_MarchMay050, temp_Aug060, notHypoxic)
                fluidRow(
-                 column(width = 9,
+                 column(width = 12,
                         checkboxGroupInput(inputId = "novelVars", 
                                            label = "Novelty variables",
-                                           choiceNames = list("Cod reproductive volume", "Water temperature", "Inverse Hypoxic area"),
-                                           choiceValues = list("plotRv", "plotTemp", "plotHyp"),
+                                           choiceNames = list("Cod reproductive volume", "Water temperature 0-50m March-May", 
+                                                              "Water temperature 0-60m August", "Inverse hypoxic area"),
+                                           choiceValues = list("plotRv", "plotTemp1", "plotTemp2", "plotHyp"),
                                            selected = "plotRv")
                  )
-              )
+               )
       ), tabName = "novelty"),
+    
     convertMenuItem(
       menuItem("Optimize", tabName = "optimize"), tabName = "optimize")
   )
@@ -114,9 +116,8 @@ body <- dashboardBody(
     ),
     tabItem("novelty",
             titlePanel("Explore the uncertainty of model forecasts under novel conditions"),
-            fluidRow(
-              splitLayout(cellWidths = c("60%", "40%"), uiOutput("novel_plot_list"), uiOutput("novel_info"))
-            )
+            htmlOutput("novel_info"), 
+            uiOutput("novel_plot_list")
     ),
     tabItem("optimize",
             titlePanel("Explore the predictions for ecosystem services in different scenarios")
@@ -295,6 +296,16 @@ server <- function(input, output) {
   
   # "NOVELTY TAB"
   
+  # output$novel_info <- renderUI({
+  #   box(
+  #     title = "About novelty", width = 12,
+  #     HTML("Novel conditions are conditions that have not been observed in the past. This page shows the result were analysed based on the past 'observed range' 
+  #          calculating the confidence interval (CI) from the four food web (EwE) forcing variables (0-50m March-May water temperature, 
+  #          0-60m August water temperature, inverse hypoxic area and the cod reproductive volume) using the biogeochemical (RCO-Scobi) 
+  #          model for the period 1974-2004. For each of the four variables the future novelty is calculated and defined as the distance outside the CI as the level of novelty.")
+  #     )
+  # })
+  
   output$plotRv <- renderPlot(
     {
       if("plotRv" %in% input$novelVars){
@@ -306,12 +317,22 @@ server <- function(input, output) {
     }
   )
   
-  
-  output$plotTemp <- renderPlot(
+  output$plotTemp1 <- renderPlot(
     {
-      if("plotTemp" %in% input$novelVars){
+      if("plotTemp1" %in% input$novelVars){
         tmp <- datNov[(datNov$Nutr_scen == input$Nutr_scen_nov & datNov$Clim_scen == input$Climate_nov),] 
-        plot(x=tmp$Year, y=tmp$Aug060mT,  xlab="Year", ylab="Water (0-60m) temperature", ylim=c(-0.5,2.3), xlim=c(2004,2096), type = 'n', main = "Novelty for August 0-60m water temperature")
+        plot(x=tmp$Year, y=tmp$T_050_MarchMay,  xlab="Year", ylab="Water (0-50m) temperature in March-May", ylim=c(-0.5,2.3), xlim=c(2004,2096), type = 'n', main = "Novelty for March-May 0-50m water temperature")
+        #polygon(c(tmp$Year, rev(tmp$Year)), col = 'grey80', border = NA)
+        lines(x=tmp$Year, y=tmp$T_050_MarchMay, col="black")
+      }
+    }
+  )
+  
+  output$plotTemp2 <- renderPlot(
+    {
+      if("plotTemp2" %in% input$novelVars){
+        tmp <- datNov[(datNov$Nutr_scen == input$Nutr_scen_nov & datNov$Clim_scen == input$Climate_nov),] 
+        plot(x=tmp$Year, y=tmp$Aug060mT,  xlab="Year", ylab="Water (0-60m) temperature in August", ylim=c(-0.5,2.3), xlim=c(2004,2096), type = 'n', main = "Novelty for August 0-60m water temperature")
         #polygon(c(tmp$Year, rev(tmp$Year)), col = 'grey80', border = NA)
         lines(x=tmp$Year, y=tmp$Aug060mT, col="black")
       }
@@ -339,18 +360,16 @@ server <- function(input, output) {
       )
       # Convert the list to a tagList - this is necessary for the list of items
       # to display properly.
-      do.call(tagList, novel_plot_output_list)
+      #do.call(tagList, novel_plot_output_list)
+      fluidRow(
+        
+        lapply(
+          X = split(novel_plot_output_list, f = rep(c(1, 2), length.out = length(novel_plot_output_list))),
+          FUN = column, width = 6, style='padding:0px'
+        )
+      )
     }
   )
-  
-  
-  output$novel_info <- renderUI({
-          box(
-            title = "About novelty", width = 12, height = 320, fill = TRUE, background = "purple", style = "position:fixed",
-            "Novel conditions, i.e. conditions that have not been observed in the past..."
-            
-          )
-  })
   
 }
 
