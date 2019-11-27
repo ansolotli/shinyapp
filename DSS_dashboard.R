@@ -3,8 +3,8 @@ library(shinydashboard)
 
 
 # Load data
-datBio <- read.csv("D:/Github/shinyapp/EwE_bio_results.csv")
-datCth <- read.csv("D:/Github/shinyapp/EwE_catch_results.csv")
+datBio <- read.csv("D:/Github/shinyapp/EwE_bio_results_corrected.csv", row.names = NULL, sep = ";")
+datCth <- read.csv("D:/Github/shinyapp/EwE_catch_results_corrected.csv", row.names = NULL, sep = ";")
 datNov <- read.csv("D:/Github/shinyapp/Corrected_novelty_30_09_2019.csv", row.names = NULL, sep = ";")
 
 
@@ -155,11 +155,11 @@ server <- function(input, output) {
     {
       if("plotCod" %in% input$bioVars){
         tmp <- datBio[(datBio$F == input$F & datBio$Nutr_scen == input$Nutr_scen & datBio$Climate == input$Climate),] 
-        plot(x=tmp$Year, y=tmp$Cod,  xlab="Year", ylab="Biomass", ylim=c(0,3.5), xlim=c(2004,2096), type = 'n', main = "Biomass of cod")
+        plot(x=tmp$Year, y=tmp$Cod,  xlab="Year", ylab="Biomass", ylim=c(0,250), xlim=c(2004,2096), type = 'n', main = "Biomass of cod")
         polygon(c(tmp$Year, rev(tmp$Year)), c((tmp$Cod - tmp$CodSD), rev(tmp$Cod + tmp$CodSD)), col = 'grey80', border = NA)
         lines(x=tmp$Year, y=tmp$Cod, col="black")
-        abline(h=0.8, col = "red")
-        text(2007, 0.85, "GES above this line", col="red", pos=4)
+        #abline(h=0.8, col = "red")
+        #text(2007, 0.85, "GES above this line", col="red", pos=4)
       }
     }
   )  
@@ -169,7 +169,7 @@ server <- function(input, output) {
     {
       if("plotHer" %in% input$bioVars){
         tmp <- datBio[(datBio$F == input$F & datBio$Nutr_scen == input$Nutr_scen & datBio$Climate == input$Climate),]  
-        plot(x=tmp$Year, y=tmp$Herring,  xlab="Year", ylab="Biomass", ylim=c(0,3.5), xlim=c(2004,2096), type = 'n', main = "Biomass of Herring")
+        plot(x=tmp$Year, y=tmp$Herring,  xlab="Year", ylab="Biomass", ylim=c(0,800), xlim=c(2004,2096), type = 'n', main = "Biomass of Herring")
         polygon(c(tmp$Year, rev(tmp$Year)), c((tmp$Herring - tmp$HerringSD), rev(tmp$Herring + tmp$HerringSD)), col = 'grey80', border = NA)
         lines(x=tmp$Year, y=tmp$Herring, col="black")
         #abline(h=0.8, col = "red")
@@ -183,7 +183,7 @@ server <- function(input, output) {
     {
       if("plotSpr" %in% input$bioVars){
         tmp <- datBio[(datBio$F == input$F & datBio$Nutr_scen == input$Nutr_scen & datBio$Climate == input$Climate),]  
-        plot(x=tmp$Year, y=tmp$Sprat,  xlab="Year", ylab="Biomass", ylim=c(0,3.5), xlim=c(2004,2096), type = 'n', main = "Biomass of Sprat")
+        plot(x=tmp$Year, y=tmp$Sprat,  xlab="Year", ylab="Biomass", ylim=c(0,1150), xlim=c(2004,2096), type = 'n', main = "Biomass of Sprat")
         # !!!! NOTE In data file there is SpratDS instead of SpratSD
         polygon(c(tmp$Year, rev(tmp$Year)), c((tmp$Sprat - tmp$SpratDS), rev(tmp$Sprat + tmp$SpratDS)), col = 'grey80', border = NA)
         lines(x=tmp$Year, y=tmp$Sprat, col="black")
@@ -228,7 +228,7 @@ server <- function(input, output) {
     {
       if("plotCodCatch" %in% input$catchVars){
         tmp <- datCth[(datCth$F == input$F & datCth$Nutr_scen == input$Nutr_scen & datCth$Climate == input$Climate),] 
-        plot(x=tmp$Year, y=tmp$CodCatch,  xlab="Year", ylab="Catch", ylim=c(0,1.2), xlim=c(2004,2096), type = 'n', main = "Cod Catch")
+        plot(x=tmp$Year, y=tmp$CodCatch,  xlab="Year", ylab="Catch", ylim=c(0,80), xlim=c(2004,2096), type = 'n', main = "Cod Catch")
         polygon(c(tmp$Year, rev(tmp$Year)), c((tmp$CodCatch - tmp$CodSD), rev(tmp$CodCatch + tmp$CodSD)), col = 'grey80', border = NA)
         lines(x=tmp$Year, y=tmp$CodCatch, col="black")
         #abline(h=0.8, col = "red")
@@ -242,7 +242,7 @@ server <- function(input, output) {
     {
       if("plotHerCatch" %in% input$catchVars){
         tmp <- datCth[(datCth$F == input$F & datCth$Nutr_scen == input$Nutr_scen & datCth$Climate == input$Climate),]  
-        plot(x=tmp$Year, y=tmp$HerringCatch,  xlab="Year", ylab="Catch", ylim=c(0,1.2), xlim=c(2004,2096), type = 'n', main = "Herring Catch")
+        plot(x=tmp$Year, y=tmp$HerringCatch,  xlab="Year", ylab="Catch", ylim=c(0,250), xlim=c(2004,2096), type = 'n', main = "Herring Catch")
         polygon(c(tmp$Year, rev(tmp$Year)), c((tmp$HerringCatch - tmp$HerringSD), rev(tmp$HerringCatch + tmp$HerringSD)), col = 'grey80', border = NA)
         lines(x=tmp$Year, y=tmp$HerringCatch, col="black")
         #abline(h=0.8, col = "red")
@@ -256,7 +256,7 @@ server <- function(input, output) {
     {
       if("plotSprCatch" %in% input$catchVars){
         tmp <- datCth[(datCth$F == input$F & datCth$Nutr_scen == input$Nutr_scen & datCth$Climate == input$Climate),]  
-        plot(x=tmp$Year, y=tmp$SpratCatch,  xlab="Year", ylab="Catch", ylim=c(0,1.2), xlim=c(2004,2096), type = 'n', main = "Sprat Catch")
+        plot(x=tmp$Year, y=tmp$SpratCatch,  xlab="Year", ylab="Catch", ylim=c(0,400), xlim=c(2004,2096), type = 'n', main = "Sprat Catch")
         # !!!! NOTE In data file there is SpratDS instead of SpratSD
         polygon(c(tmp$Year, rev(tmp$Year)), c((tmp$SpratCatch - tmp$SpratDS), rev(tmp$SpratCatch + tmp$SpratDS)), col = 'grey80', border = NA)
         lines(x=tmp$Year, y=tmp$SpratCatch, col="black")
