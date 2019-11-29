@@ -1,4 +1,3 @@
-# Define the server function
 
 # Load data
 datBio <- read.csv("D:/Github/shinyapp/EwE_bio_results_corrected.csv", row.names = NULL, sep = ";")
@@ -6,6 +5,7 @@ datCth <- read.csv("D:/Github/shinyapp/EwE_catch_results_corrected.csv", row.nam
 datNov <- read.csv("D:/Github/shinyapp/Corrected_novelty_30_09_2019.csv", row.names = NULL, sep = ";")
 
 
+# Define the server function
 server <- function(input, output) {
   
   # "ABOUT" TAB
@@ -38,8 +38,8 @@ server <- function(input, output) {
         plot(x=tmp$Year, y=tmp$Cod,  xlab="Year", ylab="Biomass", ylim=c(0,250), xlim=c(2004,2096), type = 'n', main = "Biomass of cod")
         polygon(c(tmp$Year, rev(tmp$Year)), c((tmp$Cod - tmp$CodSD), rev(tmp$Cod + tmp$CodSD)), col = 'grey80', border = NA)
         lines(x=tmp$Year, y=tmp$Cod, col="black")
-        #abline(h=0.8, col = "red")
-        #text(2007, 0.85, "GES above this line", col="red", pos=4)
+        abline(h=63, col = "red")
+        text(2007, 68, "GES above this line", col="red", pos=4)
       }
     }
   )  
@@ -52,8 +52,8 @@ server <- function(input, output) {
         plot(x=tmp$Year, y=tmp$Herring,  xlab="Year", ylab="Biomass", ylim=c(0,800), xlim=c(2004,2096), type = 'n', main = "Biomass of Herring")
         polygon(c(tmp$Year, rev(tmp$Year)), c((tmp$Herring - tmp$HerringSD), rev(tmp$Herring + tmp$HerringSD)), col = 'grey80', border = NA)
         lines(x=tmp$Year, y=tmp$Herring, col="black")
-        #abline(h=0.8, col = "red")
-        #text(2007, 0.85, "GES above this line", col="red", pos=4)
+        abline(h=430, col = "red")
+        text(2007, 450, "GES above this line", col="red", pos=4)
       }
     }
   )
@@ -67,8 +67,8 @@ server <- function(input, output) {
         # !!!! NOTE In data file there is SpratDS instead of SpratSD
         polygon(c(tmp$Year, rev(tmp$Year)), c((tmp$Sprat - tmp$SpratDS), rev(tmp$Sprat + tmp$SpratDS)), col = 'grey80', border = NA)
         lines(x=tmp$Year, y=tmp$Sprat, col="black")
-        #abline(h=0.8, col = "red")
-        #text(2007, 0.85, "GES above this line", col="red", pos=4)
+        abline(h=400, col = "red")
+        text(2007, 425, "GES above this line", col="red", pos=4)
       }
     }
   )
@@ -237,9 +237,6 @@ server <- function(input, output) {
           column(width=12, box(plotOutput(plotname, height = 300), width = 13))
         }
       )
-      # Convert the list to a tagList - this is necessary for the list of items
-      # to display properly.
-      #do.call(tagList, novel_plot_output_list)
       fluidRow(
         
         lapply(

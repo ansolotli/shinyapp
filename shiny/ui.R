@@ -1,13 +1,11 @@
 library(shiny)
 library(shinydashboard)
 
-
-
-
 # Header
 header <- dashboardHeader(title = "BONUS BLUEWEBS decision support tool", titleWidth = 450)
 
-# Manually links menuItems to the corresponding tabItems that would otherwise be unlinked
+
+# Manually links menuItems to the corresponding tabItems that would otherwise become unlinked
 convertMenuItem <- function(mi,tabName) {
   mi$children[[1]]$attribs['data-toggle']="tab"
   mi$children[[1]]$attribs['data-value'] = tabName
@@ -123,6 +121,7 @@ body <- dashboardBody(
     )
   )
 )
+
 
 # Create the UI 
 ui <- dashboardPage(header, sidebar, body, skin = "black") #skin determines the colour of the dashboard
