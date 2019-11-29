@@ -296,15 +296,15 @@ server <- function(input, output) {
   
   # "NOVELTY TAB"
   
-  # output$novel_info <- renderUI({
-  #   box(
-  #     title = "About novelty", width = 12,
-  #     HTML("Novel conditions are conditions that have not been observed in the past. This page shows the result were analysed based on the past 'observed range' 
-  #          calculating the confidence interval (CI) from the four food web (EwE) forcing variables (0-50m March-May water temperature, 
-  #          0-60m August water temperature, inverse hypoxic area and the cod reproductive volume) using the biogeochemical (RCO-Scobi) 
-  #          model for the period 1974-2004. For each of the four variables the future novelty is calculated and defined as the distance outside the CI as the level of novelty.")
-  #     )
-  # })
+  output$novel_info <- renderUI({
+    box(
+      title = "About novelty", width = 12,
+      HTML("Novel conditions are conditions that have not been observed in the past. This page shows the result were analysed based on the past 'observed range'
+           calculating the confidence interval (CI) from the four food web (EwE) forcing variables (0-50m March-May water temperature,
+           0-60m August water temperature, inverse hypoxic area and the cod reproductive volume) using the biogeochemical (RCO-Scobi)
+           model for the period 1974-2004. For each of the four variables the future novelty is calculated and defined as the distance outside the CI as the level of novelty.")
+      )
+  })
   
   output$plotRv <- renderPlot(
     {
@@ -321,7 +321,7 @@ server <- function(input, output) {
     {
       if("plotTemp1" %in% input$novelVars){
         tmp <- datNov[(datNov$Nutr_scen == input$Nutr_scen_nov & datNov$Clim_scen == input$Climate_nov),] 
-        plot(x=tmp$Year, y=tmp$T_050_MarchMay,  xlab="Year", ylab="Water (0-50m) temperature in March-May", ylim=c(-0.5,2.3), xlim=c(2004,2096), type = 'n', main = "Novelty for March-May 0-50m water temperature")
+        plot(x=tmp$Year, y=tmp$T_050_MarchMay,  xlab="Year", ylab="Water remperature", ylim=c(-0.5,2.3), xlim=c(2004,2096), type = 'n', main = "Novelty for 0-50m water temperature")
         #polygon(c(tmp$Year, rev(tmp$Year)), col = 'grey80', border = NA)
         lines(x=tmp$Year, y=tmp$T_050_MarchMay, col="black")
       }
@@ -332,7 +332,7 @@ server <- function(input, output) {
     {
       if("plotTemp2" %in% input$novelVars){
         tmp <- datNov[(datNov$Nutr_scen == input$Nutr_scen_nov & datNov$Clim_scen == input$Climate_nov),] 
-        plot(x=tmp$Year, y=tmp$Aug060mT,  xlab="Year", ylab="Water (0-60m) temperature in August", ylim=c(-0.5,2.3), xlim=c(2004,2096), type = 'n', main = "Novelty for August 0-60m water temperature")
+        plot(x=tmp$Year, y=tmp$Aug060mT,  xlab="Year", ylab="Water temperature", ylim=c(-0.5,2.3), xlim=c(2004,2096), type = 'n', main = "Novelty for 0-60m water temperature")
         #polygon(c(tmp$Year, rev(tmp$Year)), col = 'grey80', border = NA)
         lines(x=tmp$Year, y=tmp$Aug060mT, col="black")
       }
