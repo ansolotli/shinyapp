@@ -106,7 +106,10 @@ body <- dashboardBody(
   tabItems(
     tabItem("about",
             titlePanel("About the decision support tool"),
-            htmlOutput("aboutText"), width = 10),
+            htmlOutput("aboutText"), width = 10,
+            box(width = 12,
+              imageOutput("DSS", height = "auto")
+            )),
             
     tabItem("predicted",
             titlePanel("Explore the predicted biomasses and catches in different management scenarios"),
@@ -144,6 +147,10 @@ server <- function(input, output) {
          nutrient load management schemes and fisheries management options in the open Baltic Sea marine ecosystem
          during the 21st century.")
   })
+  
+  output$DSS <- renderImage({
+    return(list(src = "D:/Github/shinyapp/DSS_simplified.PNG", contentType = "image/png"))
+  }, deleteFile = FALSE)
   
   
   
