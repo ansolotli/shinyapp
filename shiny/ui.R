@@ -112,7 +112,7 @@ body <- dashboardBody(
     ),
     tabItem("novelty",
             titlePanel("Explore the uncertainty of model forecasts under novel conditions"),
-            htmlOutput("novel_info"), 
+            uiOutput('novel_info'), 
             uiOutput("novel_plot_list")
     ),
     tabItem("optimize",

@@ -175,14 +175,14 @@ server <- function(input, output) {
   # "NOVELTY TAB"
   
   output$novel_info <- renderUI({
-    box(
-      title = "About novelty", width = 12,
-      HTML("Novel conditions are conditions that have not been observed in the past. This page shows the result were analysed based on the past 'observed range'
-           calculating the confidence interval (CI) from the four food web (EwE) forcing variables (0-50m March-May water temperature,
-           0-60m August water temperature, inverse hypoxic area and the cod reproductive volume) using the biogeochemical (RCO-Scobi)
-           model for the period 1974-2004. For each of the four variables the future novelty is calculated and defined as the distance outside the CI as the level of novelty.")
-      )
+      rawText <- readLines("D:/Github/shinyapp/novelty.txt")
+      # split the text into a list of character vectors containing one line
+      splitText <- stringi::stri_split(str = rawText, regex = '\\n')
+      # wrap a paragraph tag around each element in the list
+      replacedText <- lapply(splitText, p)
+      return(replacedText)
   })
+
   
   output$plotTotal <- renderPlot(
     {
