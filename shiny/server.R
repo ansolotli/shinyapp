@@ -10,14 +10,13 @@ server <- function(input, output) {
   
   # "ABOUT" TAB
   
-  output$aboutText <- renderText({
-    HTML("This decision support tool has been created as part of the BONUS BLUEWEBS project. 
-         It aims to visualize and explain the key results of various environmental modelling scenarios.",
-         "<br>",
-         "<br>",
-         "The model behind this application has been used to forecast the impacts of different climatic futures,
-         nutrient load management schemes and fisheries management options in the open Baltic Sea marine ecosystem
-         during the 21st century.")
+  output$aboutText <- renderUI({
+    rawText <- readLines("D:/Github/shinyapp/about.txt")
+    # split the text into a list of character vectors containing one line
+    splitText <- stringi::stri_split(str = rawText, regex = '\\n')
+    # wrap a paragraph tag around each element in the list
+    replacedText <- lapply(splitText, p)
+    return(replacedText)
   })
   
   output$DSS <- renderImage({

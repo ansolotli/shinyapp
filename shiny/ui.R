@@ -100,10 +100,9 @@ body <- dashboardBody(
   tabItems(
     tabItem("about",
             titlePanel("About the decision support tool"),
-            htmlOutput("aboutText"), width = 10,
-            box(width = 12,
-                imageOutput("DSS", height = "auto")
-            )),
+            uiOutput('aboutText'),
+            imageOutput("DSS", height = "auto")
+    ),
     
     tabItem("predicted",
             titlePanel("Explore the predicted biomasses and catches in different management scenarios"),
