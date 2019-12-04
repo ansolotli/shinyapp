@@ -77,15 +77,15 @@ sidebar <- dashboardSidebar(
                            selected = "RCP4.5"
                ),
                
-               # Create the column of checkbox groups (codRV, temp_MarchMay050, temp_Aug060, notHypoxic)
+               # Create the column of checkbox groups (totalNov, codRV, temp_MarchMay050, temp_Aug060, notHypoxic)
                fluidRow(
                  column(width = 12,
                         checkboxGroupInput(inputId = "novelVars", 
                                            label = "Novelty variables",
-                                           choiceNames = list("Cod reproductive volume", "Water temperature 0-50m March-May", 
+                                           choiceNames = list("Total novelty", "Cod reproductive volume", "Water temperature 0-50m March-May", 
                                                               "Water temperature 0-60m August", "Inverse hypoxic area"),
-                                           choiceValues = list("plotRv", "plotTemp1", "plotTemp2", "plotHyp"),
-                                           selected = "plotRv")
+                                           choiceValues = list("plotTotal", "plotRv", "plotTemp1", "plotTemp2", "plotHyp"),
+                                           selected = "plotTotal")
                  )
                )
       ), tabName = "novelty"),
