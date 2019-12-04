@@ -38,7 +38,7 @@ server <- function(input, output) {
         plot(x=tmp$Year, y=tmp$Cod,  xlab="Year", ylab="Biomass", ylim=c(0,250), xlim=c(2004,2096), type = 'n', main = "Biomass of cod")
         polygon(c(tmp$Year, rev(tmp$Year)), c((tmp$Cod - tmp$CodSD), rev(tmp$Cod + tmp$CodSD)), col = 'grey80', border = NA)
         lines(x=tmp$Year, y=tmp$Cod, col="black")
-        abline(h=63, col = "red")
+        abline(h=96.5, col = "red")
         text(2007, 68, "GES above this line", col="red", pos=4)
       }
     }
@@ -67,7 +67,7 @@ server <- function(input, output) {
         # !!!! NOTE In data file there is SpratDS instead of SpratSD
         polygon(c(tmp$Year, rev(tmp$Year)), c((tmp$Sprat - tmp$SpratDS), rev(tmp$Sprat + tmp$SpratDS)), col = 'grey80', border = NA)
         lines(x=tmp$Year, y=tmp$Sprat, col="black")
-        abline(h=400, col = "red")
+        abline(h=410, col = "red")
         text(2007, 425, "GES above this line", col="red", pos=4)
       }
     }
