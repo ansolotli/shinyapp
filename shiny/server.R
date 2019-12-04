@@ -1,7 +1,7 @@
 
 # Load data
-datBio <- read.csv("D:/Github/shinyapp/EwE_bio_results_corrected.csv", row.names = NULL, sep = ";")
-datCth <- read.csv("D:/Github/shinyapp/EwE_catch_results_corrected.csv", row.names = NULL, sep = ";")
+datBio <- read.csv("D:/Github/shinyapp/EwE_bio_results_corrected0412.csv", row.names = NULL, sep = ";")
+datCth <- read.csv("D:/Github/shinyapp/EwE_catch_results_corrected0412.csv", row.names = NULL, sep = ";")
 datNov <- read.csv("D:/Github/shinyapp/Novelty_incl_total.csv", row.names = NULL, sep = ";")
 
 
