@@ -1,5 +1,7 @@
 library(shiny)
 library(shinydashboard)
+library(stringi)
+
 
 # Header
 header <- dashboardHeader(title = "BONUS BLUEWEBS decision support tool", titleWidth = 450)
