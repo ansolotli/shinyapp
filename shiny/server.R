@@ -38,7 +38,7 @@ server <- function(input, output) {
         polygon(c(tmp$Year, rev(tmp$Year)), c((tmp$Cod - tmp$CodSD), rev(tmp$Cod + tmp$CodSD)), col = 'grey80', border = NA)
         lines(x=tmp$Year, y=tmp$Cod, col="black")
         abline(h=96.5, col = "red")
-        text(2007, 68, "GES above this line", col="red", pos=4)
+        text(2007, 104, "GES above this line", col="red", pos=4)
       }
     }
   )  
@@ -52,7 +52,7 @@ server <- function(input, output) {
         polygon(c(tmp$Year, rev(tmp$Year)), c((tmp$Herring - tmp$HerringSD), rev(tmp$Herring + tmp$HerringSD)), col = 'grey80', border = NA)
         lines(x=tmp$Year, y=tmp$Herring, col="black")
         abline(h=430, col = "red")
-        text(2007, 450, "GES above this line", col="red", pos=4)
+        text(2007, 460, "GES above this line", col="red", pos=4)
       }
     }
   )
@@ -67,7 +67,7 @@ server <- function(input, output) {
         polygon(c(tmp$Year, rev(tmp$Year)), c((tmp$Sprat - tmp$SpratDS), rev(tmp$Sprat + tmp$SpratDS)), col = 'grey80', border = NA)
         lines(x=tmp$Year, y=tmp$Sprat, col="black")
         abline(h=410, col = "red")
-        text(2007, 425, "GES above this line", col="red", pos=4)
+        text(2007, 445, "GES above this line", col="red", pos=4)
       }
     }
   )
