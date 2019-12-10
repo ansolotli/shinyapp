@@ -1,7 +1,8 @@
 library(shiny)
 library(shinydashboard)
 library(stringi)
-
+# library(devtools)
+# install_github("nik01010/dashboardthemes")
 
 # Header
 header <- dashboardHeader(title = "BONUS BLUEWEBS decision support tool", titleWidth = 450)
@@ -81,11 +82,11 @@ sidebar <- dashboardSidebar(
                
                # Create the column of checkbox groups (totalNov, codRV, temp_MarchMay050, temp_Aug060, notHypoxic)
                fluidRow(
-                 column(width = 12,
+                 column(width = 9,
                         checkboxGroupInput(inputId = "novelVars", 
                                            label = "Novelty variables",
-                                           choiceNames = list("Total novelty", "Cod reproductive volume", "Water temperature 0-50m March-May", 
-                                                              "Water temperature 0-60m August", "Inverse hypoxic area"),
+                                           choiceNames = list("Total abiotic novelty", "Cod reproductive volume", "0-50m temperature March-May", 
+                                                              "0-60m temperature August", "Inverse hypoxic area"),
                                            choiceValues = list("plotTotal", "plotRv", "plotTemp1", "plotTemp2", "plotHyp"),
                                            selected = "plotTotal")
                  )

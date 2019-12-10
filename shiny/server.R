@@ -188,7 +188,7 @@ server <- function(input, output) {
     {
       if("plotTotal" %in% input$novelVars){
         tmp <- datNov[(datNov$Nutr_scen == input$Nutr_scen_nov & datNov$Clim_scen == input$Climate_nov),] 
-        plot(x=tmp$Year, y=tmp$Abiotic_novelty,  xlab="Year", ylab="Abiotic novelty", ylim=c(0,2.6), xlim=c(2004,2096), 
+        plot(x=tmp$Year, y=tmp$Abiotic_novelty,  xlab="Year", ylab="Total abiotic novelty", ylim=c(0,2.6), xlim=c(2004,2096), 
              type = 'n', main = "Abiotic novelty")
         #polygon(c(tmp$Year, rev(tmp$Year)), col = 'grey80', border = NA)
         lines(x=tmp$Year, y=tmp$Abiotic_novelty, col="black")
