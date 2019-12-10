@@ -121,9 +121,15 @@ body <- dashboardBody(
     tabItem("optimize",
             titlePanel("Explore the predictions for ecosystem services in different scenarios")
     )
-  )
+  ),
+    tags$head(tags$style(HTML('
+                                /* body */
+                                .content-wrapper, .right-side {
+                                background-color: #ffffff;
+                                }
+                                '))) #change the background colour of the app
 )
 
 
 # Create the UI 
-ui <- dashboardPage(header, sidebar, body, skin = "black") #skin determines the colour of the dashboard
+ui <- dashboardPage(header, sidebar, body, skin = "purple") #skin determines the colour of the dashboard
