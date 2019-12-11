@@ -186,13 +186,11 @@ server <- function(input, output) {
   
   output$plotTotal <- renderPlot(
     {
-      if("plotTotal" %in% input$novelVars){
         tmp <- datNov[(datNov$Nutr_scen == input$Nutr_scen_nov & datNov$Clim_scen == input$Climate_nov),] 
         plot(x=tmp$Year, y=tmp$Abiotic_novelty,  xlab="Year", ylab="Total abiotic novelty", ylim=c(0,2.6), xlim=c(2004,2096), 
              type = 'n', main = "Abiotic novelty")
         #polygon(c(tmp$Year, rev(tmp$Year)), col = 'grey80', border = NA)
         lines(x=tmp$Year, y=tmp$Abiotic_novelty, col="black")
-      }
     }
   )
   
@@ -253,7 +251,6 @@ server <- function(input, output) {
         }
       )
       fluidRow(
-        
         lapply(
           X = split(novel_plot_output_list, f = rep(c(1, 2), length.out = length(novel_plot_output_list))),
           FUN = column, width = 6, style='padding:0px'
@@ -261,5 +258,15 @@ server <- function(input, output) {
       )
     }
   )
+  
+  output$novel_plot_total <- renderUI({
+    # only make room for this plot in the app if it's selected
+    if(input$novelTotal == TRUE) {
+      # wrapping elements inside a fluidRow function extends the white space of the main panel accordingly
+      fluidRow(
+        box(plotOutput("plotTotal", height = 300), width = 12)
+      )
+    }
+  })
   
 }

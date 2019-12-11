@@ -85,10 +85,12 @@ sidebar <- dashboardSidebar(
                  column(width = 9,
                         checkboxGroupInput(inputId = "novelVars", 
                                            label = "Novelty variables",
-                                           choiceNames = list("Total abiotic novelty", "Cod reproductive volume", "0-50m temperature March-May", 
+                                           choiceNames = list("Cod reproductive volume", "0-50m temperature March-May", 
                                                               "0-60m temperature August", "Inverse hypoxic area"),
-                                           choiceValues = list("plotTotal", "plotRv", "plotTemp1", "plotTemp2", "plotHyp"),
-                                           selected = "plotTotal")
+                                           choiceValues = list("plotRv", "plotTemp1", "plotTemp2", "plotHyp"),
+                                           selected = "plotRv"),
+                        checkboxInput(inputId = "novelTotal", 
+                                      label = "Total novelty", value = TRUE)
                  )
                )
       ), tabName = "novelty"),
@@ -115,8 +117,9 @@ body <- dashboardBody(
     ),
     tabItem("novelty",
             titlePanel("Explore the uncertainty of model forecasts under novel conditions"),
-            uiOutput('novel_info'), 
-            uiOutput("novel_plot_list")
+            uiOutput('novel_info'),
+            uiOutput("novel_plot_list"),
+            uiOutput("novel_plot_total")
     ),
     tabItem("optimize",
             titlePanel("Explore the predictions for ecosystem services in different scenarios")
