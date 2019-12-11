@@ -187,8 +187,8 @@ server <- function(input, output) {
   output$plotTotal <- renderPlot(
     {
         tmp <- datNov[(datNov$Nutr_scen == input$Nutr_scen_nov & datNov$Clim_scen == input$Climate_nov),] 
-        plot(x=tmp$Year, y=tmp$Abiotic_novelty,  xlab="Year", ylab="Total abiotic novelty", ylim=c(0,2.6), xlim=c(2004,2096), 
-             type = 'n', main = "Abiotic novelty")
+        plot(x=tmp$Year, y=tmp$Abiotic_novelty,  xlab="Year", ylab="Novelty", ylim=c(0,2.6), xlim=c(2004,2096), 
+             type = 'n', main = "Total abiotic novelty")
         #polygon(c(tmp$Year, rev(tmp$Year)), col = 'grey80', border = NA)
         lines(x=tmp$Year, y=tmp$Abiotic_novelty, col="black")
     }
@@ -198,7 +198,7 @@ server <- function(input, output) {
     {
       if("plotRv" %in% input$novelVars){
         tmp <- datNov[(datNov$Nutr_scen == input$Nutr_scen_nov & datNov$Clim_scen == input$Climate_nov),] 
-        plot(x=tmp$Year, y=tmp$codRV,  xlab="Year", ylab="Cod reproductive volume", ylim=c(0,1), xlim=c(2004,2096), 
+        plot(x=tmp$Year, y=tmp$codRV,  xlab="Year", ylab="Novelty", ylim=c(0,1), xlim=c(2004,2096), 
              type = 'n', main = "Novelty for cod reproductive volume")
         #polygon(c(tmp$Year, rev(tmp$Year)), col = 'grey80', border = NA)
         lines(x=tmp$Year, y=tmp$codRV, col="black")
@@ -210,7 +210,7 @@ server <- function(input, output) {
     {
       if("plotTemp1" %in% input$novelVars){
         tmp <- datNov[(datNov$Nutr_scen == input$Nutr_scen_nov & datNov$Clim_scen == input$Climate_nov),] 
-        plot(x=tmp$Year, y=tmp$T_050_MarchMay,  xlab="Year", ylab="Water remperature", ylim=c(0, 1), xlim=c(2004,2096), 
+        plot(x=tmp$Year, y=tmp$T_050_MarchMay,  xlab="Year", ylab="Novelty", ylim=c(0, 1), xlim=c(2004,2096), 
              type = 'n', main = "Novelty for 0-50m water temperature")
         #polygon(c(tmp$Year, rev(tmp$Year)), col = 'grey80', border = NA)
         lines(x=tmp$Year, y=tmp$T_050_MarchMay, col="black")
@@ -222,7 +222,7 @@ server <- function(input, output) {
     {
       if("plotTemp2" %in% input$novelVars){
         tmp <- datNov[(datNov$Nutr_scen == input$Nutr_scen_nov & datNov$Clim_scen == input$Climate_nov),] 
-        plot(x=tmp$Year, y=tmp$Aug060mT,  xlab="Year", ylab="Water temperature", ylim=c(0, 1), xlim=c(2004,2096), 
+        plot(x=tmp$Year, y=tmp$Aug060mT,  xlab="Year", ylab="Novelty", ylim=c(0, 1), xlim=c(2004,2096), 
              type = 'n', main = "Novelty for 0-60m water temperature")
         #polygon(c(tmp$Year, rev(tmp$Year)), col = 'grey80', border = NA)
         lines(x=tmp$Year, y=tmp$Aug060mT, col="black")
@@ -234,7 +234,7 @@ server <- function(input, output) {
     {
       if("plotHyp" %in% input$novelVars){
         tmp <- datNov[(datNov$Nutr_scen == input$Nutr_scen_nov & datNov$Clim_scen == input$Climate_nov),]
-        plot(x=tmp$Year, y=tmp$notHypoxicA,  xlab="Year", ylab="Inverse hypoxic area", ylim=c(0,1), xlim=c(2004,2096), 
+        plot(x=tmp$Year, y=tmp$notHypoxicA,  xlab="Year", ylab="Novelty", ylim=c(0,1), xlim=c(2004,2096), 
              type = 'n', main = "Novelty for inverse hypoxic area")
         #polygon(c(tmp$Year, rev(tmp$Year)), col = 'grey80', border = NA)
         lines(x=tmp$Year, y=tmp$notHypoxicA, col="black")

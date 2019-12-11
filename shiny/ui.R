@@ -90,7 +90,7 @@ sidebar <- dashboardSidebar(
                                            choiceValues = list("plotRv", "plotTemp1", "plotTemp2", "plotHyp"),
                                            selected = "plotRv"),
                         checkboxInput(inputId = "novelTotal", 
-                                      label = "Total novelty", value = TRUE)
+                                      label = "Total abiotic novelty", value = TRUE)
                  )
                )
       ), tabName = "novelty"),
