@@ -16,7 +16,7 @@ server <- function(input, output) {
     splitText <- stringi::stri_split(str = rawText, regex = '\\n')
     # wrap a paragraph tag around each element in the list
     replacedText <- lapply(splitText, p)
-    return(replacedText)
+    box(replacedText, width = 12, background = "purple")
   })
   
   output$DSS <- renderImage({
@@ -180,7 +180,7 @@ server <- function(input, output) {
       splitText <- stringi::stri_split(str = rawText, regex = '\\n')
       # wrap a paragraph tag around each element in the list
       replacedText <- lapply(splitText, p)
-      return(replacedText)
+      box(replacedText, width = 12, background = "purple")
   })
 
   
