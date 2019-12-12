@@ -48,7 +48,7 @@ sidebar <- dashboardSidebar(
                  column(width = 5,
                         checkboxGroupInput(inputId = "bioVars", 
                                            label = "Biomass Variables",
-                                           choiceNames = list("Cod SSB", "Herring SSB", "Sprat SSB", "Zooplankton SSB", "Phytoplankton SSB"),
+                                           choiceNames = list("Cod", "Herring", "Sprat", "Zooplankton", "Phytoplankton"),
                                            choiceValues = list("plotCod", "plotHer", "plotSpr", "plotZoo", "plotPhy"),
                                            selected = "plotCod")
                  ),
@@ -56,7 +56,7 @@ sidebar <- dashboardSidebar(
                  column(width = 6, offset = 1,
                         checkboxGroupInput(inputId = "catchVars", 
                                            label = "Catch Size Variables",
-                                           choiceNames = list("Cod Catch", "Herring Catch", "Sprat Catch"),
+                                           choiceNames = list("Cod", "Herring", "Sprat"),
                                            choiceValues = list("plotCodCatch","plotHerCatch","plotSprCatch"), 
                                            selected = "plotCodCatch")
                  )

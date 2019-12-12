@@ -34,7 +34,7 @@ server <- function(input, output) {
     {
       if("plotCod" %in% input$bioVars){
         tmp <- datBio[(datBio$F == input$F & datBio$Nutr_scen == input$Nutr_scen & datBio$Climate == input$Climate),] 
-        plot(x=tmp$Year, y=tmp$Cod,  xlab="Year", ylab="Biomass", ylim=c(0,250), xlim=c(2004,2096), type = 'n', main = "Biomass of cod")
+        plot(x=tmp$Year, y=tmp$Cod,  xlab="Year", ylab="Spawning-stock biomass", ylim=c(0,250), xlim=c(2004,2096), type = 'n', main = "Biomass of cod")
         polygon(c(tmp$Year, rev(tmp$Year)), c((tmp$Cod - tmp$CodSD), rev(tmp$Cod + tmp$CodSD)), col = 'grey80', border = NA)
         lines(x=tmp$Year, y=tmp$Cod, col="black")
         abline(h=96.5, col = "red")
@@ -48,7 +48,7 @@ server <- function(input, output) {
     {
       if("plotHer" %in% input$bioVars){
         tmp <- datBio[(datBio$F == input$F & datBio$Nutr_scen == input$Nutr_scen & datBio$Climate == input$Climate),]  
-        plot(x=tmp$Year, y=tmp$Herring,  xlab="Year", ylab="Biomass", ylim=c(0,800), xlim=c(2004,2096), type = 'n', main = "Biomass of Herring")
+        plot(x=tmp$Year, y=tmp$Herring,  xlab="Year", ylab="Spawning-stock biomass", ylim=c(0,800), xlim=c(2004,2096), type = 'n', main = "Biomass of Herring")
         polygon(c(tmp$Year, rev(tmp$Year)), c((tmp$Herring - tmp$HerringSD), rev(tmp$Herring + tmp$HerringSD)), col = 'grey80', border = NA)
         lines(x=tmp$Year, y=tmp$Herring, col="black")
         abline(h=430, col = "red")
@@ -62,7 +62,7 @@ server <- function(input, output) {
     {
       if("plotSpr" %in% input$bioVars){
         tmp <- datBio[(datBio$F == input$F & datBio$Nutr_scen == input$Nutr_scen & datBio$Climate == input$Climate),]  
-        plot(x=tmp$Year, y=tmp$Sprat,  xlab="Year", ylab="Biomass", ylim=c(0,1150), xlim=c(2004,2096), type = 'n', main = "Biomass of Sprat")
+        plot(x=tmp$Year, y=tmp$Sprat,  xlab="Year", ylab="Spawning-stock biomass", ylim=c(0,1150), xlim=c(2004,2096), type = 'n', main = "Biomass of Sprat")
         # !!!! NOTE In data file there is SpratDS instead of SpratSD
         polygon(c(tmp$Year, rev(tmp$Year)), c((tmp$Sprat - tmp$SpratDS), rev(tmp$Sprat + tmp$SpratDS)), col = 'grey80', border = NA)
         lines(x=tmp$Year, y=tmp$Sprat, col="black")
