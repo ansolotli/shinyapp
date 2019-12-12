@@ -24,20 +24,20 @@ sidebar <- dashboardSidebar(
     convertMenuItem(
       menuItem("Predicted time series", tabName = "predicted",
                
-               # Create the dropdowns of scenario options
-               selectInput(inputId = 'F',
+               # Create the radio buttons of scenario options
+               radioButtons(inputId = 'F',
                            label = "Fishery Policy Scenario", 
                            choices = c("Sustainable" = "Sus", "Pelagics-Focused" = "Pel", "Open Access" = "OA"), 
                            selected = "Sus"
                ),
                
-               selectInput(inputId = 'Nutr_scen', 
+               radioButtons(inputId = 'Nutr_scen', 
                            label = "Nutrient Loading Policy",
                            choices = c("Baltic Sea Action Plan" = "BSAP", "Average 1995-2002" = "Ref"),
                            selected = "BSAP"
                ),
                
-               selectInput(inputId = 'Climate', 
+               radioButtons(inputId = 'Climate', 
                            label = "Climate Change Scenario - Representative Concentration Pathways",
                            choices = c("RCP4.5", "RCP8.5"), 
                            selected = "RCP4.5"
@@ -66,14 +66,14 @@ sidebar <- dashboardSidebar(
     
     convertMenuItem(
       menuItem("Novelty", tabName = "novelty",
-               # Create the dropdowns of scenario options
-               selectInput(inputId = 'Nutr_scen_nov', 
+               # Create the radio buttons of scenario options
+               radioButtons(inputId = 'Nutr_scen_nov', 
                            label = "Nutrient Loading Policy",
                            choices = c("Baltic Sea Action Plan" = "BSAP", "Average 1995-2002" = "Ref"),
                            selected = "BSAP"
                ),
                
-               selectInput(inputId = 'Climate_nov', 
+               radioButtons(inputId = 'Climate_nov', 
                            label = "Climate Change Scenario - Representative Concentration Pathways",
                            choices = c("RCP4.5", "RCP8.5"), 
                            selected = "RCP4.5"
@@ -81,13 +81,14 @@ sidebar <- dashboardSidebar(
                
                # Create the column of checkbox groups (totalNov, codRV, temp_MarchMay050, temp_Aug060, notHypoxic)
                fluidRow(
-                 column(width = 9,
+                 column(width = 12,
                         checkboxGroupInput(inputId = "novelVars", 
                                            label = "Novelty variables",
                                            choiceNames = list("Cod reproductive volume", "0-50m temperature March-May", 
                                                               "0-60m temperature August", "Inverse hypoxic area"),
                                            choiceValues = list("plotRv", "plotTemp1", "plotTemp2", "plotHyp"),
                                            selected = "plotRv"),
+                        
                         checkboxInput(inputId = "novelTotal", 
                                       label = "Total abiotic novelty", value = TRUE)
                  )
