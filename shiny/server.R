@@ -16,7 +16,7 @@ server <- function(input, output) {
     splitText <- stringi::stri_split(str = rawText, regex = '\\n')
     # wrap a paragraph tag around each element in the list
     replacedText <- lapply(splitText, p)
-    box(replacedText, width = 12)
+    box(replacedText, width = 12, solidHeader = TRUE)
   })
   
   output$DSS <- renderImage({
@@ -150,7 +150,7 @@ server <- function(input, output) {
     {
       bio_plot_output_list <- lapply(
         input$bioVars, function(plotname) {
-          column(width=12, box(plotOutput(plotname, height = 300), width = 13))
+          column(width=12, box(plotOutput(plotname, height = 300), width = 13, solidHeader = TRUE))
         }
       )
       # Convert the list to a tagList - this is necessary for the list of items
@@ -164,7 +164,7 @@ server <- function(input, output) {
     {
       catch_plot_output_list <- lapply(
         input$catchVars, function(plotname) {
-          column(width=12, box(plotOutput(plotname, height = 300), width = 13))
+          column(width=12, box(plotOutput(plotname, height = 300), width = 13, solidHeader = TRUE))
         }
       )
       do.call(tagList, catch_plot_output_list)
@@ -180,7 +180,7 @@ server <- function(input, output) {
       splitText <- stringi::stri_split(str = rawText, regex = '\\n')
       # wrap a paragraph tag around each element in the list
       replacedText <- lapply(splitText, p)
-      box(replacedText, width = 12)
+      box(replacedText, width = 12, solidHeader = TRUE)
   })
 
   
@@ -247,7 +247,7 @@ server <- function(input, output) {
     {
       novel_plot_output_list <- lapply(
         input$novelVars, function(plotname) {
-          column(width=12, box(plotOutput(plotname, height = 300), width = 13))
+          column(width=12, box(plotOutput(plotname, height = 300), width = 13, solidHeader = TRUE))
         }
       )
       fluidRow(
@@ -264,7 +264,7 @@ server <- function(input, output) {
     if(input$novelTotal == TRUE) {
       # wrapping elements inside a fluidRow function extends the white space of the main panel accordingly
       fluidRow(
-        box(plotOutput("plotTotal", height = 300), width = 12)
+        box(plotOutput("plotTotal", height = 300), width = 12, solidHeader = TRUE)
       )
     }
   })

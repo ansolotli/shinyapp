@@ -1,7 +1,7 @@
 library(shiny)
 library(shinydashboard)
 library(stringi)
-library(dashboardthemes)
+#library(dashboardthemes)
 
 # Header
 header <- dashboardHeader(title = "BONUS BLUEWEBS decision support tool", titleWidth = 450)
@@ -102,16 +102,13 @@ sidebar <- dashboardSidebar(
 
 # Body
 body <- dashboardBody(
-  shinyDashboardThemes(
-    theme = "grey_dark"
-  ),
   tabItems(
     tabItem("about",
             titlePanel("About the decision support tool"),
             fluidRow(
               column(width = 12,
                 uiOutput('aboutText'),
-                box(title = "Simplified model", width = 12,
+                box(title = "Simplified model", width = 12, solidHeader = TRUE,
                     imageOutput("DSS", height = "auto"))
               ),
             )
@@ -136,8 +133,15 @@ body <- dashboardBody(
     tabItem("optimize",
             titlePanel("Explore the predictions for ecosystem services in different scenarios")
     ))
+    ,
+    tags$head(tags$style(HTML('
+                                /* body */
+                                .content-wrapper, .right-side {
+                                background-color: #ffffff;
+                                }
+                                '))) #change the background colour of the app)
 )
 
 
 # Create the UI 
-ui <- dashboardPage(header, sidebar, body)
+ui <- dashboardPage(header, sidebar, body, skin = "purple")
