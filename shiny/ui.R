@@ -107,8 +107,13 @@ body <- dashboardBody(
   tabItems(
     tabItem("about",
             titlePanel("About the decision support tool"),
-            uiOutput('aboutText'),
-            imageOutput("DSS", height = "auto")
+            fluidRow(
+              column(width = 12,
+                uiOutput('aboutText'),
+                box(title = "Simplified model", width = 12,
+                    imageOutput("DSS", height = "auto"))
+              ),
+            )
     ),
     
     tabItem("predicted",
@@ -119,9 +124,13 @@ body <- dashboardBody(
     ),
     tabItem("novelty",
             titlePanel("Explore the uncertainty of model forecasts under novel conditions"),
-            uiOutput('novel_info'),
-            uiOutput("novel_plot_list"),
-            uiOutput("novel_plot_total")
+            fluidRow(
+              column(width = 12,
+                     uiOutput('novel_info'),
+                     uiOutput("novel_plot_list"),
+                     uiOutput("novel_plot_total") 
+              )
+            )
     ),
     tabItem("optimize",
             titlePanel("Explore the predictions for ecosystem services in different scenarios")
