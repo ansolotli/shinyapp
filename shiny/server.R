@@ -3,6 +3,7 @@
 datBio <- read.csv("D:/Github/shinyapp/EwE_bio_results_corrected0412.csv", row.names = NULL, sep = ";")
 datCth <- read.csv("D:/Github/shinyapp/EwE_catch_results_corrected0412.csv", row.names = NULL, sep = ";")
 datNov <- read.csv("D:/Github/shinyapp/Novelty_incl_total.csv", row.names = NULL, sep = ";")
+datOpt <- read.csv("D:/Github/shinyapp/DSS_Bottom_up_3x3.csv", row.names = NULL, sep = ";")
 
 
 # Define the server function
@@ -269,4 +270,21 @@ server <- function(input, output) {
     }
   })
   
+  
+  # "OPTIMIZE" TAB
+
+  # output$opt_plots <- renderUI({
+  #   tmp <- datOpt[(datOpt$F_GES == input$F_GES & datOpt$Nutr_GES == input$Nutr_GES & datOpt$Min_acc_profit == input$Profit),]
+  #   nasRemoved <- na.omit(tmp$F_scen)
+  #  
+  #     
+  #   
+  #   box(
+  #     barplot(nasRemoved, main = "Fisheries scenario",  xlab = "Fisheries policy", ylab = "Probability", 
+  #             names.arg = c("Open access", "Pelagics", "Sustainable")),
+  #     width = 6, solidHeader = TRUE
+  #   )       
+  #   
+  # })
+
 }

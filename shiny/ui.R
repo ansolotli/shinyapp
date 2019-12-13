@@ -24,20 +24,20 @@ sidebar <- dashboardSidebar(
     convertMenuItem(
       menuItem("Predicted time series", tabName = "predicted",
                
-               # Create the radio buttons of scenario options
-               radioButtons(inputId = 'F',
+               # Create the dropdowns of scenario options
+               selectInput(inputId = 'F',
                            label = "Fishery Policy Scenario", 
                            choices = c("Sustainable" = "Sus", "Pelagics-Focused" = "Pel", "Open Access" = "OA"), 
                            selected = "Sus"
                ),
                
-               radioButtons(inputId = 'Nutr_scen', 
+               selectInput(inputId = 'Nutr_scen', 
                            label = "Nutrient Loading Policy",
                            choices = c("Baltic Sea Action Plan" = "BSAP", "Average 1995-2002" = "Ref"),
                            selected = "BSAP"
                ),
                
-               radioButtons(inputId = 'Climate', 
+               selectInput(inputId = 'Climate', 
                            label = "Climate Change Scenario - Representative Concentration Pathways",
                            choices = c("RCP4.5", "RCP8.5"), 
                            selected = "RCP4.5"
@@ -66,14 +66,14 @@ sidebar <- dashboardSidebar(
     
     convertMenuItem(
       menuItem("Novelty", tabName = "novelty",
-               # Create the radio buttons of scenario options
-               radioButtons(inputId = 'Nutr_scen_nov', 
+               # Create the dropdowns of scenario options
+               selectInput(inputId = 'Nutr_scen_nov', 
                            label = "Nutrient Loading Policy",
                            choices = c("Baltic Sea Action Plan" = "BSAP", "Average 1995-2002" = "Ref"),
                            selected = "BSAP"
                ),
                
-               radioButtons(inputId = 'Climate_nov', 
+               selectInput(inputId = 'Climate_nov', 
                            label = "Climate Change Scenario - Representative Concentration Pathways",
                            choices = c("RCP4.5", "RCP8.5"), 
                            selected = "RCP4.5"
@@ -96,7 +96,26 @@ sidebar <- dashboardSidebar(
       ), tabName = "novelty"),
     
     convertMenuItem(
-      menuItem("Optimize", tabName = "optimize"), tabName = "optimize")
+      menuItem("Optimize", tabName = "optimize",
+               fluidRow(
+                 column(width = 12,
+                           checkboxGroupInput(inputId = 'Profit',
+                                       label = "Minimum acceptable profit",
+                                       choices = c("No profit", "Profit larger than 0", "Profit larger than 100", "Profit larger than 200"),
+                                       selected = "No profit")),
+               
+                 column(width = 12,    
+                           checkboxGroupInput(inputId = 'F_GES',
+                                       label = "Fish SSB in relation to GES",
+                                       choices = c("All below", "Two below", "One below", "All above"),
+                                       selected = "All above")),
+                 column(width = 12,
+                           checkboxGroupInput(inputId = 'Nutr_GES',
+                                       label = "Nutrients in relation to GES",
+                                       choices = c("Above", "Below"),
+                                       selected = "Above"))
+              ))
+      , tabName = "optimize")
   )
 )
 
@@ -109,8 +128,7 @@ body <- dashboardBody(
               column(width = 12,
                 uiOutput('aboutText'),
                 box(title = "Simplified model", width = 12, solidHeader = TRUE,
-                    imageOutput("DSS", height = "auto"))
-              ),
+                    imageOutput("DSS", height = "auto"))),
             )
     ),
     
@@ -126,22 +144,26 @@ body <- dashboardBody(
               column(width = 12,
                      uiOutput('novel_info'),
                      uiOutput("novel_plot_list"),
-                     uiOutput("novel_plot_total") 
-              )
+                     uiOutput("novel_plot_total"))
             )
-    ),
-    tabItem("optimize",
-            titlePanel("Explore the predictions for ecosystem services in different scenarios")
-    ))
+    )
     ,
+    tabItem("optimize",
+            titlePanel("Explore the predictions for ecosystem services in different scenarios"),
+            fluidRow(
+              column(width = 12,
+              uiOutput("opt_plots"))
+            )
+    )),
+    # change the background colour of the app)
     tags$head(tags$style(HTML('
                                 /* body */
                                 .content-wrapper, .right-side {
                                 background-color: #ffffff;
                                 }
-                                '))) #change the background colour of the app)
+                                '))) 
 )
 
 
 # Create the UI 
-ui <- dashboardPage(header, sidebar, body, skin = "purple")
+ui <- dashboardPage(header, sidebar, body, skin = "black")
