@@ -99,20 +99,21 @@ sidebar <- dashboardSidebar(
       menuItem("Optimize", tabName = "optimize",
                fluidRow(
                  column(width = 12,
-                           checkboxGroupInput(inputId = 'Profit',
+                           radioButtons(inputId = 'Profit',
                                        label = "Minimum acceptable profit",
                                        choices = c("No profit", "Profit larger than 0", "Profit larger than 100", "Profit larger than 200"),
                                        selected = "No profit")),
                
                  column(width = 12,    
-                           checkboxGroupInput(inputId = 'F_GES',
+                        radioButtons(inputId = 'F_GES',
                                        label = "Fish SSB in relation to GES",
-                                       choices = c("All below", "Two below", "One below", "All above"),
+                                       choices = c("All below" = "All below Blim", "Two below" = "Two below Blim",
+                                                   "One below" = "One below Blim", "All above" = "All above Blim"),
                                        selected = "All above")),
                  column(width = 12,
-                           checkboxGroupInput(inputId = 'Nutr_GES',
+                        radioButtons(inputId = 'Nutr_GES',
                                        label = "Nutrients in relation to GES",
-                                       choices = c("Above", "Below"),
+                                       choices = c("Above" = "GES", "Below" = "Sub_GES"),
                                        selected = "Above"))
               ))
       , tabName = "optimize")
