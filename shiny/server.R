@@ -2,7 +2,7 @@
 # Load data
 datBio <- read.csv("D:/Github/shinyapp/EwE_bio_results_corrected0412.csv", row.names = NULL, sep = ";")
 datCth <- read.csv("D:/Github/shinyapp/EwE_catch_results_corrected0412.csv", row.names = NULL, sep = ";")
-datNov <- read.csv("D:/Github/shinyapp/Novelty_incl_total.csv", row.names = NULL, sep = ";")
+datNov <- read.csv("D:/Github/shinyapp/Novelty_incl_total.csv", row.names = NULL, sep = ";", stringsAsFactors = FALSE)
 datOpt <- read.csv("D:/Github/shinyapp/DSS_Bottom_up_3x3.csv", row.names = NULL, sep = ";")
 
 
@@ -185,24 +185,53 @@ server <- function(input, output) {
   })
 
   
+  nov_subset <- reactive({
+    a <- datNov[(datNov$Nutr_scen == input$Nutr_scen_nov & datNov$Clim_scen == input$Climate_nov),]
+    return(a)
+  })
+  
   output$plotTotal <- renderPlot(
     {
-        tmp <- datNov[(datNov$Nutr_scen == input$Nutr_scen_nov & datNov$Clim_scen == input$Climate_nov),] 
-        plot(x=tmp$Year, y=tmp$Abiotic_novelty,  xlab="Year", ylab="Novelty", ylim=c(0,2.6), xlim=c(2004,2096), 
-             type = 'n', main = "Total abiotic novelty")
-        #polygon(c(tmp$Year, rev(tmp$Year)), col = 'grey80', border = NA)
-        lines(x=tmp$Year, y=tmp$Abiotic_novelty, col="black")
+        ggplot(nov_subset(), aes(x = Year, y = Abiotic_novelty)) +
+                 scale_y_continuous(limits=c(0,2.7), breaks = scales::pretty_breaks(n = 5)) +
+                 scale_x_continuous(limits=c(2004,2096), breaks = scales::pretty_breaks(n = 5), 
+                                    # increases expansion constant so that all the tick labels fit
+                                    expand = c(0.07, 0)) +
+                 ggtitle("Total abiotic novelty") +
+                 xlab("\nYear") +
+                 ylab("Novelty\n") +
+                 theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
+                           panel.grid.minor = element_blank(), axis.line = element_line(colour = "grey"),
+                           title = element_text(size = 14),
+                           axis.title.y = element_text(size = 13),
+                           axis.text.y = element_text(size = 11),
+                           axis.title.x = element_text(size = 13),
+                           axis.text.x = element_text(size = 11)
+                 ) +
+                 geom_line(stat = "identity")
     }
   )
   
   output$plotRv <- renderPlot(
     {
       if("plotRv" %in% input$novelVars){
-        tmp <- datNov[(datNov$Nutr_scen == input$Nutr_scen_nov & datNov$Clim_scen == input$Climate_nov),] 
-        plot(x=tmp$Year, y=tmp$codRV,  xlab="Year", ylab="Novelty", ylim=c(0,1), xlim=c(2004,2096), 
-             type = 'n', main = "Novelty for cod reproductive volume")
-        #polygon(c(tmp$Year, rev(tmp$Year)), col = 'grey80', border = NA)
-        lines(x=tmp$Year, y=tmp$codRV, col="black")
+        
+        ggplot(nov_subset(), aes(x = Year, y = codRV)) +
+          scale_y_continuous(limits=c(0,1), breaks = scales::pretty_breaks(n = 5)) +
+          scale_x_continuous(limits=c(2004,2096), breaks = scales::pretty_breaks(n = 5),
+                             expand = c(0.07, 0)) +
+          ggtitle("Novelty for cod reproductive volume") +
+          xlab("\nYear") +
+          ylab("Novelty\n") +
+          theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
+                             panel.grid.minor = element_blank(), axis.line = element_line(colour = "grey"),
+                             title = element_text(size = 14),
+                             axis.title.y = element_text(size = 13),
+                             axis.text.y = element_text(size = 11),
+                             axis.title.x = element_text(size = 13),
+                             axis.text.x = element_text(size = 11)
+          ) +
+          geom_line(stat = "identity")
       }
     }
   )
@@ -210,11 +239,23 @@ server <- function(input, output) {
   output$plotTemp1 <- renderPlot(
     {
       if("plotTemp1" %in% input$novelVars){
-        tmp <- datNov[(datNov$Nutr_scen == input$Nutr_scen_nov & datNov$Clim_scen == input$Climate_nov),] 
-        plot(x=tmp$Year, y=tmp$T_050_MarchMay,  xlab="Year", ylab="Novelty", ylim=c(0, 1), xlim=c(2004,2096), 
-             type = 'n', main = "Novelty for 0-50m water temperature")
-        #polygon(c(tmp$Year, rev(tmp$Year)), col = 'grey80', border = NA)
-        lines(x=tmp$Year, y=tmp$T_050_MarchMay, col="black")
+        
+        ggplot(nov_subset(), aes(x = Year, y = T_050_MarchMay)) +
+          scale_y_continuous(limits=c(0,1), breaks = scales::pretty_breaks(n = 5)) +
+          scale_x_continuous(limits=c(2004,2096), breaks = scales::pretty_breaks(n = 5),
+                             expand = c(0.07, 0)) +
+          ggtitle("Novelty for 0-50m water temperature") +
+          xlab("\nYear") +
+          ylab("Novelty\n") +
+          theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
+                             panel.grid.minor = element_blank(), axis.line = element_line(colour = "grey"),
+                             title = element_text(size = 14),
+                             axis.title.y = element_text(size = 13),
+                             axis.text.y = element_text(size = 11),
+                             axis.title.x = element_text(size = 13),
+                             axis.text.x = element_text(size = 11)
+          ) +
+          geom_line(stat = "identity")
       }
     }
   )
@@ -222,11 +263,23 @@ server <- function(input, output) {
   output$plotTemp2 <- renderPlot(
     {
       if("plotTemp2" %in% input$novelVars){
-        tmp <- datNov[(datNov$Nutr_scen == input$Nutr_scen_nov & datNov$Clim_scen == input$Climate_nov),] 
-        plot(x=tmp$Year, y=tmp$Aug060mT,  xlab="Year", ylab="Novelty", ylim=c(0, 1), xlim=c(2004,2096), 
-             type = 'n', main = "Novelty for 0-60m water temperature")
-        #polygon(c(tmp$Year, rev(tmp$Year)), col = 'grey80', border = NA)
-        lines(x=tmp$Year, y=tmp$Aug060mT, col="black")
+        
+        ggplot(nov_subset(), aes(x = Year, y = Aug060mT)) +
+          scale_y_continuous(limits=c(0,1), breaks = scales::pretty_breaks(n = 5)) +
+          scale_x_continuous(limits=c(2004,2096), breaks = scales::pretty_breaks(n = 5),
+                             expand = c(0.07, 0)) +
+          ggtitle("Novelty for 0-60m water temperature") +
+          xlab("\nYear") +
+          ylab("Novelty\n") +
+          theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
+                             panel.grid.minor = element_blank(), axis.line = element_line(colour = "grey"),
+                             title = element_text(size = 14),
+                             axis.title.y = element_text(size = 13),
+                             axis.text.y = element_text(size = 11),
+                             axis.title.x = element_text(size = 13),
+                             axis.text.x = element_text(size = 11)
+          ) +
+          geom_line(stat = "identity")
       }
     }
   )
@@ -234,11 +287,23 @@ server <- function(input, output) {
   output$plotHyp <- renderPlot(
     {
       if("plotHyp" %in% input$novelVars){
-        tmp <- datNov[(datNov$Nutr_scen == input$Nutr_scen_nov & datNov$Clim_scen == input$Climate_nov),]
-        plot(x=tmp$Year, y=tmp$notHypoxicA,  xlab="Year", ylab="Novelty", ylim=c(0,1), xlim=c(2004,2096), 
-             type = 'n', main = "Novelty for inverse hypoxic area")
-        #polygon(c(tmp$Year, rev(tmp$Year)), col = 'grey80', border = NA)
-        lines(x=tmp$Year, y=tmp$notHypoxicA, col="black")
+        
+        ggplot(nov_subset(), aes(x = Year, y = notHypoxicA)) +
+          scale_y_continuous(limits=c(0,1), breaks = scales::pretty_breaks(n = 5)) +
+          scale_x_continuous(limits=c(2004,2096), breaks = scales::pretty_breaks(n = 5),
+                             expand = c(0.07, 0)) +
+          ggtitle("Novelty for inverse hypoxic area") +
+          xlab("\nYear") +
+          ylab("Novelty\n") +
+          theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
+                             panel.grid.minor = element_blank(), axis.line = element_line(colour = "grey"),
+                             title = element_text(size = 14),
+                             axis.title.y = element_text(size = 13),
+                             axis.text.y = element_text(size = 11),
+                             axis.title.x = element_text(size = 13),
+                             axis.text.x = element_text(size = 11)
+          ) +
+          geom_line(stat = "identity")
       }
     }
   )
