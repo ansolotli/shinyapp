@@ -106,8 +106,8 @@ sidebar <- dashboardSidebar(
                
                selectInput(inputId = 'F_GES',
                                        label = "Fish SSB in relation to GES",
-                                       choices = c("All below" = "All below Blim", "Two below" = "Two below Blim",
-                                                   "One below" = "One below Blim", "All above" = "All above Blim"),
+                                       choices = c("All above" = "All above Blim", "One below" = "One below Blim",
+                                                   "Two below" = "Two below Blim", "All below" = "All below Blim"),
                                        selected = "All above"
                ),
                
@@ -120,7 +120,7 @@ sidebar <- dashboardSidebar(
                  column(width = 12,
                         checkboxGroupInput(inputId = "optVars", 
                                            label = "Scenario variables",
-                                           choiceNames = list("Fisheries policy", "Climate scenario", 
+                                           choiceNames = list("Fishery policy", "Climate scenario", 
                                                               "Nutrient loading policy", "Decade"),
                                            choiceValues = list("opt_fish", "opt_clim", "opt_nutr", "opt_dec"),
                                            selected = "opt_fish")
@@ -159,12 +159,10 @@ body <- dashboardBody(
     )
     ,
     tabItem("optimize",
-            titlePanel("Explore the predictions for ecosystem services in different scenarios"),
+            titlePanel("Explore the scenarios leading to different outcomes"),
             fluidRow(
               column(width = 12,
-                     
                        uiOutput("opt_plots")
-                     
               )
             )
     )),

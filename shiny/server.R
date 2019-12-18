@@ -281,27 +281,73 @@ server <- function(input, output) {
 
   output$opt_fish <- renderPlot({
     ggplot(opt_subset()[1:3,], aes(x = F_labels, y = F_scen)) +
-      scale_y_continuous(limits=c(-0.1,1.1)) +
+      scale_y_continuous(limits=c(0,1), breaks = scales::pretty_breaks(n = 5)) +
+      ggtitle("Fishery Policy Scenario") +
+      xlab("\nFishery policy") +
+      ylab("Probability\n") + 
+      theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
+                         panel.grid.minor = element_blank(), axis.line = element_line(colour = "grey"),
+                         title = element_text(size = 14),
+                         axis.title.y = element_text(size = 13),
+                         axis.text.y = element_text(size = 11),
+                         axis.title.x = element_text(size = 13),
+                         axis.text.x = element_text(size = 11)
+      ) +
       geom_bar(stat = "identity")
+    
   })
   
   output$opt_clim <- renderPlot({
     ggplot(opt_subset()[1:2,], aes(x = Clim_labels, y = Clim_scen)) +
-      scale_y_continuous(limits=c(-0.1,1.1)) +
+      scale_y_continuous(limits=c(0,1), breaks = scales::pretty_breaks(n = 5)) + 
+      ggtitle("Climate Scenario") +
+      xlab("\nClimate scenario") +
+      ylab("Probability\n") + 
+      theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
+                         panel.grid.minor = element_blank(), axis.line = element_line(colour = "grey"),
+                         title = element_text(size = 14),
+                         axis.title.y = element_text(size = 13),
+                         axis.text.y = element_text(size = 11),
+                         axis.title.x = element_text(size = 13),
+                         axis.text.x = element_text(size = 11)
+      ) +
       geom_bar(stat = "identity")
   })
   
   output$opt_nutr <- renderPlot({
     ggplot(opt_subset()[1:2,], aes(x = Nutr_labels, y = Nutr_scen)) +
-      scale_y_continuous(limits=c(-0.1,1.1)) +
+      scale_y_continuous(limits=c(0,1), breaks = scales::pretty_breaks(n = 5)) + 
+      ggtitle("Nutrient Loading Policy Scenario") +
+      xlab("\nNutrient loading policy") +
+      ylab("Probability\n") + 
+      theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
+                         panel.grid.minor = element_blank(), axis.line = element_line(colour = "grey"),
+                         title = element_text(size = 14),
+                         axis.title.y = element_text(size = 13),
+                         axis.text.y = element_text(size = 11),
+                         axis.title.x = element_text(size = 13),
+                         axis.text.x = element_text(size = 11)
+      ) +
       geom_bar(stat = "identity")
   })
   
   output$opt_dec <- renderPlot({
     ggplot(opt_subset(), aes(x = Dec_labels, y = Decade)) +
-      scale_y_continuous(limits=c(-0.1,1.1)) +
+      scale_y_continuous(limits=c(0,1), breaks = scales::pretty_breaks(n = 5)) + 
+      ggtitle("Decade") +
+      xlab("\nDecade") +
+      ylab("Probability\n") + 
+      theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
+                         panel.grid.minor = element_blank(), axis.line = element_line(colour = "grey"),
+                         title = element_text(size = 14),
+                         axis.title.y = element_text(size = 13),
+                         axis.text.y = element_text(size = 11),
+                         axis.title.x = element_text(size = 13),
+                         axis.text.x = element_text(size = 11)
+      ) +
       geom_bar(stat = "identity")
   })
+  
   
   output$opt_plots <- renderUI(
     {
