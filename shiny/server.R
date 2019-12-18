@@ -273,18 +273,50 @@ server <- function(input, output) {
   
   # "OPTIMIZE" TAB
 
-  # output$opt_plots <- renderUI({
-  #   tmp <- datOpt[(datOpt$F_GES == input$F_GES & datOpt$Nutr_GES == input$Nutr_GES & datOpt$Min_acc_profit == input$Profit),]
-  #   nasRemoved <- na.omit(tmp$F_scen)
-  #  
-  #     
-  #   
-  #   box(
-  #     barplot(nasRemoved, main = "Fisheries scenario",  xlab = "Fisheries policy", ylab = "Probability", 
-  #             names.arg = c("Open access", "Pelagics", "Sustainable")),
-  #     width = 6, solidHeader = TRUE
-  #   )       
-  #   
-  # })
+  # subsetting data for the optimizing plots
+  opt_subset <- reactive({
+    a <- datOpt[(datOpt$F_GES == input$F_GES & datOpt$Nutr_GES == input$Nutr_GES & datOpt$Min_acc_profit == input$Profit),]
+    return(a)
+  })
 
+  output$opt_fish <- renderPlot({
+    ggplot(opt_subset()[1:3,], aes(x = F_labels, y = F_scen)) +
+      scale_y_continuous(limits=c(-0.1,1.1)) +
+      geom_bar(stat = "identity")
+  })
+  
+  output$opt_clim <- renderPlot({
+    ggplot(opt_subset()[1:2,], aes(x = Clim_labels, y = Clim_scen)) +
+      scale_y_continuous(limits=c(-0.1,1.1)) +
+      geom_bar(stat = "identity")
+  })
+  
+  output$opt_nutr <- renderPlot({
+    ggplot(opt_subset()[1:2,], aes(x = Nutr_labels, y = Nutr_scen)) +
+      scale_y_continuous(limits=c(-0.1,1.1)) +
+      geom_bar(stat = "identity")
+  })
+  
+  output$opt_dec <- renderPlot({
+    ggplot(opt_subset(), aes(x = Dec_labels, y = Decade)) +
+      scale_y_continuous(limits=c(-0.1,1.1)) +
+      geom_bar(stat = "identity")
+  })
+  
+  output$opt_plots <- renderUI(
+    {
+      opt_plot_output_list <- lapply(
+        input$optVars, function(plotname) {
+          column(width=12, box(plotOutput(plotname, height = 300), width = 13, solidHeader = TRUE))
+        }
+      )
+      fluidRow(
+        lapply(
+          X = split(opt_plot_output_list, f = rep(c(1, 2), length.out = length(opt_plot_output_list))),
+          FUN = column, width = 6, style='padding:0px'
+        )
+      )
+    }
+  )
+ 
 }

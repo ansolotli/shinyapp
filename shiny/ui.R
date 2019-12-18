@@ -2,6 +2,7 @@ library(shiny)
 library(shinydashboard)
 library(stringi)
 #library(dashboardthemes)
+library(ggplot2)
 
 # Header
 header <- dashboardHeader(title = "BONUS BLUEWEBS decision support tool", titleWidth = 450)
@@ -97,25 +98,33 @@ sidebar <- dashboardSidebar(
     
     convertMenuItem(
       menuItem("Optimize", tabName = "optimize",
-               fluidRow(
-                 column(width = 12,
-                           radioButtons(inputId = 'Profit',
+               selectInput(inputId = 'Profit',
                                        label = "Minimum acceptable profit",
                                        choices = c("No profit", "Profit larger than 0", "Profit larger than 100", "Profit larger than 200"),
-                                       selected = "No profit")),
+                                       selected = "No profit"
+               ),
                
-                 column(width = 12,    
-                        radioButtons(inputId = 'F_GES',
+               selectInput(inputId = 'F_GES',
                                        label = "Fish SSB in relation to GES",
                                        choices = c("All below" = "All below Blim", "Two below" = "Two below Blim",
                                                    "One below" = "One below Blim", "All above" = "All above Blim"),
-                                       selected = "All above")),
-                 column(width = 12,
-                        radioButtons(inputId = 'Nutr_GES',
+                                       selected = "All above"
+               ),
+               
+               selectInput(inputId = 'Nutr_GES',
                                        label = "Nutrients in relation to GES",
                                        choices = c("Above" = "GES", "Below" = "Sub_GES"),
-                                       selected = "Above"))
-              ))
+                                       selected = "Above"
+               ),
+               fluidRow(
+                 column(width = 12,
+                        checkboxGroupInput(inputId = "optVars", 
+                                           label = "Scenario variables",
+                                           choiceNames = list("Fisheries policy", "Climate scenario", 
+                                                              "Nutrient loading policy", "Decade"),
+                                           choiceValues = list("opt_fish", "opt_clim", "opt_nutr", "opt_dec"),
+                                           selected = "opt_fish")
+               )))
       , tabName = "optimize")
   )
 )
@@ -153,7 +162,10 @@ body <- dashboardBody(
             titlePanel("Explore the predictions for ecosystem services in different scenarios"),
             fluidRow(
               column(width = 12,
-              uiOutput("opt_plots"))
+                     
+                       uiOutput("opt_plots")
+                     
+              )
             )
     )),
     # change the background colour of the app)
