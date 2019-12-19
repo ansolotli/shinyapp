@@ -185,16 +185,38 @@ server <- function(input, output) {
   
   ## CATCH VARIABLES
   
+  # subsetting data for catch plots
+  cth_subset <- reactive({
+    a <- datCth[(datCth$F == input$F & datCth$Nutr_scen == input$Nutr_scen & datCth$Climate == input$Climate),] 
+    return(a)
+  })
+  
+  
   # Cod
   output$plotCodCatch <- renderPlot(
     {
       if("plotCodCatch" %in% input$catchVars){
-        tmp <- datCth[(datCth$F == input$F & datCth$Nutr_scen == input$Nutr_scen & datCth$Climate == input$Climate),] 
-        plot(x=tmp$Year, y=tmp$CodCatch,  xlab="Year", ylab="Catch", ylim=c(0,80), xlim=c(2004,2096), type = 'n', main = "Cod Catch")
-        polygon(c(tmp$Year, rev(tmp$Year)), c((tmp$CodCatch - tmp$CodSD), rev(tmp$CodCatch + tmp$CodSD)), col = 'grey80', border = NA)
-        lines(x=tmp$Year, y=tmp$CodCatch, col="black")
-        #abline(h=0.8, col = "red")
-        #text(2007, 0.85, "GES above this line", col="red", pos=4)
+        
+        ggplot(cth_subset(), aes(x = Year, y = CodCatch)) +
+          scale_y_continuous(limits=c(0,80), breaks = scales::pretty_breaks(n = 5)) +
+          scale_x_continuous(limits=c(2004,2096), breaks = scales::pretty_breaks(n = 5),
+                             # increases expansion constant so that all the tick labels fit
+                             expand = c(0.07, 0)) +
+          ggtitle("Cod catch") +
+          xlab("\nYear") +
+          ylab("Catch\n") +
+          theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
+                             panel.grid.minor = element_blank(), axis.line = element_line(colour = "grey"),
+                             title = element_text(size = 14),
+                             axis.title.y = element_text(size = 13),
+                             axis.text.y = element_text(size = 11),
+                             axis.title.x = element_text(size = 13),
+                             axis.text.x = element_text(size = 11),
+                             legend.position = "none"
+          ) +
+          geom_line(stat = "identity") +
+          geom_ribbon(aes(ymin = cth_subset()[,"CodCatch"] - cth_subset()[,"CodSD"], ymax = cth_subset()[,"CodCatch"] + cth_subset()[,"CodSD"]), 
+                      linetype = 2, alpha = 0.2)
       }
     }
   )  
@@ -203,12 +225,27 @@ server <- function(input, output) {
   output$plotHerCatch <- renderPlot(
     {
       if("plotHerCatch" %in% input$catchVars){
-        tmp <- datCth[(datCth$F == input$F & datCth$Nutr_scen == input$Nutr_scen & datCth$Climate == input$Climate),]  
-        plot(x=tmp$Year, y=tmp$HerringCatch,  xlab="Year", ylab="Catch", ylim=c(0,250), xlim=c(2004,2096), type = 'n', main = "Herring Catch")
-        polygon(c(tmp$Year, rev(tmp$Year)), c((tmp$HerringCatch - tmp$HerringSD), rev(tmp$HerringCatch + tmp$HerringSD)), col = 'grey80', border = NA)
-        lines(x=tmp$Year, y=tmp$HerringCatch, col="black")
-        #abline(h=0.8, col = "red")
-        #text(2007, 0.85, "GES above this line", col="red", pos=4)
+        
+        ggplot(cth_subset(), aes(x = Year, y = HerringCatch)) +
+          scale_y_continuous(limits=c(0,250), breaks = scales::pretty_breaks(n = 5)) +
+          scale_x_continuous(limits=c(2004,2096), breaks = scales::pretty_breaks(n = 5),
+                             # increases expansion constant so that all the tick labels fit
+                             expand = c(0.07, 0)) +
+          ggtitle("Herring catch") +
+          xlab("\nYear") +
+          ylab("Catch\n") +
+          theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
+                             panel.grid.minor = element_blank(), axis.line = element_line(colour = "grey"),
+                             title = element_text(size = 14),
+                             axis.title.y = element_text(size = 13),
+                             axis.text.y = element_text(size = 11),
+                             axis.title.x = element_text(size = 13),
+                             axis.text.x = element_text(size = 11),
+                             legend.position = "none"
+          ) +
+          geom_line(stat = "identity") +
+          geom_ribbon(aes(ymin = cth_subset()[,"HerringCatch"] - cth_subset()[,"HerringSD"], ymax = cth_subset()[,"HerringCatch"] + cth_subset()[,"HerringSD"]), 
+                      linetype = 2, alpha = 0.2)
       }
     }
   )
@@ -217,13 +254,27 @@ server <- function(input, output) {
   output$plotSprCatch <- renderPlot(
     {
       if("plotSprCatch" %in% input$catchVars){
-        tmp <- datCth[(datCth$F == input$F & datCth$Nutr_scen == input$Nutr_scen & datCth$Climate == input$Climate),]  
-        plot(x=tmp$Year, y=tmp$SpratCatch,  xlab="Year", ylab="Catch", ylim=c(0,400), xlim=c(2004,2096), type = 'n', main = "Sprat Catch")
-        # !!!! NOTE In data file there is SpratDS instead of SpratSD
-        polygon(c(tmp$Year, rev(tmp$Year)), c((tmp$SpratCatch - tmp$SpratDS), rev(tmp$SpratCatch + tmp$SpratDS)), col = 'grey80', border = NA)
-        lines(x=tmp$Year, y=tmp$SpratCatch, col="black")
-        #abline(h=0.8, col = "red")
-        #text(2007, 0.85, "GES above this line", col="red", pos=4)
+        
+        ggplot(cth_subset(), aes(x = Year, y = SpratCatch)) +
+          scale_y_continuous(limits=c(0,400), breaks = scales::pretty_breaks(n = 5)) +
+          scale_x_continuous(limits=c(2004,2096), breaks = scales::pretty_breaks(n = 5),
+                             # increases expansion constant so that all the tick labels fit
+                             expand = c(0.07, 0)) +
+          ggtitle("Sprat catch") +
+          xlab("\nYear") +
+          ylab("Catch\n") +
+          theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
+                             panel.grid.minor = element_blank(), axis.line = element_line(colour = "grey"),
+                             title = element_text(size = 14),
+                             axis.title.y = element_text(size = 13),
+                             axis.text.y = element_text(size = 11),
+                             axis.title.x = element_text(size = 13),
+                             axis.text.x = element_text(size = 11),
+                             legend.position = "none"
+          ) +
+          geom_line(stat = "identity") +
+          geom_ribbon(aes(ymin = cth_subset()[,"SpratCatch"] - cth_subset()[,"SpratDS"], ymax = cth_subset()[,"SpratCatch"] + cth_subset()[,"SpratDS"]), 
+                      linetype = 2, alpha = 0.2)
       }
     }
   )
