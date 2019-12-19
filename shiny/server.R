@@ -184,7 +184,7 @@ server <- function(input, output) {
       box(replacedText, width = 12, solidHeader = TRUE)
   })
 
-  
+  # subset the data for novelty plots
   nov_subset <- reactive({
     a <- datNov[(datNov$Nutr_scen == input$Nutr_scen_nov & datNov$Clim_scen == input$Climate_nov),]
     return(a)
@@ -192,23 +192,21 @@ server <- function(input, output) {
   
   output$plotTotal <- renderPlot(
     {
-        ggplot(nov_subset(), aes(x = Year, y = Abiotic_novelty)) +
-                 scale_y_continuous(limits=c(0,2.7), breaks = scales::pretty_breaks(n = 5)) +
-                 scale_x_continuous(limits=c(2004,2096), breaks = scales::pretty_breaks(n = 5), 
-                                    # increases expansion constant so that all the tick labels fit
-                                    expand = c(0.07, 0)) +
-                 ggtitle("Total abiotic novelty") +
-                 xlab("\nYear") +
-                 ylab("Novelty\n") +
-                 theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
+      ggplot(nov_subset(), aes(x = Year, y = Abiotic_novelty)) +
+        scale_y_continuous(limits=c(0,2.7), breaks = scales::pretty_breaks(n = 5)) +
+        scale_x_continuous(limits=c(2004,2098), breaks = scales::pretty_breaks(n = 5)) +
+        ggtitle("Total abiotic novelty") +
+        xlab("\nYear") +
+        ylab("Novelty\n") +
+        theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
                            panel.grid.minor = element_blank(), axis.line = element_line(colour = "grey"),
                            title = element_text(size = 14),
                            axis.title.y = element_text(size = 13),
                            axis.text.y = element_text(size = 11),
                            axis.title.x = element_text(size = 13),
                            axis.text.x = element_text(size = 11)
-                 ) +
-                 geom_line(stat = "identity")
+        ) +
+        geom_line(stat = "identity")
     }
   )
   
@@ -218,8 +216,7 @@ server <- function(input, output) {
         
         ggplot(nov_subset(), aes(x = Year, y = codRV)) +
           scale_y_continuous(limits=c(0,1), breaks = scales::pretty_breaks(n = 5)) +
-          scale_x_continuous(limits=c(2004,2096), breaks = scales::pretty_breaks(n = 5),
-                             expand = c(0.07, 0)) +
+          scale_x_continuous(limits=c(2004,2098), breaks = scales::pretty_breaks(n = 5)) +
           ggtitle("Novelty for cod reproductive volume") +
           xlab("\nYear") +
           ylab("Novelty\n") +
@@ -242,8 +239,7 @@ server <- function(input, output) {
         
         ggplot(nov_subset(), aes(x = Year, y = T_050_MarchMay)) +
           scale_y_continuous(limits=c(0,1), breaks = scales::pretty_breaks(n = 5)) +
-          scale_x_continuous(limits=c(2004,2096), breaks = scales::pretty_breaks(n = 5),
-                             expand = c(0.07, 0)) +
+          scale_x_continuous(limits=c(2004,2098), breaks = scales::pretty_breaks(n = 5)) +
           ggtitle("Novelty for 0-50m water temperature") +
           xlab("\nYear") +
           ylab("Novelty\n") +
@@ -266,8 +262,7 @@ server <- function(input, output) {
         
         ggplot(nov_subset(), aes(x = Year, y = Aug060mT)) +
           scale_y_continuous(limits=c(0,1), breaks = scales::pretty_breaks(n = 5)) +
-          scale_x_continuous(limits=c(2004,2096), breaks = scales::pretty_breaks(n = 5),
-                             expand = c(0.07, 0)) +
+          scale_x_continuous(limits=c(2004,2098), breaks = scales::pretty_breaks(n = 5)) +
           ggtitle("Novelty for 0-60m water temperature") +
           xlab("\nYear") +
           ylab("Novelty\n") +
@@ -290,8 +285,7 @@ server <- function(input, output) {
         
         ggplot(nov_subset(), aes(x = Year, y = notHypoxicA)) +
           scale_y_continuous(limits=c(0,1), breaks = scales::pretty_breaks(n = 5)) +
-          scale_x_continuous(limits=c(2004,2096), breaks = scales::pretty_breaks(n = 5),
-                             expand = c(0.07, 0)) +
+          scale_x_continuous(limits=c(2004,2098), breaks = scales::pretty_breaks(n = 5)) +
           ggtitle("Novelty for inverse hypoxic area") +
           xlab("\nYear") +
           ylab("Novelty\n") +
