@@ -30,16 +30,39 @@ server <- function(input, output) {
   
   ## BIOMASS VARIABLES
   
+  # subsetting data for bio plots
+  bio_subset <- reactive({
+    a <- datBio[(datBio$F == input$F & datBio$Nutr_scen == input$Nutr_scen & datBio$Climate == input$Climate),] 
+    return(a)
+  })
+  
   # Cod
   output$plotCod <- renderPlot(
     {
       if("plotCod" %in% input$bioVars){
-        tmp <- datBio[(datBio$F == input$F & datBio$Nutr_scen == input$Nutr_scen & datBio$Climate == input$Climate),] 
-        plot(x=tmp$Year, y=tmp$Cod,  xlab="Year", ylab="Spawning-stock biomass", ylim=c(0,250), xlim=c(2004,2096), type = 'n', main = "Biomass of cod")
-        polygon(c(tmp$Year, rev(tmp$Year)), c((tmp$Cod - tmp$CodSD), rev(tmp$Cod + tmp$CodSD)), col = 'grey80', border = NA)
-        lines(x=tmp$Year, y=tmp$Cod, col="black")
-        abline(h=96.5, col = "red")
-        text(2007, 104, "GES above this line", col="red", pos=4)
+        
+        ggplot(bio_subset(), aes(x = Year, y = Cod)) +
+          scale_y_continuous(limits=c(0,250), breaks = scales::pretty_breaks(n = 5)) +
+          scale_x_continuous(limits=c(2004,2096), breaks = scales::pretty_breaks(n = 5),
+                             # increases expansion constant so that all the tick labels fit
+                             expand = c(0.07, 0)) +
+          ggtitle("Biomass of cod") +
+          xlab("\nYear") +
+          ylab("Spawning-stock biomass\n") +
+          geom_hline(aes(yintercept = 96.5, col = "red")) +
+          annotate("text", x = 2040, y = 104, label = "GES above this line", col = "red", size = 5) +
+          theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
+                             panel.grid.minor = element_blank(), axis.line = element_line(colour = "grey"),
+                             title = element_text(size = 14),
+                             axis.title.y = element_text(size = 13),
+                             axis.text.y = element_text(size = 11),
+                             axis.title.x = element_text(size = 13),
+                             axis.text.x = element_text(size = 11),
+                             legend.position = "none"
+          ) +
+          geom_line(stat = "identity") +
+          geom_ribbon(aes(ymin = bio_subset()[,"Cod"] - bio_subset()[,"CodSD"], ymax = bio_subset()[,"Cod"] + bio_subset()[,"CodSD"]), 
+                      linetype = 2, alpha = 0.2)
       }
     }
   )  
@@ -48,12 +71,28 @@ server <- function(input, output) {
   output$plotHer <- renderPlot(
     {
       if("plotHer" %in% input$bioVars){
-        tmp <- datBio[(datBio$F == input$F & datBio$Nutr_scen == input$Nutr_scen & datBio$Climate == input$Climate),]  
-        plot(x=tmp$Year, y=tmp$Herring,  xlab="Year", ylab="Spawning-stock biomass", ylim=c(0,800), xlim=c(2004,2096), type = 'n', main = "Biomass of Herring")
-        polygon(c(tmp$Year, rev(tmp$Year)), c((tmp$Herring - tmp$HerringSD), rev(tmp$Herring + tmp$HerringSD)), col = 'grey80', border = NA)
-        lines(x=tmp$Year, y=tmp$Herring, col="black")
-        abline(h=430, col = "red")
-        text(2007, 460, "GES above this line", col="red", pos=4)
+        
+        ggplot(bio_subset(), aes(x = Year, y = Herring)) +
+          scale_y_continuous(limits=c(0,800), breaks = scales::pretty_breaks(n = 5)) +
+          scale_x_continuous(limits=c(2004,2096), breaks = scales::pretty_breaks(n = 5),
+                             expand = c(0.07, 0)) +
+          ggtitle("Biomass of herring") +
+          xlab("\nYear") +
+          ylab("Spawning-stock biomass\n") +
+          geom_hline(aes(yintercept = 430, col = "red")) +
+          annotate("text", x = 2040, y = 460, label = "GES above this line", col = "red", size = 5) +
+          theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
+                             panel.grid.minor = element_blank(), axis.line = element_line(colour = "grey"),
+                             title = element_text(size = 14),
+                             axis.title.y = element_text(size = 13),
+                             axis.text.y = element_text(size = 11),
+                             axis.title.x = element_text(size = 13),
+                             axis.text.x = element_text(size = 11),
+                             legend.position = "none"
+          ) +
+          geom_line(stat = "identity") +
+          geom_ribbon(aes(ymin = bio_subset()[,"Herring"] - bio_subset()[,"HerringSD"], ymax = bio_subset()[,"Herring"] + bio_subset()[,"HerringSD"]), 
+                      linetype = 2, alpha = 0.2)
       }
     }
   )
@@ -62,13 +101,28 @@ server <- function(input, output) {
   output$plotSpr <- renderPlot(
     {
       if("plotSpr" %in% input$bioVars){
-        tmp <- datBio[(datBio$F == input$F & datBio$Nutr_scen == input$Nutr_scen & datBio$Climate == input$Climate),]  
-        plot(x=tmp$Year, y=tmp$Sprat,  xlab="Year", ylab="Spawning-stock biomass", ylim=c(0,1150), xlim=c(2004,2096), type = 'n', main = "Biomass of Sprat")
-        # !!!! NOTE In data file there is SpratDS instead of SpratSD
-        polygon(c(tmp$Year, rev(tmp$Year)), c((tmp$Sprat - tmp$SpratDS), rev(tmp$Sprat + tmp$SpratDS)), col = 'grey80', border = NA)
-        lines(x=tmp$Year, y=tmp$Sprat, col="black")
-        abline(h=410, col = "red")
-        text(2007, 445, "GES above this line", col="red", pos=4)
+        
+        ggplot(bio_subset(), aes(x = Year, y = Sprat)) +
+          scale_y_continuous(limits=c(0,1150), breaks = scales::pretty_breaks(n = 5)) +
+          scale_x_continuous(limits=c(2004,2096), breaks = scales::pretty_breaks(n = 5),
+                             expand = c(0.07, 0)) +
+          ggtitle("Biomass of sprat") +
+          xlab("\nYear") +
+          ylab("Spawning-stock biomass\n") +
+          geom_hline(aes(yintercept = 410, col = "red")) +
+          annotate("text", x = 2040, y = 445, label = "GES above this line", col = "red", size = 5) +
+          theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
+                             panel.grid.minor = element_blank(), axis.line = element_line(colour = "grey"),
+                             title = element_text(size = 14),
+                             axis.title.y = element_text(size = 13),
+                             axis.text.y = element_text(size = 11),
+                             axis.title.x = element_text(size = 13),
+                             axis.text.x = element_text(size = 11),
+                             legend.position = "none"
+          ) +
+          geom_line(stat = "identity") +
+          geom_ribbon(aes(ymin = bio_subset()[,"Sprat"] - bio_subset()[,"SpratDS"], ymax = bio_subset()[,"Sprat"] + bio_subset()[,"SpratDS"]), 
+                      linetype = 2, alpha = 0.2)
       }
     }
   )
@@ -77,12 +131,26 @@ server <- function(input, output) {
   output$plotZoo <- renderPlot(
     {
       if("plotZoo" %in% input$bioVars){
-        tmp <- datBio[(datBio$F == input$F & datBio$Nutr_scen == input$Nutr_scen & datBio$Climate == input$Climate),]  
-        plot(x=tmp$Year, y=tmp$Zooplankton,  xlab="Year", ylab="Biomass", ylim=c(0,12), xlim=c(2004,2096), type = 'n', main = "Biomass of Zooplankton")
-        polygon(c(tmp$Year, rev(tmp$Year)), c((tmp$Zooplankton - tmp$ZooplanktonSD), rev(tmp$Zooplankton + tmp$ZooplanktonSD)), col = 'grey80', border = NA)
-        lines(x=tmp$Year, y=tmp$Zooplankton, col="black")
-        #abline(h=0.8, col = "red")
-        #text(2007, 0.85, "GES above this line", col="red", pos=4)
+        
+        ggplot(bio_subset(), aes(x = Year, y = Zooplankton)) +
+          scale_y_continuous(limits=c(0,12.5), breaks = scales::pretty_breaks(n = 5)) +
+          scale_x_continuous(limits=c(2004,2096), breaks = scales::pretty_breaks(n = 5),
+                             expand = c(0.07, 0)) +
+          ggtitle("Biomass of zooplankton") +
+          xlab("\nYear") +
+          ylab("Biomass\n") +
+          theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
+                             panel.grid.minor = element_blank(), axis.line = element_line(colour = "grey"),
+                             title = element_text(size = 14),
+                             axis.title.y = element_text(size = 13),
+                             axis.text.y = element_text(size = 11),
+                             axis.title.x = element_text(size = 13),
+                             axis.text.x = element_text(size = 11),
+                             legend.position = "none"
+          ) +
+          geom_line(stat = "identity") +
+          geom_ribbon(aes(ymin = bio_subset()[,"Zooplankton"] - bio_subset()[,"ZooplanktonSD"], ymax = bio_subset()[,"Zooplankton"] + bio_subset()[,"ZooplanktonSD"]), 
+                      linetype = 2, alpha = 0.2)
       }
     }
   )
@@ -91,12 +159,26 @@ server <- function(input, output) {
   output$plotPhy <- renderPlot(
     {
       if("plotPhy" %in% input$bioVars){
-        tmp <- datBio[(datBio$F == input$F & datBio$Nutr_scen == input$Nutr_scen & datBio$Climate == input$Climate),]  
-        plot(x=tmp$Year, y=tmp$Phytoplankton,  xlab="Year", ylab="Biomass", ylim=c(0,12), xlim=c(2004,2096), type = 'n', main = "Biomass of Phytoplankton")
-        polygon(c(tmp$Year, rev(tmp$Year)), c((tmp$Phytoplankton - tmp$PhytoplanktonSD), rev(tmp$Phytoplankton + tmp$PhytoplanktonSD)), col = 'grey80', border = NA)
-        lines(x=tmp$Year, y=tmp$Phytoplankton, col="black")
-        #abline(h=0.8, col = "red")
-        #text(2007, 0.85, "GES above this line", col="red", pos=4)
+        
+        ggplot(bio_subset(), aes(x = Year, y = Phytoplankton)) +
+          scale_y_continuous(limits=c(0,13), breaks = scales::pretty_breaks(n = 5)) +
+          scale_x_continuous(limits=c(2004,2096), breaks = scales::pretty_breaks(n = 5),
+                             expand = c(0.07, 0)) +
+          ggtitle("Biomass of phytoplankton") +
+          xlab("\nYear") +
+          ylab("Biomass\n") +
+          theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
+                             panel.grid.minor = element_blank(), axis.line = element_line(colour = "grey"),
+                             title = element_text(size = 14),
+                             axis.title.y = element_text(size = 13),
+                             axis.text.y = element_text(size = 11),
+                             axis.title.x = element_text(size = 13),
+                             axis.text.x = element_text(size = 11),
+                             legend.position = "none"
+          ) +
+          geom_line(stat = "identity") +
+          geom_ribbon(aes(ymin = bio_subset()[,"Phytoplankton"] - bio_subset()[,"PhytoplanktonSD"], ymax = bio_subset()[,"Phytoplankton"] + bio_subset()[,"PhytoplanktonSD"]), 
+                      linetype = 2, alpha = 0.2)
       }
     }
   )
