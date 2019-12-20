@@ -9,7 +9,7 @@ datOpt <- read.csv("D:/Github/shinyapp/DSS_Bottom_up_3x3.csv", row.names = NULL,
 # Define the server function
 server <- function(input, output) {
   
-  # "ABOUT" TAB
+  ##### "ABOUT" TAB #####
   
   output$aboutText <- renderUI({
     rawText <- readLines("D:/Github/shinyapp/about.txt")
@@ -26,7 +26,7 @@ server <- function(input, output) {
   
   
   
-  # "PREDICTED TIME SERIES" TAB
+  ##### "PREDICTED TIME SERIES" TAB ######
   
   ## BIOMASS VARIABLES
   
@@ -306,7 +306,7 @@ server <- function(input, output) {
   )
   
   
-  # "NOVELTY TAB"
+  ##### "NOVELTY TAB" #####
   
   output$novel_info <- renderUI({
       rawText <- readLines("D:/Github/shinyapp/novelty.txt")
@@ -482,7 +482,7 @@ server <- function(input, output) {
   })
   
   
-  # "OPTIMIZE" TAB
+  ##### "OPTIMIZE" TAB #####
 
   # subsetting data for the optimizing plots
   opt_subset <- reactive({
