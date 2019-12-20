@@ -1,7 +1,7 @@
 library(shiny)
 library(shinydashboard)
+library(shinyBS) # for popovers
 library(stringi)
-#library(dashboardthemes)
 library(ggplot2)
 
 # Header
@@ -131,13 +131,14 @@ sidebar <- dashboardSidebar(
 
 # Body
 body <- dashboardBody(
+  
   tabItems(
     tabItem("about",
             titlePanel("About the decision support tool"),
             fluidRow(
               column(width = 12,
                 uiOutput('aboutText'),
-                box(title = "Simplified model", width = 12, solidHeader = TRUE,
+                box(title = "Map of the modelled area", width = 12, solidHeader = TRUE,
                     imageOutput("DSS", height = "auto"))),
             )
     ),

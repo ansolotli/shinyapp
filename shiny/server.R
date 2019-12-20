@@ -21,7 +21,7 @@ server <- function(input, output) {
   })
   
   output$DSS <- renderImage({
-    return(list(src = "D:/Github/shinyapp/DSS_simplified.PNG", contentType = "image/png"))
+    return(list(src = "D:/Github/shinyapp/map.PNG", contentType = "image/png"))
   }, deleteFile = FALSE)
   
   
@@ -440,7 +440,22 @@ server <- function(input, output) {
     {
       novel_plot_output_list <- lapply(
         input$novelVars, function(plotname) {
-          column(width=12, box(plotOutput(plotname, height = 300), width = 13, solidHeader = TRUE))
+          column(width=12, 
+                 if (plotname == "plotRv") {
+                   # wrap rendered elements and add popovers to them
+                   popify(box(plotOutput(plotname, height = 300), width = 13, solidHeader = TRUE),
+                     title = "Cod reproductive volume", 
+                     content = "Cod reproductive volume is the water layer where the water is warm enough but not too saline for the eggs to float.",
+                     trigger = "hover", placement = "top", options = list(container = "body"))
+                 } else if (plotname == "plotHyp") {
+                   popify(box(plotOutput(plotname, height = 300), width = 13, solidHeader = TRUE),
+                          title = "Not hypoxic area", 
+                          content = "Not hypoxic area means area where there is soluble oxygen in the water. This area has been decreasing in size in the Baltic Sea for decades.",
+                          trigger = "hover", placement = "top", options = list(container = "body"))
+                 } else {
+                   box(plotOutput(plotname, height = 300), width = 13, solidHeader = TRUE)
+                 }
+                 )
         }
       )
       fluidRow(
@@ -457,8 +472,12 @@ server <- function(input, output) {
     if(input$novelTotal == TRUE) {
       # wrapping elements inside a fluidRow function extends the white space of the main panel accordingly
       fluidRow(
-        box(plotOutput("plotTotal", height = 300), width = 12, solidHeader = TRUE)
-      )
+        popify(
+          box(plotOutput("plotTotal", height = 300), width = 12, solidHeader = TRUE), title = "Total novelty", 
+          content = "Increasing novelty leads to greater uncertainty. Conditions that have not been observed previously lead to less certain predictions.",
+          trigger = "hover", placement = "top",
+          options=list(container="body"))
+        )
     }
   })
   
