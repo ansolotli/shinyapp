@@ -170,10 +170,20 @@ body <- dashboardBody(
     # change the background colour of the app)
     tags$head(tags$style(HTML('
                                 /* body */
-                                .content-wrapper, .right-side {
+                              .content-wrapper, .right-side {
                                 background-color: #ffffff;
-                                }
-                                '))) 
+                              }
+                              .popover-title {
+                                color: #ffffff;
+                                font-size: 16px;
+                                background-color: #3d0099;
+                              }
+                              .popover-content { 
+                                color: #ffffff;
+                                background: #404040; 
+                              }
+                              '
+                              ))) 
 )
 
 
