@@ -3,6 +3,7 @@ library(shinydashboard)
 library(shinyBS) # for popovers
 library(stringi)
 library(ggplot2)
+library(shinydashboardPlus) # for fancier boxes
 
 # Header
 header <- dashboardHeader(title = "BONUS BLUEWEBS decision support tool", titleWidth = 450)
@@ -142,9 +143,20 @@ body <- dashboardBody(
                          uiOutput("aboutText")
                          ),
                 tabPanel("The model"),
-                tabPanel("Map of the modelled area", 
-                             imageOutput("DSS", height = "auto")
-                        )
+                tabPanel("Map of the modelled area",
+                  fluidRow(
+                    column(width = 6,
+                           box(solidHeader = TRUE, imageOutput("DSS", height = "auto"))),
+                    column(width = 6,
+                           gradientBox(title = "Central Baltic Sea",
+                                       width = 12,
+                                       collapsible = FALSE,
+                                       footer = "The map covers ICES areas XX, XX and XX."
+                                   )
+                           )
+                  )
+                  
+                )
             ))   
     ),
     tabItem("predicted",
@@ -177,18 +189,41 @@ body <- dashboardBody(
                               .content-wrapper, .right-side {
                                 background-color: #ffffff;
                               }
+                              #aboutText {
+                                 font-size: 16px;
+                              }
+                              #novel_info {
+                                font-size: 16px;
+                              }
                               
                               /* tabBox background */                    
                               .nav-tabs-custom>.nav-tabs {
                                 font-size: 16px;
+                                font-weight: 600;
                                 background-color: #404040;
                               }
                               .nav-tabs-custom .nav-tabs li:not(.active) a {
                                 color: #ffffff;
                               }
                               .nav-tabs-custom .nav-tabs li.active {
-                                border-top-color: #404040;
+                                border-top-color: #ffffff;
                               }
+                              
+                              /* gradientBox */
+                              .box-header {
+                                background-color: #404040;
+                                color: #ffffff;
+                              }
+                              .box-header .box-title {
+                                font-size: 16px;
+                              }
+                              .box-body {
+                                padding: 0px;
+                              }
+                              .box-footer {
+                                font-size: 16px;
+                              }
+                              
                              
                               /* popovers */
                               .popover-title {
@@ -198,7 +233,7 @@ body <- dashboardBody(
                               }
                               .popover-content { 
                                 color: #ffffff;
-                                font-size: 13px;
+                                font-size: 14px;
                                 background: #404040; 
                               }
                               '
