@@ -17,7 +17,7 @@ server <- function(input, output) {
     splitText <- stringi::stri_split(str = rawText, regex = '\\n')
     # wrap a paragraph tag around each element in the list
     replacedText <- lapply(splitText, p)
-    box(replacedText, width = 12, solidHeader = TRUE)
+    return(replacedText)
   })
   
   output$DSS <- renderImage({
@@ -476,6 +476,7 @@ server <- function(input, output) {
           box(plotOutput("plotTotal", height = 300), width = 12, solidHeader = TRUE), title = "Total novelty", 
           content = "Increasing novelty leads to greater uncertainty. Conditions that have not been observed previously lead to less certain predictions.",
           trigger = "hover", placement = "top",
+          #increase the size of the popover according to the length of content
           options=list(container="body"))
         )
     }

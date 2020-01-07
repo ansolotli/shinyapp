@@ -136,13 +136,17 @@ body <- dashboardBody(
     tabItem("about",
             titlePanel("About the decision support tool"),
             fluidRow(
-              column(width = 12,
-                uiOutput('aboutText'),
-                box(title = "Map of the modelled area", width = 12, solidHeader = TRUE,
-                    imageOutput("DSS", height = "auto"))),
-            )
+              tabBox(width = 12,
+                id = "aboutBoxes",
+                tabPanel("Introduction",
+                         uiOutput("aboutText")
+                         ),
+                tabPanel("The model"),
+                tabPanel("Map of the modelled area", 
+                             imageOutput("DSS", height = "auto")
+                        )
+            ))   
     ),
-    
     tabItem("predicted",
             titlePanel("Explore the predicted biomasses and catches in different management scenarios"),
             fluidRow(
@@ -167,12 +171,26 @@ body <- dashboardBody(
               )
             )
     )),
-    # change the background colour of the app)
+    # CSS
     tags$head(tags$style(HTML('
-                                /* body */
+                              /* body */
                               .content-wrapper, .right-side {
                                 background-color: #ffffff;
                               }
+                              
+                              /* tabBox background */                    
+                              .nav-tabs-custom>.nav-tabs {
+                                font-size: 16px;
+                                background-color: #404040;
+                              }
+                              .nav-tabs-custom .nav-tabs li:not(.active) a {
+                                color: #ffffff;
+                              }
+                              .nav-tabs-custom .nav-tabs li.active {
+                                border-top-color: #404040;
+                              }
+                             
+                              /* popovers */
                               .popover-title {
                                 color: #ffffff;
                                 font-size: 16px;
@@ -180,6 +198,7 @@ body <- dashboardBody(
                               }
                               .popover-content { 
                                 color: #ffffff;
+                                font-size: 13px;
                                 background: #404040; 
                               }
                               '
