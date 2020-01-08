@@ -142,12 +142,14 @@ body <- dashboardBody(
                 tabPanel("Introduction",
                          uiOutput("aboutText")
                          ),
-                tabPanel("The model"),
+                tabPanel("The model",
+                         uiOutput("modelText"),
+                         imageOutput("model", height = "auto")),
                 tabPanel("Map of the modelled area",
                   fluidRow(
                     column(width = 6,
                            box(solidHeader = TRUE, imageOutput("DSS", height = "auto"))),
-                    column(width = 6,
+                    column(width = 5, offset = 1,
                            gradientBox(title = "Central Baltic Sea",
                                        width = 12,
                                        collapsible = FALSE,
@@ -190,7 +192,10 @@ body <- dashboardBody(
                                 background-color: #ffffff;
                               }
                               #aboutText {
-                                 font-size: 16px;
+                                font-size: 16px;
+                              }
+                              #modelText {
+                                font-size: 16px;
                               }
                               #novel_info {
                                 font-size: 16px;
@@ -199,7 +204,6 @@ body <- dashboardBody(
                               /* tabBox background */                    
                               .nav-tabs-custom>.nav-tabs {
                                 font-size: 16px;
-                                font-weight: 600;
                                 background-color: #404040;
                               }
                               .nav-tabs-custom .nav-tabs li:not(.active) a {
@@ -211,7 +215,7 @@ body <- dashboardBody(
                               
                               /* gradientBox */
                               .box-header {
-                                background-color: #404040;
+                                background-color: #004d99;
                                 color: #ffffff;
                               }
                               .box-header .box-title {
@@ -222,6 +226,7 @@ body <- dashboardBody(
                               }
                               .box-footer {
                                 font-size: 16px;
+                                background-color: #cce6ff;
                               }
                               
                              
@@ -229,12 +234,11 @@ body <- dashboardBody(
                               .popover-title {
                                 color: #ffffff;
                                 font-size: 16px;
-                                background-color: #3d0099;
+                                background-color: #004d99;
                               }
                               .popover-content { 
-                                color: #ffffff;
                                 font-size: 14px;
-                                background: #404040; 
+                                background: #cce6ff; 
                               }
                               '
                               ))) 

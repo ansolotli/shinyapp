@@ -20,6 +20,17 @@ server <- function(input, output) {
     return(replacedText)
   })
   
+  output$modelText <- renderUI({
+    rawText <- readLines("D:/Github/shinyapp/model.txt")
+    splitText <- stringi::stri_split(str = rawText, regex = '\\n')
+    replacedText <- lapply(splitText, p)
+    return(replacedText)
+  })
+  
+  output$model <- renderImage({
+    return(list(src = "D:/Github/shinyapp/model.PNG", contentType = "image/png"))
+  }, deleteFile = FALSE)
+  
   output$DSS <- renderImage({
     return(list(src = "D:/Github/shinyapp/map.PNG", contentType = "image/png"))
   }, deleteFile = FALSE)
