@@ -27,23 +27,23 @@ sidebar <- dashboardSidebar(
       menuItem("Predicted time series", tabName = "predicted",
                
                # Create the dropdowns of scenario options
-               selectInput(inputId = 'F',
+               popify(selectInput(inputId = 'F',
                            label = "Fishery Policy Scenario", 
                            choices = c("Sustainable" = "Sus", "Pelagics-Focused" = "Pel", "Open Access" = "OA"), 
                            selected = "Sus"
-               ),
+               ), "Fishery policies", "Here are the fishery policy options explained!", placement = "right", trigger = "hover", options = list(container = "body")),
                
-               selectInput(inputId = 'Nutr_scen', 
+               popify(selectInput(inputId = 'Nutr_scen', 
                            label = "Nutrient Loading Policy",
                            choices = c("Baltic Sea Action Plan" = "BSAP", "Average 1995-2002" = "Ref"),
                            selected = "BSAP"
-               ),
+               ), "Nutrient loading policies", "Here are the nutrient policy options explained!", placement = "right", trigger = "hover", options = list(container = "body")),
                
-               selectInput(inputId = 'Climate', 
+               popify(selectInput(inputId = 'Climate', 
                            label = "Climate Change Scenario - Representative Concentration Pathways",
                            choices = c("RCP4.5", "RCP8.5"), 
                            selected = "RCP4.5"
-               ),
+               ), "Climate scenarios", "Here are the climate scenario options explained!", placement = "right", trigger = "hover", options = list(container = "body")),
                
                # Create the two colums of checkbox groups (biomass and catch)
                fluidRow(
@@ -210,7 +210,7 @@ body <- dashboardBody(
                                 color: #ffffff;
                               }
                               .nav-tabs-custom .nav-tabs li.active {
-                                border-top-color: #ffffff;
+                                border-top-color: #000000;
                               }
                               
                               /* gradientBox */
