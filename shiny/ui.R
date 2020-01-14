@@ -144,20 +144,17 @@ body <- dashboardBody(
                          ),
                 tabPanel("The model",
                          uiOutput("modelText"),
-                         imageOutput("model", height = "auto")),
+                         imageOutput("model", height = "auto"),
+                         uiOutput("modelText2")
+                         ),
                 tabPanel("Map of the modelled area",
                   fluidRow(
                     column(width = 6,
                            box(solidHeader = TRUE, imageOutput("DSS", height = "auto"))),
                     column(width = 5, offset = 1,
-                           gradientBox(title = "Central Baltic Sea",
-                                       width = 12,
-                                       collapsible = FALSE,
-                                       footer = "The map covers ICES areas XX, XX and XX."
-                                   )
+                           uiOutput("mapText")
                            )
                   )
-                  
                 )
             ))   
     ),
@@ -191,14 +188,23 @@ body <- dashboardBody(
                               .content-wrapper, .right-side {
                                 background-color: #ffffff;
                               }
+                              
+                              /* { font-family: Arial; } */
+                              
                               #aboutText {
-                                font-size: 16px;
+                                font-size: 15px;
                               }
                               #modelText {
-                                font-size: 16px;
+                                font-size: 15px;
+                              }
+                              #modelText2 {
+                                font-size: 15px;
+                              }
+                              #mapText {
+                                font-size: 15px;
                               }
                               #novel_info {
-                                font-size: 16px;
+                                font-size: 15px;
                               }
                               
                               /* tabBox background */                    
