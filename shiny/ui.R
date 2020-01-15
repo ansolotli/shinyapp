@@ -31,19 +31,23 @@ sidebar <- dashboardSidebar(
                            label = "Fishery Policy Scenario", 
                            choices = c("Sustainable" = "Sus", "Pelagics-Focused" = "Pel", "Open Access" = "OA"), 
                            selected = "Sus"
-               ), "Fishery policies", "Here are the fishery policy options explained!", placement = "right", trigger = "hover", options = list(container = "body")),
+               ), "Fishery policies", 
+               "Sustainable fishery policy assumes that healthy states of all three major fish stocks (i.e. cod, herring and sprat) supports a healthy and functioning food web and will be the basis for developing a sustainable exploitation of the Baltic Sea. <br><br> Pelagics-focused scenario assumes that given expected climate change, future living conditions of the cod stock will be detrimental and hence prioritisation of the pelagic fishery on herring and sprat would be the preferred fisheries management strategy. <br><br> Open access scenario assumes that a largely unregulated fishery would be the management of choice for the future Baltic Sea."
+               , placement = "right", trigger = "hover", options = list(container = "body")),
                
                popify(selectInput(inputId = 'Nutr_scen', 
                            label = "Nutrient Loading Policy",
                            choices = c("Baltic Sea Action Plan" = "BSAP", "Average 1995-2002" = "Ref"),
                            selected = "BSAP"
-               ), "Nutrient loading policies", "Here are the nutrient policy options explained!", placement = "right", trigger = "hover", options = list(container = "body")),
+               ), "Nutrient loading policies", "Nutrient loads were modelled according to the reference conditions between 1995 and 2002 and according to the loads outlined in the Baltic Sea Action Plan."
+               , placement = "right", trigger = "hover", options = list(container = "body")),
                
                popify(selectInput(inputId = 'Climate', 
                            label = "Climate Change Scenario - Representative Concentration Pathways",
                            choices = c("RCP4.5", "RCP8.5"), 
                            selected = "RCP4.5"
-               ), "Climate scenarios", "Here are the climate scenario options explained!", placement = "right", trigger = "hover", options = list(container = "body")),
+               ), "Climate scenarios", "Climate scenarios follow Representative Concentration Pathways (RCP) 4.5 and 8.5 according to the ICPP 2014."
+               , placement = "right", trigger = "hover", options = list(container = "body")),
                
                # Create the two colums of checkbox groups (biomass and catch)
                fluidRow(
@@ -250,12 +254,13 @@ body <- dashboardBody(
                               /* popovers */
                               .popover-title {
                                 color: #ffffff;
-                                font-size: 16px;
+                                font-family: Arial;
                                 background-color: #004d99;
                               }
                               .popover-content { 
-                                font-size: 14px;
-                                background: #cce6ff; 
+                                font-family: Arial;
+                                background: #cce6ff;
+                                data-html: true;
                               }
                               '
                               ))) 
