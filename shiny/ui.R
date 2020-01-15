@@ -189,7 +189,18 @@ body <- dashboardBody(
                                 background-color: #ffffff;
                               }
                               
-                              /* { font-family: Arial; } */
+                              * { font-family: Arial; }
+                              
+                              /* app title */
+                              .main-header .logo {
+                                font-family: Arial;
+                              }
+                              
+                              /* page title */
+                              h2 {
+                                font-family: Arial;
+                                font-size: 24px;
+                              }
                               
                               #aboutText {
                                 font-size: 15px;
@@ -207,7 +218,7 @@ body <- dashboardBody(
                                 font-size: 15px;
                               }
                               
-                              /* tabBox background */                    
+                              /* tabBox */                    
                               .nav-tabs-custom>.nav-tabs {
                                 font-size: 16px;
                                 background-color: #404040;
