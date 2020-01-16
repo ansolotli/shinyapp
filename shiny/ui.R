@@ -27,13 +27,16 @@ sidebar <- dashboardSidebar(
       menuItem("Predicted time series", tabName = "predicted",
                
                # Create the dropdowns of scenario options
+               # wrap rendered elements and add popovers to them
                popify(selectInput(inputId = 'F',
                            label = "Fishery Policy Scenario", 
                            choices = c("Sustainable" = "Sus", "Pelagics-Focused" = "Pel", "Open Access" = "OA"), 
                            selected = "Sus"
                ), "Fishery policies", 
                "Sustainable fishery policy assumes that healthy states of all three major fish stocks (i.e. cod, herring and sprat) supports a healthy and functioning food web and will be the basis for developing a sustainable exploitation of the Baltic Sea. <br><br> Pelagics-focused scenario assumes that given expected climate change, future living conditions of the cod stock will be detrimental and hence prioritisation of the pelagic fishery on herring and sprat would be the preferred fisheries management strategy. <br><br> Open access scenario assumes that a largely unregulated fishery would be the management of choice for the future Baltic Sea."
-               , placement = "right", trigger = "hover", options = list(container = "body")),
+               , placement = "right", trigger = "hover", 
+               #increase the size of the popover according to the length of content
+               options = list(container = "body")),
                
                popify(selectInput(inputId = 'Nutr_scen', 
                            label = "Nutrient Loading Policy",
@@ -88,15 +91,19 @@ sidebar <- dashboardSidebar(
                # Create the column of checkbox groups (totalNov, codRV, temp_MarchMay050, temp_Aug060, notHypoxic)
                fluidRow(
                  column(width = 12,
-                        checkboxGroupInput(inputId = "novelVars", 
+                        popify(checkboxGroupInput(inputId = "novelVars", 
                                            label = "Novelty variables",
                                            choiceNames = list("Cod reproductive volume", "0-50m temperature March-May", 
                                                               "0-60m temperature August", "Inverse hypoxic area"),
                                            choiceValues = list("plotRv", "plotTemp1", "plotTemp2", "plotHyp"),
-                                           selected = "plotRv"),
+                                           selected = "plotRv"), 
+                               title = "Novelty variables", content = "Cod reproductive volume is the water layer where the water is warm enough but not too saline for the eggs to float in an oxygenated environment. If this volume decreases, the reproduction of cod will be less successful. <br><br> The temperature variables present the water temperature in the surface layer of the water column during spring months and in the summer. <br><br> Inverse hypoxic area is an area that has gone anoxic i.e. is not oxygenated."
+                               , placement = "right", trigger = "hover", options = list(container = "body")),
                         
-                        checkboxInput(inputId = "novelTotal", 
-                                      label = "Total abiotic novelty", value = TRUE)
+                        popify(checkboxInput(inputId = "novelTotal", 
+                                      label = "Total abiotic novelty", value = TRUE),
+                               title = "Total abiotic novelty", content = "Total abiotic novelty is the sum of other novelty variables and describes the total novelty expected to occur in the Central Baltic Sea in the current century."
+                               , placement = "right", trigger = "hover", options = list(container = "body"))
                  )
                )
       ), tabName = "novelty"),
