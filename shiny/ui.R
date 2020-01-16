@@ -225,7 +225,7 @@ body <- dashboardBody(
                               /* tabBox */                    
                               .nav-tabs-custom>.nav-tabs {
                                 font-size: 16px;
-                                background-color: #404040;
+                                background-color: #222d32;
                               }
                               .nav-tabs-custom .nav-tabs li:not(.active) a {
                                 color: #ffffff;
@@ -255,11 +255,12 @@ body <- dashboardBody(
                               .popover-title {
                                 color: #ffffff;
                                 font-family: Arial;
-                                background-color: #004d99;
+                                background-color: #222d32;
                               }
                               .popover-content { 
                                 font-family: Arial;
-                                background: #cce6ff;
+                                color: #ffffff;
+                                background: #2c3b41;
                                 data-html: true;
                               }
                               '
