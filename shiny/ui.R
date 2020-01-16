@@ -234,6 +234,20 @@ body <- dashboardBody(
                                 font-size: 15px;
                               }
                               
+                              #novel_info .box {
+                                background: #d9d9d9;
+                                padding: 10px;
+                              }
+                              
+                              #opt_info {
+                                font-size: 15px;
+                              }
+                              
+                              #opt_info .box {
+                                background: #d9d9d9;
+                                padding: 10px;
+                              }
+                              
                               /* tabBox */                    
                               .nav-tabs-custom>.nav-tabs {
                                 font-size: 16px;
@@ -262,7 +276,6 @@ body <- dashboardBody(
                                 background-color: #cce6ff;
                               }
                               
-                             
                               /* popovers */
                               .popover-title {
                                 color: #ffffff;
