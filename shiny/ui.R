@@ -110,24 +110,28 @@ sidebar <- dashboardSidebar(
     
     convertMenuItem(
       menuItem("Optimize", tabName = "optimize",
-               selectInput(inputId = 'Profit',
+               popify(selectInput(inputId = 'Profit',
                                        label = "Minimum acceptable profit",
                                        choices = c("No profit", "Profit larger than 0", "Profit larger than 100", "Profit larger than 200"),
                                        selected = "No profit"
-               ),
+               ), title = "Minimum acceptable profit", content = "Minimum acceptable profit describes the profitability of fisheries on the scale of no profit to profit exceeding the value of 200."
+               , placement = "right", trigger = "hover", options = list(container = "body")),
                
-               selectInput(inputId = 'F_GES',
+               popify(selectInput(inputId = 'F_GES',
                                        label = "Fish SSB in relation to GES",
                                        choices = c("All above" = "All above Blim", "One below" = "One below Blim",
                                                    "Two below" = "Two below Blim", "All below" = "All below Blim"),
                                        selected = "All above"
-               ),
+               ), title = "Fish SSB to GES", content = "The spawning-stock biomass of the three major fish species (i.e. cod, herring and sprat) in relation to Good Ecosystem Status (GES) describes the expected condition of the fish stocks. The scale ranges from all three species being above the GES limit to none of the species faring well."
+               , placement = "right", trigger = "hover", options = list(container = "body")),
                
-               selectInput(inputId = 'Nutr_GES',
+               popify(selectInput(inputId = 'Nutr_GES',
                                        label = "Nutrients in relation to GES",
                                        choices = c("Above" = "GES", "Below" = "Sub_GES"),
                                        selected = "Above"
-               ),
+               ), title = "Nutrients to GES", content = "Nutrients in relation to GES can be over or under the limit representing Good Ecosystem Status. If nutrients are above the limit, the water clarity increases."
+               , placement = "right", trigger = "hover", options = list(container = "body")),
+               
                fluidRow(
                  column(width = 12,
                         checkboxGroupInput(inputId = "optVars", 
@@ -186,10 +190,11 @@ body <- dashboardBody(
     )
     ,
     tabItem("optimize",
-            titlePanel("Explore the scenarios leading to different outcomes"),
+            titlePanel("Explore the forecasts about the ecosystem services"),
             fluidRow(
               column(width = 12,
-                       uiOutput("opt_plots")
+                     uiOutput("opt_info"),
+                     uiOutput("opt_plots")
               )
             )
     )),

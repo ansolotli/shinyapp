@@ -489,6 +489,13 @@ server <- function(input, output) {
   
   
   ##### "OPTIMIZE" TAB #####
+  
+  output$opt_info <- renderUI({
+    rawText <- readLines("D:/Github/shinyapp/optimize.txt")
+    splitText <- stringi::stri_split(str = rawText, regex = '\\n')
+    replacedText <- lapply(splitText, p)
+    box(replacedText, width = 12, solidHeader = TRUE)
+  })
 
   # subsetting data for the optimizing plots
   opt_subset <- reactive({
