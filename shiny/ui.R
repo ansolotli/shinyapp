@@ -159,13 +159,15 @@ body <- dashboardBody(
                          ),
                 tabPanel("The model",
                          uiOutput("modelText"),
-                         imageOutput("model", height = "auto"),
+                         fluidRow(
+                           box(solidHeader = TRUE, imageOutput("model", height = "auto"))
+                         ),
                          uiOutput("modelText2")
                          ),
                 tabPanel("Map of the modelled area",
                   fluidRow(
                     column(width = 6,
-                           box(solidHeader = TRUE, imageOutput("DSS", height = "auto"))),
+                           box(solidHeader = TRUE, imageOutput("map", height = "auto"))),
                     column(width = 5, offset = 1,
                            uiOutput("mapText")
                            )
