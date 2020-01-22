@@ -12,7 +12,7 @@ server <- function(input, output) {
   ##### "ABOUT" TAB #####
   
   output$aboutText <- renderUI({
-    rawText <- readLines("D:/Github/shinyapp/about.txt")
+    rawText <- readLines("D:/Github/shinyapp/about_intro.txt")
     # split the text into a list of character vectors containing one line
     splitText <- stringi::stri_split(str = rawText, regex = '\\n')
     # wrap a paragraph tag around each element in the list
@@ -21,21 +21,21 @@ server <- function(input, output) {
   })
   
   output$modelText <- renderUI({
-    rawText <- readLines("D:/Github/shinyapp/model.txt")
+    rawText <- readLines("D:/Github/shinyapp/model_info.txt")
     splitText <- stringi::stri_split(str = rawText, regex = '\\n')
     replacedText <- lapply(splitText, p)
     return(replacedText)
   })
   
   output$modelText2 <- renderUI({
-    rawText <- readLines("D:/Github/shinyapp/model2.txt")
+    rawText <- readLines("D:/Github/shinyapp/model_info2.txt")
     splitText <- stringi::stri_split(str = rawText, regex = '\\n')
     replacedText <- lapply(splitText, p)
     return(replacedText)
   })
   
   output$mapText <- renderUI({
-    rawText <- readLines("D:/Github/shinyapp/map.txt")
+    rawText <- readLines("D:/Github/shinyapp/map_info.txt")
     splitText <- stringi::stri_split(str = rawText, regex = '\\n')
     replacedText <- lapply(splitText, p)
     return(replacedText)
@@ -52,6 +52,13 @@ server <- function(input, output) {
   
   
   ##### "PREDICTED TIME SERIES" TAB ######
+  
+  output$timeseries_info <- renderUI({
+    rawText <- readLines("D:/Github/shinyapp/timeseries_info.txt")
+    splitText <- stringi::stri_split(str = rawText, regex = '\\n')
+    replacedText <- lapply(splitText, p)
+    box(replacedText, width = 12, solidHeader = TRUE)
+  })
   
   ## BIOMASS VARIABLES
   
@@ -334,7 +341,7 @@ server <- function(input, output) {
   ##### "NOVELTY TAB" #####
   
   output$novel_info <- renderUI({
-      rawText <- readLines("D:/Github/shinyapp/novelty.txt")
+      rawText <- readLines("D:/Github/shinyapp/novelty_info.txt")
       # split the text into a list of character vectors containing one line
       splitText <- stringi::stri_split(str = rawText, regex = '\\n')
       # wrap a paragraph tag around each element in the list
@@ -491,7 +498,7 @@ server <- function(input, output) {
   ##### "OPTIMIZE" TAB #####
   
   output$opt_info <- renderUI({
-    rawText <- readLines("D:/Github/shinyapp/optimize.txt")
+    rawText <- readLines("D:/Github/shinyapp/optimize_info.txt")
     splitText <- stringi::stri_split(str = rawText, regex = '\\n')
     replacedText <- lapply(splitText, p)
     box(replacedText, width = 12, solidHeader = TRUE)

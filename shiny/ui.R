@@ -42,7 +42,7 @@ sidebar <- dashboardSidebar(
                            label = "Nutrient Loading Policy",
                            choices = c("Baltic Sea Action Plan" = "BSAP", "Average 1995-2002" = "Ref"),
                            selected = "BSAP"
-               ), "Nutrient loading policies", "Nutrient loads were modelled according to the reference conditions between 1995 and 2002 and according to the loads outlined in the Baltic Sea Action Plan."
+               ), "Nutrient loading policies", "Nutrient loads were modelled according to the higher reference conditions between 1995 and 2002 and according to the lower nutrient loads outlined in the Baltic Sea Action Plan."
                , placement = "right", trigger = "hover", options = list(container = "body")),
                
                popify(selectInput(inputId = 'Climate', 
@@ -64,7 +64,7 @@ sidebar <- dashboardSidebar(
                  
                  column(width = 6, offset = 1,
                         checkboxGroupInput(inputId = "catchVars", 
-                                           label = "Catch Size Variables",
+                                           label = "Catch Variables",
                                            choiceNames = list("Cod", "Herring", "Sprat"),
                                            choiceValues = list("plotCodCatch","plotHerCatch","plotSprCatch"), 
                                            selected = "plotCodCatch")
@@ -113,23 +113,23 @@ sidebar <- dashboardSidebar(
                popify(selectInput(inputId = 'Profit',
                                        label = "Minimum acceptable profit",
                                        choices = c("No profit", "Profit larger than 0", "Profit larger than 100", "Profit larger than 200"),
-                                       selected = "No profit"
+                                       selected = "Profit larger than 100"
                ), title = "Minimum acceptable profit", content = "Minimum acceptable profit describes the profitability of fisheries on the scale of no profit to profit exceeding the value of 200."
                , placement = "right", trigger = "hover", options = list(container = "body")),
                
                popify(selectInput(inputId = 'F_GES',
-                                       label = "Fish SSB in relation to GES",
-                                       choices = c("All above" = "All above Blim", "One below" = "One below Blim",
-                                                   "Two below" = "Two below Blim", "All below" = "All below Blim"),
+                                       label = "Environmental status of fish stocks",
+                                       choices = c("All stocks above GES" = "All above Blim", "One stock below GES" = "One below Blim",
+                                                   "Two stocks below GES" = "Two below Blim", "All stocks below GES" = "All below Blim"),
                                        selected = "All above"
                ), title = "Fish SSB to GES", content = "The spawning-stock biomass of the three major fish species (i.e. cod, herring and sprat) in relation to Good Ecosystem Status (GES) describes the expected condition of the fish stocks. The scale ranges from all three species being above the GES limit to none of the species faring well."
                , placement = "right", trigger = "hover", options = list(container = "body")),
                
                popify(selectInput(inputId = 'Nutr_GES',
-                                       label = "Nutrients in relation to GES",
-                                       choices = c("Above" = "GES", "Below" = "Sub_GES"),
+                                       label = "Environmental status of nutrients",
+                                       choices = c("Above GES" = "GES", "Below GES" = "Sub_GES"),
                                        selected = "Above"
-               ), title = "Nutrients to GES", content = "Nutrients in relation to GES can be over or under the limit representing Good Ecosystem Status. If nutrients are above the limit, the water clarity increases."
+               ), title = "Nutrients to GES", content = "Nutrients in relation to GES can be over or under the limit representing Good Ecosystem Status. Nutrient concentration affects e.g. eutrophication levels and water clarity."
                , placement = "right", trigger = "hover", options = list(container = "body")),
                
                fluidRow(
@@ -175,6 +175,9 @@ body <- dashboardBody(
     ),
     tabItem("predicted",
             titlePanel("Explore the predicted biomasses and catches in different management scenarios"),
+            fluidRow(
+              uiOutput("timeseries_info")
+            ),
             fluidRow(
               splitLayout(cellWidths = c("50%", "50%"), uiOutput("bio_plot_list"), uiOutput("catch_plot_list"))
             )
@@ -230,19 +233,23 @@ body <- dashboardBody(
                               #mapText {
                                 font-size: 15px;
                               }
+                              #timeseries_info {
+                                font-size: 15px;
+                              }
+                              #timeseries_info .box {
+                                background: #d9d9d9;
+                                padding: 10px;
+                              }
                               #novel_info {
                                 font-size: 15px;
                               }
-                              
                               #novel_info .box {
                                 background: #d9d9d9;
                                 padding: 10px;
                               }
-                              
                               #opt_info {
                                 font-size: 15px;
                               }
-                              
                               #opt_info .box {
                                 background: #d9d9d9;
                                 padding: 10px;
