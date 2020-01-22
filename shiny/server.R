@@ -1,9 +1,9 @@
 
 # Load data
-datBio <- read.csv("D:/Github/shinyapp/EwE_bio_results_corrected0412.csv", row.names = NULL, sep = ";")
-datCth <- read.csv("D:/Github/shinyapp/EwE_catch_results_corrected0412.csv", row.names = NULL, sep = ";")
-datNov <- read.csv("D:/Github/shinyapp/Novelty_incl_total.csv", row.names = NULL, sep = ";", stringsAsFactors = FALSE)
-datOpt <- read.csv("D:/Github/shinyapp/DSS_Bottom_up_3x3.csv", row.names = NULL, sep = ";")
+datBio <- read.csv("data/ewe_bio_results_corrected0412.csv", row.names = NULL, sep = ";")
+datCth <- read.csv("data/ewe_catch_results_corrected0412.csv", row.names = NULL, sep = ";")
+datNov <- read.csv("data/novelty_incl_total.csv", row.names = NULL, sep = ";", stringsAsFactors = FALSE)
+datOpt <- read.csv("data/dss_bottom_up_3x3.csv", row.names = NULL, sep = ";")
 
 
 # Define the server function
@@ -12,7 +12,7 @@ server <- function(input, output) {
   ##### "ABOUT" TAB #####
   
   output$aboutText <- renderUI({
-    rawText <- readLines("D:/Github/shinyapp/about_intro.txt")
+    rawText <- readLines("data/about_intro.txt")
     # split the text into a list of character vectors containing one line
     splitText <- stringi::stri_split(str = rawText, regex = '\\n')
     # wrap a paragraph tag around each element in the list
@@ -21,32 +21,32 @@ server <- function(input, output) {
   })
   
   output$modelText <- renderUI({
-    rawText <- readLines("D:/Github/shinyapp/model_info.txt")
+    rawText <- readLines("data/model_info.txt")
     splitText <- stringi::stri_split(str = rawText, regex = '\\n')
     replacedText <- lapply(splitText, p)
     return(replacedText)
   })
   
   output$modelText2 <- renderUI({
-    rawText <- readLines("D:/Github/shinyapp/model_info2.txt")
+    rawText <- readLines("data/model_info2.txt")
     splitText <- stringi::stri_split(str = rawText, regex = '\\n')
     replacedText <- lapply(splitText, p)
     return(replacedText)
   })
   
   output$mapText <- renderUI({
-    rawText <- readLines("D:/Github/shinyapp/map_info.txt")
+    rawText <- readLines("data/map_info.txt")
     splitText <- stringi::stri_split(str = rawText, regex = '\\n')
     replacedText <- lapply(splitText, p)
     return(replacedText)
   })
   
   output$model <- renderImage({
-    return(list(src = "D:/Github/shinyapp/model.PNG", contentType = "image/png"))
+    return(list(src = "data/model.png", contentType = "image/png"))
   }, deleteFile = FALSE)
   
-  output$DSS <- renderImage({
-    return(list(src = "D:/Github/shinyapp/map.PNG", contentType = "image/png"))
+  output$map <- renderImage({
+    return(list(src = "data/map.png", contentType = "image/png"))
   }, deleteFile = FALSE)
   
   
@@ -54,7 +54,7 @@ server <- function(input, output) {
   ##### "PREDICTED TIME SERIES" TAB ######
   
   output$timeseries_info <- renderUI({
-    rawText <- readLines("D:/Github/shinyapp/timeseries_info.txt")
+    rawText <- readLines("data/timeseries_info.txt")
     splitText <- stringi::stri_split(str = rawText, regex = '\\n')
     replacedText <- lapply(splitText, p)
     box(replacedText, width = 12, solidHeader = TRUE)
@@ -341,7 +341,7 @@ server <- function(input, output) {
   ##### "NOVELTY TAB" #####
   
   output$novel_info <- renderUI({
-      rawText <- readLines("D:/Github/shinyapp/novelty_info.txt")
+      rawText <- readLines("data/novelty_info.txt")
       # split the text into a list of character vectors containing one line
       splitText <- stringi::stri_split(str = rawText, regex = '\\n')
       # wrap a paragraph tag around each element in the list
@@ -498,7 +498,7 @@ server <- function(input, output) {
   ##### "OPTIMIZE" TAB #####
   
   output$opt_info <- renderUI({
-    rawText <- readLines("D:/Github/shinyapp/optimize_info.txt")
+    rawText <- readLines("data/optimize_info.txt")
     splitText <- stringi::stri_split(str = rawText, regex = '\\n')
     replacedText <- lapply(splitText, p)
     box(replacedText, width = 12, solidHeader = TRUE)
