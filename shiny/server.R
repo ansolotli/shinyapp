@@ -3,7 +3,7 @@
 datBio <- read.csv("data/ewe_bio_results_corrected0412.csv", row.names = NULL, sep = ";")
 datCth <- read.csv("data/ewe_catch_results_corrected0412.csv", row.names = NULL, sep = ";")
 datNov <- read.csv("data/novelty_incl_total.csv", row.names = NULL, sep = ";", stringsAsFactors = FALSE)
-datOpt <- read.csv("data/dss_bottom_up_3x3.csv", row.names = NULL, sep = ";")
+datOpt <- read.csv("data/optimize_2401.csv", row.names = NULL, sep = ";")
 
 
 # Define the server function
@@ -506,7 +506,7 @@ server <- function(input, output) {
 
   # subsetting data for the optimizing plots
   opt_subset <- reactive({
-    a <- datOpt[(datOpt$F_GES == input$F_GES & datOpt$Nutr_GES == input$Nutr_GES & datOpt$Min_acc_profit == input$Profit),]
+    a <- datOpt[(datOpt$F_GES == input$F_GES & datOpt$Nutr_GES == input$Nutr_GES & datOpt$Min_acc_profit == input$Profit & datOpt$Novelty == input$Novelty & datOpt$Ref_point == input$Ref_point),]
     return(a)
   })
 
