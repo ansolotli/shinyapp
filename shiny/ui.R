@@ -5,7 +5,7 @@ suppressPackageStartupMessages({
   library(stringi)
   library(ggplot2)
   library(shinydashboardPlus) # for fancier boxes
-  library(shinytest)
+  # library(shinytest)
 })
 
 # Header
