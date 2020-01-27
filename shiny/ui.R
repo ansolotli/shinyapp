@@ -122,28 +122,30 @@ sidebar <- dashboardSidebar(
                                        choices = c("All stocks above the ref. point" = "All above", "One stock below the ref. point" = "One below",
                                                    "Two stocks below the ref. point" = "Two below", "All stocks below the ref. point" = "All below"),
                                        selected = "All above"
-               ), title = "Fish SSB to GES", content = "The spawning-stock biomass of the three major fish species (i.e. cod, herring and sprat) in relation to Good Ecosystem Status (GES) describes the expected condition of the fish stocks. The scale ranges from all three species being above the GES limit to none of the species faring well."
+               ), title = "Spawning-stock biomass in relation to the reference point", content = "The spawning-stock biomass of the three major fish species (i.e. cod, herring and sprat) in relation to the reference point describes the expected condition of the fish stocks. The scale ranges from all three species being above the GES limit to none of the species faring well."
+               , placement = "right", trigger = "hover", options = list(container = "body")),
+               
+               popify(radioButtons(inputId = 'Ref_point',
+                                   label = "Reference point",
+                                   choices = c("Blim" = "Blim", "B MSY trigger" = "B MSY"),
+                                   selected = "Blim",
+                                   inline = TRUE # horizontal display
+               ), title = "Reference point", content = "Explanation here about the reference point options."
                , placement = "right", trigger = "hover", options = list(container = "body")),
                
                popify(selectInput(inputId = 'Nutr_GES',
                                        label = "Environmental status of nutrients",
                                        choices = c("Above GES" = "GES", "Below GES" = "Sub-GES"),
                                        selected = "Above"
-               ), title = "Nutrients to GES", content = "Nutrients in relation to GES can be over or under the limit representing Good Ecosystem Status. Nutrient concentration affects e.g. eutrophication levels and water clarity."
+               ), title = "Nutrients in relation to GES", content = "Nutrients in relation to Good Environmental Status (GES) can be over or under the limit representing Good Ecosystem Status. Nutrient concentration affects e.g. eutrophication levels and water clarity."
                , placement = "right", trigger = "hover", options = list(container = "body")),
-               
-               popify(radioButtons(inputId = 'Ref_point',
-                                   label = "Reference point",
-                                   choices = c("Blim" = "Blim", "B MSY trigger" = "B MSY"),
-                                   selected = "Blim"
-               ), title = "Reference point", content = "Some explanation here about the reference point options."
-               , placement = "right", trigger = "hover", options = list(container = "body")),
-               
+                
                popify(radioButtons(inputId = 'Novelty',
                                   label = "Include novelty",
                                   choices = c("Yes" = "Yes", "No" = "No"),
-                                  selected = "No"
-               ), title = "Novelty", content = "Some explanation here on novelty."
+                                  selected = "No",
+                                  inline = TRUE
+               ), title = "Novelty", content = "Explanation here on novelty."
                , placement = "right", trigger = "hover", options = list(container = "body")),
                
                fluidRow(
