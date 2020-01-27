@@ -1,9 +1,12 @@
-library(shiny)
-library(shinydashboard)
-library(shinyBS) # for popovers
-library(stringi)
-library(ggplot2)
-library(shinydashboardPlus) # for fancier boxes
+suppressPackageStartupMessages({
+  library(shiny)
+  library(shinydashboard)
+  library(shinyBS) # for popovers
+  library(stringi)
+  library(ggplot2)
+  library(shinydashboardPlus) # for fancier boxes
+  library(shinytest)
+})
 
 # Header
 header <- dashboardHeader(title = "BONUS BLUEWEBS decision support tool", titleWidth = 450)
@@ -42,7 +45,7 @@ sidebar <- dashboardSidebar(
                            label = "Nutrient Loading Policy",
                            choices = c("Baltic Sea Action Plan" = "BSAP", "Average 1995-2002" = "Ref"),
                            selected = "BSAP"
-               ), "Nutrient loading policies", "Nutrient loads were modelled according to the higher reference conditions between 1995 and 2002 and according to the lower nutrient loads outlined in the Baltic Sea Action Plan."
+               ), "Nutrient loading policies", "Nutrient loads were modelled according to the higher reference conditions between 1995 and 2002 and according to the lower nutrient loads outlined in the Baltic Sea Action Plan programme by HELCOM."
                , placement = "right", trigger = "hover", options = list(container = "body")),
                
                popify(selectInput(inputId = 'Climate', 
@@ -114,7 +117,7 @@ sidebar <- dashboardSidebar(
                                        label = "Minimum acceptable profit",
                                        choices = c("No profit", "Profit larger than 0", "Profit larger than 100", "Profit larger than 200"),
                                        selected = "Profit larger than 100"
-               ), title = "Minimum acceptable profit", content = "Minimum acceptable profit describes the profitability of fisheries on the scale of no profit to profit exceeding the value of 200."
+               ), title = "Minimum acceptable profit", content = "Minimum acceptable profit describes the profitability of fisheries in millions of euros."
                , placement = "right", trigger = "hover", options = list(container = "body")),
                
                popify(selectInput(inputId = 'F_GES',
@@ -122,7 +125,7 @@ sidebar <- dashboardSidebar(
                                        choices = c("All stocks above the ref. point" = "All above", "One stock below the ref. point" = "One below",
                                                    "Two stocks below the ref. point" = "Two below", "All stocks below the ref. point" = "All below"),
                                        selected = "All above"
-               ), title = "Spawning-stock biomass in relation to the reference point", content = "The spawning-stock biomass of the three major fish species (i.e. cod, herring and sprat) in relation to the reference point describes the expected condition of the fish stocks. The scale ranges from all three species being above the GES limit to none of the species faring well."
+               ), title = "Spawning-stock biomass in relation to the reference point", content = "The spawning-stock biomass of the three major fish species (i.e. cod, herring and sprat) in relation to the reference point describes the expected condition of the fish stocks. The scale ranges from all three species being above the reference point limit to none of the species faring well."
                , placement = "right", trigger = "hover", options = list(container = "body")),
                
                popify(radioButtons(inputId = 'Ref_point',
@@ -130,14 +133,14 @@ sidebar <- dashboardSidebar(
                                    choices = c("Blim" = "Blim", "B MSY trigger" = "B MSY"),
                                    selected = "Blim",
                                    inline = TRUE # horizontal display
-               ), title = "Reference point", content = "Explanation here about the reference point options."
+               ), title = "Reference point", content = "Blim is the reference point identified by ICES describing the limit below which there is a high risk of reduced recruitment. <br><br> B MSY trigger is the optional reference point."
                , placement = "right", trigger = "hover", options = list(container = "body")),
                
                popify(selectInput(inputId = 'Nutr_GES',
                                        label = "Environmental status of nutrients",
                                        choices = c("Above GES" = "GES", "Below GES" = "Sub-GES"),
                                        selected = "Above"
-               ), title = "Nutrients in relation to GES", content = "Nutrients in relation to Good Environmental Status (GES) can be over or under the limit representing Good Ecosystem Status. Nutrient concentration affects e.g. eutrophication levels and water clarity."
+               ), title = "Nutrients in relation to GES", content = "Nutrient variable is comprised of nitrogen, phosphorus and chlorophyll a concentrations. These concentrations can exceed or fall below the limit of Good Environmental Status (GES)."
                , placement = "right", trigger = "hover", options = list(container = "body")),
                 
                popify(radioButtons(inputId = 'Novelty',
@@ -145,7 +148,7 @@ sidebar <- dashboardSidebar(
                                   choices = c("Yes" = "Yes", "No" = "No"),
                                   selected = "No",
                                   inline = TRUE
-               ), title = "Novelty", content = "Explanation here on novelty."
+               ), title = "Novelty", content = "Ecosystem novelty is expected to increase in the Baltic Sea, leading to modelling of the future conditions becoming more uncertain. Novelty can be included or excluded from these results."
                , placement = "right", trigger = "hover", options = list(container = "body")),
                
                fluidRow(
@@ -194,7 +197,9 @@ body <- dashboardBody(
               uiOutput("timeseries_info")
             ),
             fluidRow(
-              splitLayout(cellWidths = c("50%", "50%"), uiOutput("bio_plot_list"), uiOutput("catch_plot_list"))
+              splitLayout(cellWidths = c("50%", "50%"), 
+                          uiOutput("bio_plot_list"), 
+                          uiOutput("catch_plot_list"))
             )
     ),
     tabItem("novelty",

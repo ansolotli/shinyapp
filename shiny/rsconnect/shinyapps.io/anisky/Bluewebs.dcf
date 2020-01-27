@@ -5,9 +5,9 @@ account: anisky
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 1688705
-bundleId: 2751065
+bundleId: 2755570
 url: https://anisky.shinyapps.io/Bluewebs/
-when: 1579875489.5075
+when: 1580120525.01944
 asMultiple: FALSE
 asStatic: FALSE
 ignoredFiles: .RData
