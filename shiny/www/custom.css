@@ -1,0 +1,97 @@
+			      /* body */
+                              .content-wrapper, .right-side {
+                                background-color: #ffffff;
+                              }
+                              
+                              .wrapper {
+                                background-color: #ffffff;
+                              }
+                              
+                              .main-header {
+                                position: fixed;
+                                width:100%;
+                              }
+                              
+                              .content {
+                                margin-top: 50px;
+                              }
+                              
+                              .main-sidebar {
+                                position: fixed;
+                              }
+                              
+                              * { font-family: Arial; }
+                              
+                              /* app title */
+                              .main-header .logo {
+                                font-family: Arial;
+                              }
+                              
+                              /* page title */
+                              h2 {
+                                font-family: Arial;
+                                font-size: 24px;
+                              }
+                              
+                              #aboutText {
+                                font-size: 15px;
+                              }
+                              #modelText {
+                                font-size: 15px;
+                              }
+                              #modelText2 {
+                                font-size: 15px;
+                              }
+                              #mapText {
+                                font-size: 15px;
+                              }
+                              #timeseries_info {
+                                font-size: 15px;
+                              }
+                              #timeseries_info .box {
+                                background: #d9d9d9;
+                                padding: 10px;
+                              }
+                              #novel_info {
+                                font-size: 15px;
+                              }
+                              #novel_info .box {
+                                background: #d9d9d9;
+                                padding: 10px;
+                              }
+                              #opt_info {
+                                font-size: 15px;
+                              }
+                              #opt_info .box {
+                                background: #d9d9d9;
+                                padding: 10px;
+                              }
+                              
+                              .selectize-control {
+                                font-size: 11px;
+                              }
+                              
+                              /* tabBox */                    
+                              .nav-tabs-custom>.nav-tabs {
+                                font-size: 16px;
+                                background-color: #222d32;
+                              }
+                              .nav-tabs-custom .nav-tabs li:not(.active) a {
+                                color: #ffffff;
+                              }
+                              .nav-tabs-custom .nav-tabs li.active {
+                                border-top-color: #000000;
+                              }
+                              
+                              /* popovers */
+                              .popover-title {
+                                color: #ffffff;
+                                font-family: Arial;
+                                background-color: #222d32;
+                              }
+                              .popover-content { 
+                                font-family: Arial;
+                                color: #ffffff;
+                                background: #2c3b41;
+                                data-html: true;
+                              }
