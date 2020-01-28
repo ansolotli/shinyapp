@@ -4,8 +4,6 @@ suppressPackageStartupMessages({
   library(shinyBS) # for popovers
   library(stringi)
   library(ggplot2)
-  library(shinydashboardPlus) # for fancier boxes
-  # library(shinytest)
 })
 
 # Header
@@ -228,6 +226,23 @@ body <- dashboardBody(
                                 background-color: #ffffff;
                               }
                               
+                              .wrapper {
+                                background-color: #ffffff;
+                              }
+                              
+                              .main-header {
+                                position: fixed;
+                                width:100%;
+                              }
+                              
+                              .content {
+                                margin-top: 50px;
+                              }
+                              
+                              .main-sidebar {
+                                position: fixed;
+                              }
+                              
                               * { font-family: Arial; }
                               
                               /* app title */
@@ -289,22 +304,6 @@ body <- dashboardBody(
                               }
                               .nav-tabs-custom .nav-tabs li.active {
                                 border-top-color: #000000;
-                              }
-                              
-                              /* gradientBox */
-                              .box-header {
-                                background-color: #004d99;
-                                color: #ffffff;
-                              }
-                              .box-header .box-title {
-                                font-size: 16px;
-                              }
-                              .box-body {
-                                padding: 0px;
-                              }
-                              .box-footer {
-                                font-size: 16px;
-                                background-color: #cce6ff;
                               }
                               
                               /* popovers */
