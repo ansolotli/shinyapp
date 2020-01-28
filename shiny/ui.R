@@ -34,7 +34,7 @@ sidebar <- dashboardSidebar(
                            choices = c("Sustainable" = "Sus", "Pelagics-Focused" = "Pel", "Open Access" = "OA"), 
                            selected = "Sus"
                ), "Fishery policies", 
-               "Sustainable fishery policy assumes that healthy states of all three major fish stocks (i.e. cod, herring and sprat) supports a healthy and functioning food web and will be the basis for developing a sustainable exploitation of the Baltic Sea. <br><br> Pelagics-focused scenario assumes that given expected climate change, future living conditions of the cod stock will be detrimental and hence prioritisation of the pelagic fishery on herring and sprat would be the preferred fisheries management strategy. <br><br> Open access scenario assumes that a largely unregulated fishery would be the management of choice for the future Baltic Sea."
+               content = "Sustainable fishery policy explores if healthy states of all three major fish stocks (i.e. cod, herring and sprat) will support a healthy and functioning food web and will be the basis for developing a sustainable exploitation of the Baltic Sea. <br><br> Pelagics-Focused scenario explores the option that given the climate change and nutrient load scenarios, prioritisation of herring and sprat over cod would be the preferred fisheries management strategy. <br><br> Open access scenario enables exploring the impacts of largely unregulated fisheries management on the status of the fish stocks, the food web and the economic outcomes from fisheries in the future Baltic Sea."
                , placement = "right", trigger = "hover", 
                #increase the size of the popover according to the length of content
                options = list(container = "body")),
@@ -43,14 +43,16 @@ sidebar <- dashboardSidebar(
                            label = "Nutrient Loading Policy",
                            choices = c("Baltic Sea Action Plan" = "BSAP", "Average 1995-2002" = "Ref"),
                            selected = "BSAP"
-               ), "Nutrient loading policies", "Nutrient loads were modelled according to the higher reference conditions between 1995 and 2002 and according to the lower nutrient loads outlined in the Baltic Sea Action Plan programme by HELCOM."
+               ), "Nutrient loading policies", 
+               content = "Nutrient loads were modelled according to the higher reference conditions between 1995 and 2002 and according to the lower nutrient loads outlined in the Baltic Sea Action Plan programme by HELCOM."
                , placement = "right", trigger = "hover", options = list(container = "body")),
                
                popify(selectInput(inputId = 'Climate', 
                            label = "Climate Change Scenario - Representative Concentration Pathways",
                            choices = c("RCP4.5", "RCP8.5"), 
                            selected = "RCP4.5"
-               ), "Climate scenarios", "Climate scenarios follow Representative Concentration Pathways (RCP) 4.5 and 8.5 according to the ICPP 2014."
+               ), "Climate scenarios", 
+               content = "Climate scenarios follow Representative Concentration Pathways (RCP) 4.5 and 8.5 according to the ICPP 2014."
                , placement = "right", trigger = "hover", options = list(container = "body")),
                
                # Create the two colums of checkbox groups (biomass and catch)
@@ -98,12 +100,14 @@ sidebar <- dashboardSidebar(
                                                               "0-60m temperature August", "Inverse hypoxic area"),
                                            choiceValues = list("plotRv", "plotTemp1", "plotTemp2", "plotHyp"),
                                            selected = "plotRv"), 
-                               title = "Novelty variables", content = "Cod reproductive volume is the water layer where the water is warm enough but not too saline for the eggs to float in an oxygenated environment. If this volume decreases, the reproduction of cod will be less successful. <br><br> The temperature variables present the water temperature in the surface layer of the water column during spring months and in the summer. <br><br> Inverse hypoxic area is an area that has gone anoxic i.e. is not oxygenated."
+                               title = "Novelty variables", 
+                               content = "Cod reproductive volume is the water layer where the water is warm enough but not too saline for the eggs to float in an oxygenated environment. If this volume decreases, the reproduction of cod will be less successful. <br><br> The temperature variables present the water temperature in the surface layer of the water column during spring months and in the summer. <br><br> Inverse hypoxic area is an area that has gone anoxic i.e. is not oxygenated."
                                , placement = "right", trigger = "hover", options = list(container = "body")),
                         
                         popify(checkboxInput(inputId = "novelTotal", 
                                       label = "Total abiotic novelty", value = TRUE),
-                               title = "Total abiotic novelty", content = "Total abiotic novelty is the sum of other novelty variables and describes the total novelty expected to occur in the Central Baltic Sea in the current century."
+                               title = "Total abiotic novelty", 
+                               content = "Total abiotic novelty is the sum of other novelty variables and describes the total novelty expected to occur in the Central Baltic Sea in the current century."
                                , placement = "right", trigger = "hover", options = list(container = "body"))
                  )
                )
@@ -115,7 +119,8 @@ sidebar <- dashboardSidebar(
                                        label = "Minimum acceptable profit",
                                        choices = c("No profit", "Profit larger than 0", "Profit larger than 100", "Profit larger than 200"),
                                        selected = "Profit larger than 100"
-               ), title = "Minimum acceptable profit", content = "Minimum acceptable profit describes the profitability of fisheries in millions of euros."
+               ), title = "Minimum acceptable profit", 
+               content = "Minimum acceptable profit enables selection of the desired lowest limit of profitability of fisheries on cod, herring, and sprat in millions of euros."
                , placement = "right", trigger = "hover", options = list(container = "body")),
                
                popify(selectInput(inputId = 'F_GES',
@@ -123,7 +128,8 @@ sidebar <- dashboardSidebar(
                                        choices = c("All stocks above the ref. point" = "All above", "One stock below the ref. point" = "One below",
                                                    "Two stocks below the ref. point" = "Two below", "All stocks below the ref. point" = "All below"),
                                        selected = "All above"
-               ), title = "Spawning-stock biomass in relation to the reference point", content = "The spawning-stock biomass of the three major fish species (i.e. cod, herring and sprat) in relation to the reference point describes the expected condition of the fish stocks. The scale ranges from all three species being above the reference point limit to none of the species faring well."
+               ), title = "Environmental status of fish stocks", 
+               content = "The spawning-stock biomass of the three major fish species (i.e. cod, herring and sprat) in relation to the reference point describes the expected status of these fish stocks. The scale ranges from all three species being above the reference point limit to none of the species faring well."
                , placement = "right", trigger = "hover", options = list(container = "body")),
                
                popify(radioButtons(inputId = 'Ref_point',
@@ -131,14 +137,15 @@ sidebar <- dashboardSidebar(
                                    choices = c("Blim" = "Blim", "B MSY trigger" = "B MSY"),
                                    selected = "Blim",
                                    inline = TRUE # horizontal display
-               ), title = "Reference point", content = "Blim is the reference point identified by ICES describing the limit below which there is a high risk of reduced recruitment. <br><br> B MSY trigger is the optional reference point."
+               ), title = "Reference point", content = "Blim is the reference point identified by ICES describing the limit below which there is a high risk of reduced recruitment. <br><br> B MSY trigger (or BMSYtrigger) is considered as the lower bound of spawning–stock biomass fluctuation below which fishing needs to be reduced to allow a fish stock to rebuild to levels capable of producing maximum sustainable yield (MSY)."
                , placement = "right", trigger = "hover", options = list(container = "body")),
                
                popify(selectInput(inputId = 'Nutr_GES',
-                                       label = "Environmental status of nutrients",
+                                       label = "Status of water quality",
                                        choices = c("Above GES" = "GES", "Below GES" = "Sub-GES"),
                                        selected = "Above"
-               ), title = "Nutrients in relation to GES", content = "Nutrient variable is comprised of nitrogen, phosphorus and chlorophyll a concentrations. These concentrations can exceed or fall below the limit of Good Environmental Status (GES)."
+               ), title = "Status of water quality", 
+               content = "The indicators of water quality comprise of the average concentrations of nitrogen, phosphorus and chlorophyll <i>a</i>. Low concentrations suggest high probability of reaching reaching the Good Environmental Status (GES)."
                , placement = "right", trigger = "hover", options = list(container = "body")),
                 
                popify(radioButtons(inputId = 'Novelty',
@@ -146,7 +153,8 @@ sidebar <- dashboardSidebar(
                                   choices = c("Yes" = "Yes", "No" = "No"),
                                   selected = "No",
                                   inline = TRUE
-               ), title = "Novelty", content = "Ecosystem novelty is expected to increase in the Baltic Sea, leading to modelling of the future conditions becoming more uncertain. Novelty can be included or excluded from these results."
+               ), title = "Novelty", 
+               content = "Ecological novelty denotes unprecedented, human-mediated changes at different ecological levels. The rapid changes in climate and in other anthropogenic pressures may result in novel species communities and ecosystems without any historical analogue."
                , placement = "right", trigger = "hover", options = list(container = "body")),
                
                fluidRow(
