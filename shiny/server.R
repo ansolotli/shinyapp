@@ -12,33 +12,19 @@ server <- function(input, output) {
   ##### "ABOUT" TAB #####
   
   output$aboutText <- renderUI({
-    rawText <- readLines("data/about_intro.txt")
-    # split the text into a list of character vectors containing one line
-    splitText <- stringi::stri_split(str = rawText, regex = '\\n')
-    # wrap a paragraph tag around each element in the list
-    replacedText <- lapply(splitText, p)
-    return(replacedText)
+    includeMarkdown("data/about_intro.md")
   })
   
   output$modelText <- renderUI({
-    rawText <- readLines("data/model_info.txt")
-    splitText <- stringi::stri_split(str = rawText, regex = '\\n')
-    replacedText <- lapply(splitText, p)
-    return(replacedText)
+    includeMarkdown("data/model_info.md")
   })
   
   output$modelText2 <- renderUI({
-    rawText <- readLines("data/model_info2.txt")
-    splitText <- stringi::stri_split(str = rawText, regex = '\\n')
-    replacedText <- lapply(splitText, p)
-    return(replacedText)
+    includeMarkdown("data/model_info2.md")
   })
   
   output$mapText <- renderUI({
-    rawText <- readLines("data/map_info.txt")
-    splitText <- stringi::stri_split(str = rawText, regex = '\\n')
-    replacedText <- lapply(splitText, p)
-    return(replacedText)
+    includeMarkdown("data/map_info.md")
   })
   
   output$model <- renderImage({
@@ -54,10 +40,7 @@ server <- function(input, output) {
   ##### "PREDICTED TIME SERIES" TAB ######
   
   output$timeseries_info <- renderUI({
-    rawText <- readLines("data/timeseries_info.txt")
-    splitText <- stringi::stri_split(str = rawText, regex = '\\n')
-    replacedText <- lapply(splitText, p)
-    box(replacedText, width = 12, solidHeader = TRUE)
+    box(includeMarkdown("data/timeseries_info.md"), width = 12, solidHeader = TRUE)
   })
   
   ## BIOMASS VARIABLES
@@ -341,12 +324,7 @@ server <- function(input, output) {
   ##### "NOVELTY TAB" #####
   
   output$novel_info <- renderUI({
-      rawText <- readLines("data/novelty_info.txt")
-      # split the text into a list of character vectors containing one line
-      splitText <- stringi::stri_split(str = rawText, regex = '\\n')
-      # wrap a paragraph tag around each element in the list
-      replacedText <- lapply(splitText, p)
-      box(replacedText, width = 12, solidHeader = TRUE)
+      box(includeMarkdown("data/novelty_info.md"), width = 12, solidHeader = TRUE)
   })
 
   # subset the data for novelty plots
@@ -498,10 +476,7 @@ server <- function(input, output) {
   ##### "OPTIMIZE" TAB #####
   
   output$opt_info <- renderUI({
-    rawText <- readLines("data/optimize_info.txt")
-    splitText <- stringi::stri_split(str = rawText, regex = '\\n')
-    replacedText <- lapply(splitText, p)
-    box(replacedText, width = 12, solidHeader = TRUE)
+    box(includeMarkdown("data/optimize_info.md"), width = 12, solidHeader = TRUE)
   })
 
   # subsetting data for the optimizing plots

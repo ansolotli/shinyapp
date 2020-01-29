@@ -3,4 +3,5 @@
 *.txt
 *.Rhistory
 *.RData
+*.md
 *tests/
