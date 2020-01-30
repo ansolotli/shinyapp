@@ -4,6 +4,7 @@ suppressPackageStartupMessages({
   library(shinyBS) # for popovers
   library(stringi)
   library(ggplot2)
+  library(rmarkdown)
 })
 
 # Header
