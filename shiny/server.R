@@ -60,12 +60,17 @@ server <- function(input, output) {
           scale_y_continuous(limits=c(0,250), breaks = scales::pretty_breaks(n = 5)) +
           scale_x_continuous(limits=c(2004,2096), breaks = scales::pretty_breaks(n = 5),
                              # increases expansion constant so that all the tick labels fit
-                             expand = c(0.07, 0)) +
+                             expand = c(0.02, 0)) +
           ggtitle("Biomass of cod") +
           xlab("\nYear") +
           ylab("Spawning-stock biomass\n") +
           geom_hline(aes(yintercept = 96.5, col = "red")) +
-          annotate("text", x = 2040, y = 104, label = "GES above this line", col = "red", size = 5) +
+          annotate("text", x = 2050, y = 106, label = "GES above this line", col = "red", size = 5) +
+          geom_vline(xintercept=2014) +
+          annotate(geom = "text", x = 2011, y = 60, label = "Calibration period", size = 4,
+                   angle = 90) +
+          annotate(geom = "text", x = 2017, y = 70, label = "Predicted conditions", size = 4,
+                   angle = 90) +
           theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
                              panel.grid.minor = element_blank(), axis.line = element_line(colour = "grey"),
                              title = element_text(size = 14),
@@ -90,12 +95,13 @@ server <- function(input, output) {
         ggplot(bio_subset(), aes(x = Year, y = Herring)) +
           scale_y_continuous(limits=c(0,800), breaks = scales::pretty_breaks(n = 5)) +
           scale_x_continuous(limits=c(2004,2096), breaks = scales::pretty_breaks(n = 5),
-                             expand = c(0.07, 0)) +
+                             expand = c(0.02, 0)) +
           ggtitle("Biomass of herring") +
           xlab("\nYear") +
           ylab("Spawning-stock biomass\n") +
           geom_hline(aes(yintercept = 430, col = "red")) +
           annotate("text", x = 2040, y = 460, label = "GES above this line", col = "red", size = 5) +
+          geom_vline(xintercept=2014) +
           theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
                              panel.grid.minor = element_blank(), axis.line = element_line(colour = "grey"),
                              title = element_text(size = 14),
@@ -120,12 +126,13 @@ server <- function(input, output) {
         ggplot(bio_subset(), aes(x = Year, y = Sprat)) +
           scale_y_continuous(limits=c(0,1150), breaks = scales::pretty_breaks(n = 5)) +
           scale_x_continuous(limits=c(2004,2096), breaks = scales::pretty_breaks(n = 5),
-                             expand = c(0.07, 0)) +
+                             expand = c(0.02, 0)) +
           ggtitle("Biomass of sprat") +
           xlab("\nYear") +
           ylab("Spawning-stock biomass\n") +
           geom_hline(aes(yintercept = 410, col = "red")) +
-          annotate("text", x = 2040, y = 445, label = "GES above this line", col = "red", size = 5) +
+          annotate("text", x = 2040, y = 450, label = "GES above this line", col = "red", size = 5) +
+          geom_vline(xintercept=2014) +
           theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
                              panel.grid.minor = element_blank(), axis.line = element_line(colour = "grey"),
                              title = element_text(size = 14),
@@ -150,10 +157,11 @@ server <- function(input, output) {
         ggplot(bio_subset(), aes(x = Year, y = Zooplankton)) +
           scale_y_continuous(limits=c(0,12.5), breaks = scales::pretty_breaks(n = 5)) +
           scale_x_continuous(limits=c(2004,2096), breaks = scales::pretty_breaks(n = 5),
-                             expand = c(0.07, 0)) +
+                             expand = c(0.02, 0)) +
           ggtitle("Biomass of zooplankton") +
           xlab("\nYear") +
           ylab("Biomass\n") +
+          geom_vline(xintercept=2014) +
           theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
                              panel.grid.minor = element_blank(), axis.line = element_line(colour = "grey"),
                              title = element_text(size = 14),
@@ -178,10 +186,11 @@ server <- function(input, output) {
         ggplot(bio_subset(), aes(x = Year, y = Phytoplankton)) +
           scale_y_continuous(limits=c(0,13), breaks = scales::pretty_breaks(n = 5)) +
           scale_x_continuous(limits=c(2004,2096), breaks = scales::pretty_breaks(n = 5),
-                             expand = c(0.07, 0)) +
+                             expand = c(0.02, 0)) +
           ggtitle("Biomass of phytoplankton") +
           xlab("\nYear") +
           ylab("Biomass\n") +
+          geom_vline(xintercept=2014) +
           theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
                              panel.grid.minor = element_blank(), axis.line = element_line(colour = "grey"),
                              title = element_text(size = 14),
@@ -216,10 +225,15 @@ server <- function(input, output) {
           scale_y_continuous(limits=c(0,80), breaks = scales::pretty_breaks(n = 5)) +
           scale_x_continuous(limits=c(2004,2096), breaks = scales::pretty_breaks(n = 5),
                              # increases expansion constant so that all the tick labels fit
-                             expand = c(0.07, 0)) +
+                             expand = c(0.02, 0)) +
           ggtitle("Cod catch") +
           xlab("\nYear") +
           ylab("Catch\n") +
+          geom_vline(xintercept=2014) +
+          annotate(geom = "text", x = 2011, y = 20, label = "Calibration period", size = 4,
+                   angle = 90) +
+          annotate(geom = "text", x = 2017, y = 24, label = "Predicted conditions", size = 4,
+                   angle = 90) +
           theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
                              panel.grid.minor = element_blank(), axis.line = element_line(colour = "grey"),
                              title = element_text(size = 14),
@@ -245,10 +259,11 @@ server <- function(input, output) {
           scale_y_continuous(limits=c(0,250), breaks = scales::pretty_breaks(n = 5)) +
           scale_x_continuous(limits=c(2004,2096), breaks = scales::pretty_breaks(n = 5),
                              # increases expansion constant so that all the tick labels fit
-                             expand = c(0.07, 0)) +
+                             expand = c(0.02, 0)) +
           ggtitle("Herring catch") +
           xlab("\nYear") +
           ylab("Catch\n") +
+          geom_vline(xintercept=2014) +
           theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
                              panel.grid.minor = element_blank(), axis.line = element_line(colour = "grey"),
                              title = element_text(size = 14),
@@ -274,10 +289,11 @@ server <- function(input, output) {
           scale_y_continuous(limits=c(0,400), breaks = scales::pretty_breaks(n = 5)) +
           scale_x_continuous(limits=c(2004,2096), breaks = scales::pretty_breaks(n = 5),
                              # increases expansion constant so that all the tick labels fit
-                             expand = c(0.07, 0)) +
+                             expand = c(0.02, 0)) +
           ggtitle("Sprat catch") +
           xlab("\nYear") +
           ylab("Catch\n") +
+          geom_vline(xintercept=2014) +
           theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
                              panel.grid.minor = element_blank(), axis.line = element_line(colour = "grey"),
                              title = element_text(size = 14),
