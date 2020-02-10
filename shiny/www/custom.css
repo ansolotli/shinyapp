@@ -49,11 +49,11 @@ h2 {
 	font-size: 15px;
 }
 
-#about_novelty {
+#aboutNovelty {
 	font-size: 15px;
 }
 
-#about_novelty2 {
+#aboutNovelty2 {
 	font-size: 15px;
 }
 
@@ -96,6 +96,7 @@ h2 {
 
 .nav-tabs-custom .nav-tabs li:not(.active) a {
 	color: #ffffff;
+	padding: 10px 10px;
 }
 
 .nav-tabs-custom .nav-tabs li.active {

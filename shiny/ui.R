@@ -149,7 +149,7 @@ sidebar <- dashboardSidebar(
                , placement = "right", trigger = "hover", options = list(container = "body")),
                 
                popify(radioButtons(inputId = 'Novelty',
-                                  label = "Include novelty",
+                                  label = "Include expert knowledge",
                                   choices = c("Yes" = "Yes", "No" = "No"),
                                   selected = "No",
                                   inline = TRUE
@@ -182,7 +182,7 @@ body <- dashboardBody(
                 tabPanel("Introduction",
                          uiOutput("aboutText")
                 ),
-                tabPanel("The model",
+                tabPanel("The decision support system",
                          uiOutput("modelText"),
                          fluidRow(
                            box(solidHeader = TRUE, width = 12, imageOutput("model", height = "auto"))
@@ -196,11 +196,11 @@ body <- dashboardBody(
                          uiOutput("mapText")
                 ),
                 tabPanel("What is novelty?",
-                         uiOutput("about_novelty"),
+                         uiOutput("aboutNovelty"),
                          fluidRow(
                            box(solidHeader = TRUE, width = 12, imageOutput("noveltyci", height = "auto"))
                          ),
-                         uiOutput("about_novelty2")
+                         uiOutput("aboutNovelty2")
                 ))
             )  
     ),
@@ -230,8 +230,7 @@ body <- dashboardBody(
             fluidRow(
               column(width = 12,
                      uiOutput("opt_info"),
-                     uiOutput("opt_plots")
-              )
+                     uiOutput("opt_plots"))
             )
     )),
     # CSS

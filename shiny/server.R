@@ -35,11 +35,11 @@ server <- function(input, output) {
     return(list(src = "data/map.png", contentType = "image/png"))
   }, deleteFile = FALSE)
   
-  output$about_novelty <- renderUI({
+  output$aboutNovelty <- renderUI({
     includeMarkdown("data/about_novelty.md")
   })
   
-  output$about_novelty2 <- renderUI({
+  output$aboutNovelty2 <- renderUI({
     includeMarkdown("data/about_novelty2.md")
   })
   
@@ -80,7 +80,7 @@ server <- function(input, output) {
           geom_vline(xintercept=2014) +
           annotate(geom = "text", x = 2011, y = 60, label = "Calibration period", size = 4,
                    angle = 90) +
-          annotate(geom = "text", x = 2017, y = 70, label = "Predicted conditions", size = 4,
+          annotate(geom = "text", x = 2017, y = 60, label = "Predicted biomass", size = 4,
                    angle = 90) +
           theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
                              panel.grid.minor = element_blank(), axis.line = element_line(colour = "grey"),
@@ -243,7 +243,7 @@ server <- function(input, output) {
           geom_vline(xintercept=2014) +
           annotate(geom = "text", x = 2011, y = 20, label = "Calibration period", size = 4,
                    angle = 90) +
-          annotate(geom = "text", x = 2017, y = 24, label = "Predicted conditions", size = 4,
+          annotate(geom = "text", x = 2017, y = 20, label = "Predicted catch", size = 4,
                    angle = 90) +
           theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
                              panel.grid.minor = element_blank(), axis.line = element_line(colour = "grey"),
