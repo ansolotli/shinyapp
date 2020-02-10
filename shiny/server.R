@@ -35,6 +35,17 @@ server <- function(input, output) {
     return(list(src = "data/map.png", contentType = "image/png"))
   }, deleteFile = FALSE)
   
+  output$about_novelty <- renderUI({
+    includeMarkdown("data/about_novelty.md")
+  })
+  
+  output$about_novelty2 <- renderUI({
+    includeMarkdown("data/about_novelty2.md")
+  })
+  
+  output$noveltyci <- renderImage({
+    return(list(src = "data/novelty.png", contentType = "image/png"))
+  }, deleteFile = FALSE)
   
   
   ##### "PREDICTED TIME SERIES" TAB ######

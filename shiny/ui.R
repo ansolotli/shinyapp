@@ -181,20 +181,27 @@ body <- dashboardBody(
                 id = "aboutBoxes",
                 tabPanel("Introduction",
                          uiOutput("aboutText")
-                         ),
+                ),
                 tabPanel("The model",
                          uiOutput("modelText"),
                          fluidRow(
-                           box(solidHeader = TRUE, imageOutput("model", height = "auto"))
+                           box(solidHeader = TRUE, width = 12, imageOutput("model", height = "auto"))
                          ),
                          uiOutput("modelText2")
-                         ),
+                ),
                 tabPanel("Map of the modelled area",
                          fluidRow(
                            box(solidHeader = TRUE, imageOutput("map", height = "auto"))
                          ),
                          uiOutput("mapText")
-                  ))
+                ),
+                tabPanel("What is novelty?",
+                         uiOutput("about_novelty"),
+                         fluidRow(
+                           box(solidHeader = TRUE, width = 12, imageOutput("noveltyci", height = "auto"))
+                         ),
+                         uiOutput("about_novelty2")
+                ))
             )  
     ),
     tabItem("predicted",
