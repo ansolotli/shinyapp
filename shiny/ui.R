@@ -154,10 +154,10 @@ sidebar <- dashboardSidebar(
                popify(radioButtons(inputId = 'Novelty',
                                   label = "Include expert knowledge",
                                   choices = c("Yes" = "Yes", "No" = "No"),
-                                  selected = "No",
+                                  selected = "Yes",
                                   inline = TRUE
-               ), title = "Novelty", 
-               content = "Ecological novelty denotes unprecedented, human-mediated changes at different ecological levels. The rapid changes in climate and in other anthropogenic pressures may result in novel species communities and ecosystems without any historical analogue."
+               ), title = "Expert knowledge", 
+               content = "Ecological novelty denotes unprecedented, human-mediated changes at different ecological levels. The rapid changes in climate and in other anthropogenic pressures may result in novel species communities and ecosystems without any historical analogue. <br><br> This is difficult to predict with models as novel conditions can not be calibrated against historical observations. Bringing expert knowledge about this uncertainty on top of modelling could increase the certainty of predictions."
                , placement = "right", trigger = "hover", options = list(container = "body")),
                
                fluidRow(
