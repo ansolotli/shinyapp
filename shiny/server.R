@@ -353,7 +353,7 @@ server <- function(input, output) {
   output$novel_info <- renderUI({
       box(includeMarkdown("data/novelty_info.md"), width = 12, solidHeader = TRUE)
   })
-
+  
   # subset the data for novelty plots
   nov_subset <- reactive({
     a <- datNov[(datNov$Nutr_scen == input$Nutr_scen_nov & datNov$Clim_scen == input$Climate_nov),]
@@ -380,111 +380,37 @@ server <- function(input, output) {
     }
   )
   
-  output$plotRv <- renderPlot(
-    {
-      if("plotRv" %in% input$novelVars){
-        
-        ggplot(nov_subset(), aes(x = Year, y = codRV)) +
-          scale_y_continuous(limits=c(0,1), breaks = scales::pretty_breaks(n = 5)) +
-          scale_x_continuous(limits=c(2004,2098), breaks = scales::pretty_breaks(n = 5)) +
-          ggtitle("Novelty for cod reproductive volume") +
-          xlab("\nYear") +
-          ylab("Novelty\n") +
-          theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
-                             panel.grid.minor = element_blank(), axis.line = element_line(colour = "grey"),
-                             title = element_text(size = 14),
-                             axis.title.y = element_text(size = 13),
-                             axis.text.y = element_text(size = 11),
-                             axis.title.x = element_text(size = 13),
-                             axis.text.x = element_text(size = 11)
-          ) +
-          geom_line(stat = "identity")
-      }
-    }
-  )
-  
-  output$plotTemp1 <- renderPlot(
-    {
-      if("plotTemp1" %in% input$novelVars){
-        
-        ggplot(nov_subset(), aes(x = Year, y = T_050_MarchMay)) +
-          scale_y_continuous(limits=c(0,1), breaks = scales::pretty_breaks(n = 5)) +
-          scale_x_continuous(limits=c(2004,2098), breaks = scales::pretty_breaks(n = 5)) +
-          ggtitle("Novelty for 0-50m water temperature") +
-          xlab("\nYear") +
-          ylab("Novelty\n") +
-          theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
-                             panel.grid.minor = element_blank(), axis.line = element_line(colour = "grey"),
-                             title = element_text(size = 14),
-                             axis.title.y = element_text(size = 13),
-                             axis.text.y = element_text(size = 11),
-                             axis.title.x = element_text(size = 13),
-                             axis.text.x = element_text(size = 11)
-          ) +
-          geom_line(stat = "identity")
-      }
-    }
-  )
-  
-  output$plotTemp2 <- renderPlot(
-    {
-      if("plotTemp2" %in% input$novelVars){
-        
-        ggplot(nov_subset(), aes(x = Year, y = Aug060mT)) +
-          scale_y_continuous(limits=c(0,1), breaks = scales::pretty_breaks(n = 5)) +
-          scale_x_continuous(limits=c(2004,2098), breaks = scales::pretty_breaks(n = 5)) +
-          ggtitle("Novelty for 0-60m water temperature") +
-          xlab("\nYear") +
-          ylab("Novelty\n") +
-          theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
-                             panel.grid.minor = element_blank(), axis.line = element_line(colour = "grey"),
-                             title = element_text(size = 14),
-                             axis.title.y = element_text(size = 13),
-                             axis.text.y = element_text(size = 11),
-                             axis.title.x = element_text(size = 13),
-                             axis.text.x = element_text(size = 11)
-          ) +
-          geom_line(stat = "identity")
-      }
-    }
-  )
-  
-  output$plotHyp <- renderPlot(
-    {
-      if("plotHyp" %in% input$novelVars){
-        
-        ggplot(nov_subset(), aes(x = Year, y = notHypoxicA)) +
-          scale_y_continuous(limits=c(0,1), breaks = scales::pretty_breaks(n = 5)) +
-          scale_x_continuous(limits=c(2004,2098), breaks = scales::pretty_breaks(n = 5)) +
-          ggtitle("Novelty for inverse hypoxic area") +
-          xlab("\nYear") +
-          ylab("Novelty\n") +
-          theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
-                             panel.grid.minor = element_blank(), axis.line = element_line(colour = "grey"),
-                             title = element_text(size = 14),
-                             axis.title.y = element_text(size = 13),
-                             axis.text.y = element_text(size = 11),
-                             axis.title.x = element_text(size = 13),
-                             axis.text.x = element_text(size = 11)
-          ) +
-          geom_line(stat = "identity")
-      }
-    }
-  )
+    nov_var <- reactive({
+      melted <- melt(nov_subset(), id.vars = "Year", measure.vars = c("codRV", "T_050_MarchMay", "Aug060mT", "notHypoxicA"))
+      a <- melted[melted$variable %in% input$novelVars,]
+      return(a)
+    }) 
+    
+    output$plotRv <- renderPlot({
+      
+      ggplot(nov_var(), aes(x = Year, y = value, col = variable)) +
+        scale_y_continuous(limits=c(0,1), breaks = scales::pretty_breaks(n = 5)) +
+        scale_x_continuous(limits=c(2004,2098), breaks = scales::pretty_breaks(n = 5)) +
+        ggtitle("Novelty variables") +
+        xlab("\nYear") +
+        ylab("Novelty\n") +
+        theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
+                                 panel.grid.minor = element_blank(), axis.line = element_line(colour = "grey"),
+                                 title = element_text(size = 14),
+                                 axis.title.y = element_text(size = 13),
+                                 axis.text.y = element_text(size = 11),
+                                 axis.title.x = element_text(size = 13),
+                                 axis.text.x = element_text(size = 11)
+        ) +
+        geom_line(stat = "identity")
+    })
+    
   
   # Render Novelty variable time-series
-  output$novel_plot_list <- renderUI(
+  output$novel_plot <- renderUI(
     {
-      novel_plot_output_list <- lapply(
-        input$novelVars, function(plotname) {
-          column(width=12, box(plotOutput(plotname, height = 300), width = 13, solidHeader = TRUE))
-        }
-      )
       fluidRow(
-        lapply(
-          X = split(novel_plot_output_list, f = rep(c(1, 2), length.out = length(novel_plot_output_list))),
-          FUN = column, width = 6, style='padding:0px'
-        )
+        box(plotOutput("plotRv", height = 300), width = 12, solidHeader = TRUE)
       )
     }
   )
