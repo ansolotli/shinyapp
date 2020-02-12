@@ -97,13 +97,13 @@ sidebar <- dashboardSidebar(
                         popify(checkboxGroupInput(inputId = "novelVars", 
                                            label = "Novelty variables",
                                            choices = list("Cod reproductive volume" = "codRV", 
-                                                          "0-50m temperature March-May" = "T_050_MarchMay", 
-                                                          "0-60m temperature August" = "Aug060mT",
+                                                          "Spring temperature" = "T_050_MarchMay", 
+                                                          "August temperature" = "Aug060mT",
                                                           "Inverse hypoxic area" = "notHypoxicA"),
                                            #choiceValues = list("plotRv", "plotTemp1", "plotTemp2", "plotHyp"),
                                            selected = "codRV"), 
                                title = "Novelty variables", 
-                               content = "Cod spawns in the open sea and the eggs drift in the water. The <b>reproductive volume</b> indicates changes in the size of the water layer where salinity is high enough and thereby also the density of the water (weight of water per its unit volume) is high enough to prevent the eggs from sinking in the oxygen deficient deep water. Eutrophication and less saline water inflow to the Baltic Sea via the Danish Straits tend to decrease the reproductive volume of cod. <br><br> The <b>temperature</b> variables present the water temperature in the surface layer of the water column during spring months and in the summer. <br><br> <b>Inverse hypoxic area</b> is the inverse of the deep water area that has gone hypoxic i.e. this variable describes the proportion of the study area where oxygen concentration in the deep water is above 2 mg/l."
+                               content = "Cod spawns in the open sea and the eggs drift in the water. The <b>reproductive volume</b> indicates changes in the size of the water layer where salinity is high enough and thereby also the density of the water (weight of water per its unit volume) is high enough to prevent the eggs from sinking in the oxygen deficient deep water. Eutrophication and less saline water inflow to the Baltic Sea via the Danish Straits tend to decrease the reproductive volume of cod. <br><br> The <b>temperature</b> variables present the water temperature in the surface layer (0-50m for March-May temperatures and 0-60m for August temperatures) of the water column during spring months and in the summer. <br><br> <b>Inverse hypoxic area</b> is the inverse of the deep water area that has gone hypoxic i.e. this variable describes the proportion of the study area where oxygen concentration in the deep water is above 2 mg/l."
                                , placement = "right", trigger = "hover", options = list(container = "body")),
                         
                         popify(checkboxInput(inputId = "novelTotal", 
@@ -223,7 +223,7 @@ body <- dashboardBody(
             fluidRow(
               column(width = 12,
                      uiOutput('novel_info'),
-                     uiOutput("novel_plot"),
+                     uiOutput("novel_plot_render"),
                      uiOutput("novel_plot_total"))
             )
     )

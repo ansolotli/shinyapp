@@ -368,11 +368,50 @@ server <- function(input, output) {
     return(a)
   })
   
+    nov_var <- reactive({
+      melted <- melt(nov_subset(), id.vars = "Year", measure.vars = c("codRV", "T_050_MarchMay", "Aug060mT", "notHypoxicA"))
+      a <- melted[melted$variable %in% input$novelVars,]
+      return(a)
+    }) 
+    
+    output$novel_plot <- renderPlot({
+      
+      ggplot(nov_var(), aes(x = Year, y = value, col = variable)) +
+        scale_y_continuous(limits=c(0,1), breaks = scales::pretty_breaks(n = 5)) +
+        scale_x_continuous(limits=c(2004,2098), breaks = scales::pretty_breaks(n = 5),
+                           expand = c(0.02, 0)) +
+        ggtitle("Novelty variables") +
+        xlab("\nYear") +
+        ylab("Novelty\n") +
+        theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
+                                 panel.grid.minor = element_blank(), axis.line = element_line(colour = "grey"),
+                                 title = element_text(size = 14),
+                                 axis.title.y = element_text(size = 13),
+                                 axis.text.y = element_text(size = 11),
+                                 axis.title.x = element_text(size = 13),
+                                 axis.text.x = element_text(size = 11),
+                                 legend.text=element_text(size=11),
+                                 legend.position = c(0.15,0.75)
+        ) +
+        geom_line(stat = "identity", size = 1) +
+        scale_color_discrete(name="Variables",
+                           labels=c("Cod reproductive volume","Spring temperature","August temperature","Inverse hypoxic area"))
+    })
+
+  output$novel_plot_render <- renderUI(
+    {
+      fluidRow(
+        box(plotOutput("novel_plot", height = 300), width = 12, solidHeader = TRUE)
+      )
+    }
+  )
+  
   output$plotTotal <- renderPlot(
     {
       ggplot(nov_subset(), aes(x = Year, y = Abiotic_novelty)) +
         scale_y_continuous(limits=c(0,2.7), breaks = scales::pretty_breaks(n = 5)) +
-        scale_x_continuous(limits=c(2004,2098), breaks = scales::pretty_breaks(n = 5)) +
+        scale_x_continuous(limits=c(2004,2098), breaks = scales::pretty_breaks(n = 5),
+                           expand = c(0.02, 0)) +
         ggtitle("Total abiotic novelty") +
         xlab("\nYear") +
         ylab("Novelty\n") +
@@ -384,42 +423,7 @@ server <- function(input, output) {
                            axis.title.x = element_text(size = 13),
                            axis.text.x = element_text(size = 11)
         ) +
-        geom_line(stat = "identity")
-    }
-  )
-  
-    nov_var <- reactive({
-      melted <- melt(nov_subset(), id.vars = "Year", measure.vars = c("codRV", "T_050_MarchMay", "Aug060mT", "notHypoxicA"))
-      a <- melted[melted$variable %in% input$novelVars,]
-      return(a)
-    }) 
-    
-    output$plotRv <- renderPlot({
-      
-      ggplot(nov_var(), aes(x = Year, y = value, col = variable)) +
-        scale_y_continuous(limits=c(0,1), breaks = scales::pretty_breaks(n = 5)) +
-        scale_x_continuous(limits=c(2004,2098), breaks = scales::pretty_breaks(n = 5)) +
-        ggtitle("Novelty variables") +
-        xlab("\nYear") +
-        ylab("Novelty\n") +
-        theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
-                                 panel.grid.minor = element_blank(), axis.line = element_line(colour = "grey"),
-                                 title = element_text(size = 14),
-                                 axis.title.y = element_text(size = 13),
-                                 axis.text.y = element_text(size = 11),
-                                 axis.title.x = element_text(size = 13),
-                                 axis.text.x = element_text(size = 11)
-        ) +
-        geom_line(stat = "identity")
-    })
-    
-  
-  # Render Novelty variable time-series
-  output$novel_plot <- renderUI(
-    {
-      fluidRow(
-        box(plotOutput("plotRv", height = 300), width = 12, solidHeader = TRUE)
-      )
+        geom_line(stat = "identity", size = 1)
     }
   )
   
