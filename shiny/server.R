@@ -77,10 +77,8 @@ server <- function(input, output) {
           ylab("Spawning-stock biomass\n") +
           geom_hline(aes(yintercept = 96.5, col = "red")) +
           annotate("text", x = 2050, y = 106, label = "GES above this line", col = "red", size = 5) +
-          geom_vline(xintercept=2014) +
+          geom_vline(xintercept=2014, col = "blue") +
           annotate(geom = "text", x = 2011, y = 60, label = "Calibration period", size = 4,
-                   angle = 90) +
-          annotate(geom = "text", x = 2017, y = 60, label = "Predicted biomass", size = 4,
                    angle = 90) +
           theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
                              panel.grid.minor = element_blank(), axis.line = element_line(colour = "grey"),
@@ -112,7 +110,9 @@ server <- function(input, output) {
           ylab("Spawning-stock biomass\n") +
           geom_hline(aes(yintercept = 430, col = "red")) +
           annotate("text", x = 2040, y = 460, label = "GES above this line", col = "red", size = 5) +
-          geom_vline(xintercept=2014) +
+          geom_vline(xintercept=2014, col = "blue") +
+          annotate(geom = "text", x = 2011, y = 200, label = "Calibration period", size = 4,
+                   angle = 90) +
           theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
                              panel.grid.minor = element_blank(), axis.line = element_line(colour = "grey"),
                              title = element_text(size = 14),
@@ -143,7 +143,9 @@ server <- function(input, output) {
           ylab("Spawning-stock biomass\n") +
           geom_hline(aes(yintercept = 410, col = "red")) +
           annotate("text", x = 2040, y = 450, label = "GES above this line", col = "red", size = 5) +
-          geom_vline(xintercept=2014) +
+          geom_vline(xintercept=2014, col = "blue") +
+          annotate(geom = "text", x = 2011, y = 300, label = "Calibration period", size = 4,
+                   angle = 90) +
           theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
                              panel.grid.minor = element_blank(), axis.line = element_line(colour = "grey"),
                              title = element_text(size = 14),
@@ -172,7 +174,9 @@ server <- function(input, output) {
           ggtitle("Biomass of zooplankton") +
           xlab("\nYear") +
           ylab("Biomass\n") +
-          geom_vline(xintercept=2014) +
+          geom_vline(xintercept=2014, col = "blue") +
+          annotate(geom = "text", x = 2011, y = 3, label = "Calibration period", size = 4,
+                   angle = 90) +
           theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
                              panel.grid.minor = element_blank(), axis.line = element_line(colour = "grey"),
                              title = element_text(size = 14),
@@ -201,7 +205,9 @@ server <- function(input, output) {
           ggtitle("Biomass of phytoplankton") +
           xlab("\nYear") +
           ylab("Biomass\n") +
-          geom_vline(xintercept=2014) +
+          geom_vline(xintercept=2013, col = "blue") +
+          annotate(geom = "text", x = 2011, y = 3, label = "Calibration period", size = 4,
+                   angle = 90) +
           theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
                              panel.grid.minor = element_blank(), axis.line = element_line(colour = "grey"),
                              title = element_text(size = 14),
@@ -240,10 +246,8 @@ server <- function(input, output) {
           ggtitle("Cod catch") +
           xlab("\nYear") +
           ylab("Catch\n") +
-          geom_vline(xintercept=2014) +
+          geom_vline(xintercept=2014, col = "blue") +
           annotate(geom = "text", x = 2011, y = 20, label = "Calibration period", size = 4,
-                   angle = 90) +
-          annotate(geom = "text", x = 2017, y = 20, label = "Predicted catch", size = 4,
                    angle = 90) +
           theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
                              panel.grid.minor = element_blank(), axis.line = element_line(colour = "grey"),
@@ -274,7 +278,9 @@ server <- function(input, output) {
           ggtitle("Herring catch") +
           xlab("\nYear") +
           ylab("Catch\n") +
-          geom_vline(xintercept=2014) +
+          geom_vline(xintercept=2014, col = "blue") +
+          annotate(geom = "text", x = 2011, y = 60, label = "Calibration period", size = 4,
+                   angle = 90) +
           theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
                              panel.grid.minor = element_blank(), axis.line = element_line(colour = "grey"),
                              title = element_text(size = 14),
@@ -304,7 +310,9 @@ server <- function(input, output) {
           ggtitle("Sprat catch") +
           xlab("\nYear") +
           ylab("Catch\n") +
-          geom_vline(xintercept=2014) +
+          geom_vline(xintercept=2014, col = "blue") +
+          annotate(geom = "text", x = 2011, y = 100, label = "Calibration period", size = 4,
+                   angle = 90) +
           theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
                              panel.grid.minor = element_blank(), axis.line = element_line(colour = "grey"),
                              title = element_text(size = 14),
