@@ -33,7 +33,11 @@ h2 {
 	font-size: 24px;
 }
 
-#aboutText {
+#about_shortly {
+	font-size: 15px;
+}
+
+#about_indepth {
 	font-size: 15px;
 }
 

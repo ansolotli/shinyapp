@@ -6,6 +6,7 @@ suppressPackageStartupMessages({
   library(ggplot2)
   library(rmarkdown)
   library(reshape2)
+  library(shinyjs)
 })
 
 # Header
@@ -175,6 +176,7 @@ sidebar <- dashboardSidebar(
 
 # Body
 body <- dashboardBody(
+ useShinyjs(),
   
   tabItems(
     tabItem("about",
@@ -183,7 +185,11 @@ body <- dashboardBody(
               tabBox(width = 12,
                 id = "aboutBoxes",
                 tabPanel("Introduction",
-                         uiOutput("aboutText")
+                         uiOutput("about_shortly"),
+                         actionLink("link", "Show more"),
+                         hidden(
+                           uiOutput("about_indepth")
+                         )
                 ),
                 tabPanel("The decision support system",
                          uiOutput("modelText"),

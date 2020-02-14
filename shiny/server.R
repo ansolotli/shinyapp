@@ -11,8 +11,16 @@ server <- function(input, output) {
   
   ##### "ABOUT" TAB #####
   
-  output$aboutText <- renderUI({
-    includeMarkdown("data/about_intro.md")
+  output$about_shortly <- renderUI({
+    includeMarkdown("data/about_intro_short.md")
+  })
+  
+  observeEvent(input$link, {
+               # use shinyjs toggle to show and/or hide outputs
+               toggle("about_indepth")
+               output$about_indepth <- renderUI({
+                 includeMarkdown("data/about_intro_long.md")
+               })
   })
   
   output$modelText <- renderUI({
