@@ -186,7 +186,7 @@ body <- dashboardBody(
                 id = "aboutBoxes",
                 tabPanel("Introduction",
                          uiOutput("about_shortly"),
-                         actionLink("link", "Show more"),
+                         actionLink("aboutLink", "Read more"),
                          hidden(
                            uiOutput("about_indepth")
                          )
@@ -196,7 +196,10 @@ body <- dashboardBody(
                          fluidRow(
                            box(solidHeader = TRUE, width = 12, imageOutput("model", height = "auto"))
                          ),
-                         uiOutput("modelText2")
+                         actionLink("modelLink", "Read more"),
+                         hidden(
+                           uiOutput("modelText2")
+                         )
                 ),
                 tabPanel("Map of the modelled area",
                          fluidRow(

@@ -15,27 +15,38 @@ server <- function(input, output, session) {
     includeMarkdown("data/about_intro_short.md")
   })
   
-  observeEvent(input$link, {
+  observeEvent(input$aboutLink, {
                # use shinyjs toggle to show and/or hide outputs
                toggle("about_indepth")
                output$about_indepth <- renderUI({
                  includeMarkdown("data/about_intro_long.md")
                })
                
-               if (input$link %% 2 == 1) {
-                 newlabel <- "Show less"
+               if (input$aboutLink %% 2 == 1) {
+                 newlabel <- "Read less"
                } else {
-                 newlabel <- "Show more"
+                 newlabel <- "Read more"
                }
-               updateActionButton(session, "link", label = newlabel)
+               updateActionButton(session, "aboutLink", label = newlabel)
   })
   
   output$modelText <- renderUI({
     includeMarkdown("data/model_info.md")
   })
   
-  output$modelText2 <- renderUI({
-    includeMarkdown("data/model_info2.md")
+  observeEvent(input$modelLink, {
+              toggle("modelText2")
+              output$modelText2 <- renderUI({
+                includeMarkdown("data/model_info2.md")
+              })
+    
+             if (input$modelLink %% 2 == 1) {
+                newlabel <- "Read less"
+             } else {
+                newlabel <- "Read more"
+             }
+             updateActionButton(session, "modelLink", label = newlabel)
+    
   })
   
   output$mapText <- renderUI({
