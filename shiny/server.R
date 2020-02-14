@@ -7,7 +7,7 @@ datOpt <- read.csv("data/optimize_2401.csv", row.names = NULL, sep = ";")
 
 
 # Define the server function
-server <- function(input, output) {
+server <- function(input, output, session) {
   
   ##### "ABOUT" TAB #####
   
@@ -21,6 +21,13 @@ server <- function(input, output) {
                output$about_indepth <- renderUI({
                  includeMarkdown("data/about_intro_long.md")
                })
+               
+               if (input$link %% 2 == 1) {
+                 newlabel <- "Show less"
+               } else {
+                 newlabel <- "Show more"
+               }
+               updateActionButton(session, "link", label = newlabel)
   })
   
   output$modelText <- renderUI({
