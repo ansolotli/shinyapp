@@ -491,7 +491,6 @@ server <- function(input, output, session) {
                          axis.text.x = element_text(size = 11)
       ) +
       geom_bar(stat = "identity")
-    
   })
   
   output$opt_clim <- renderPlot({
@@ -544,22 +543,5 @@ server <- function(input, output, session) {
       ) +
       geom_bar(stat = "identity")
   })
-  
-  
-  output$opt_plots <- renderUI(
-    {
-      opt_plot_output_list <- lapply(
-        input$optVars, function(plotname) {
-          column(width=12, box(plotOutput(plotname, height = 300), width = 13, solidHeader = TRUE))
-        }
-      )
-      fluidRow(
-        lapply(
-          X = split(opt_plot_output_list, f = rep(c(1, 2), length.out = length(opt_plot_output_list))),
-          FUN = column, width = 6, style='padding:0px'
-        )
-      )
-    }
-  )
  
 }

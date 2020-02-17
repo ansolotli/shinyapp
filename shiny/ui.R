@@ -159,17 +159,8 @@ sidebar <- dashboardSidebar(
                                   inline = TRUE
                ), title = "Expert knowledge", 
                content = "Ecological novelty denotes unprecedented, human-mediated changes at different ecological levels. The rapid changes in climate and in other anthropogenic pressures may result in novel species communities and ecosystems without any historical analogue. <br><br> This is difficult to predict with models as novel conditions can not be calibrated against historical observations. Bringing expert knowledge about this uncertainty on top of modelling could increase the certainty of predictions."
-               , placement = "right", trigger = "hover", options = list(container = "body")),
-               
-               fluidRow(
-                 column(width = 12,
-                        checkboxGroupInput(inputId = "optVars", 
-                                           label = "Scenario variables",
-                                           choiceNames = list("Fishery policy", "Climate scenario", 
-                                                              "Nutrient loading policy", "Decade"),
-                                           choiceValues = list("opt_fish", "opt_clim", "opt_nutr", "opt_dec"),
-                                           selected = "opt_fish")
-               )))
+               , placement = "right", trigger = "hover", options = list(container = "body"))
+               )
       , tabName = "optimize")
   )
 )
@@ -242,9 +233,16 @@ body <- dashboardBody(
             fluidRow(
               column(width = 12,
                      uiOutput("opt_info"),
-                     uiOutput("opt_plots"))
+                     fluidRow(                              
+                       column(width = 6,
+                              box(plotOutput("opt_fish", height = 300), width = 13, solidHeader = TRUE),
+                              box(plotOutput("opt_nutr", height = 300), width = 13, solidHeader = TRUE)),
+                       column(width = 6,
+                              box(plotOutput("opt_clim", height = 300), width = 13, solidHeader = TRUE),
+                              box(plotOutput("opt_dec", height = 300), width = 13, solidHeader = TRUE))
+                     )
             )
-    )),
+    ))),
     # CSS
     tags$head(tags$link(rel = "stylesheet", type = "text/css", href = "custom.css")) 
 )
