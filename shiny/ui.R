@@ -7,6 +7,7 @@ suppressPackageStartupMessages({
   library(rmarkdown)
   library(reshape2)
   library(shinyjs)
+  library(patchwork)
 })
 
 # Header
@@ -233,14 +234,7 @@ body <- dashboardBody(
             fluidRow(
               column(width = 12,
                      uiOutput("opt_info"),
-                     fluidRow(                              
-                       column(width = 6,
-                              box(plotOutput("opt_fish", height = 300), width = 13, solidHeader = TRUE),
-                              box(plotOutput("opt_nutr", height = 300), width = 13, solidHeader = TRUE)),
-                       column(width = 6,
-                              box(plotOutput("opt_clim", height = 300), width = 13, solidHeader = TRUE),
-                              box(plotOutput("opt_dec", height = 300), width = 13, solidHeader = TRUE))
-                     )
+                     plotOutput("opt_plots")
             )
     ))),
     # CSS
