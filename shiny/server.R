@@ -496,19 +496,50 @@ server <- function(input, output, session) {
     # format the probability of fishery policy
     fish_p <- percent(fish$F_scen)
     
-    a <- includeMarkdown("data/opt/a.md")
-    b <- includeMarkdown("data/opt/b.md")
-    c <- includeMarkdown("data/opt/c.md")
+    a <- "The highest chance of reaching your desired outcome of profit and environmental status would be to apply "
+    b <- " <b>fishery policy</b>. Out of the three fishery policy options, this one has the highest chance of "
+    c <- " to help you achieve your goal. <br><br>"
     
-    sectionOne <- HTML(paste(a, "<b>", fish_s, "</b>", b, "<b>", fish_p, "</b>", c))
+    section1 <- HTML(paste0(a, "<b>", fish_s, "</b>", b, "<b>", fish_p, "</b>", c))
     
-    box(sectionOne, width = 12, solidHeader = TRUE)
+    # extract row with highest probability nutrient scenario
+    nutr <- opt_subset()[which.max(opt_subset()$Nutr_scen),]
+    
+    # format nutrient policy
+    nutr_s <- ""
+    
+    if (nutr$Nutr_labels == "BSAP") {
+      nutr_s <- "Baltic Sea Action Plan (BSAP)"
+    }
+    else {
+      nutr_s <- "Reference conditions"
+    } 
+    
+    # format the probability of nutrient policy
+    nutr_p <- percent(nutr$Nutr_scen)
+    
+    d <- "The fishery policy should be combined with <b>nutrient loading policy</b> according to the "
+    e <- ". Out of the two nutrient loading policy options, this one has the chance of "
+    f <- " to be the best option. <br><br>"
+    
+    section2 <- HTML(paste0(d, "<b>", nutr_s, "</b>", e, "<b>", nutr_p, "</b>", f))
+    
+    # extract row with highest probability climate scenario
+    clim <- opt_subset()[which.max(opt_subset()$Clim_scen),]
+    
+    clim_s <- clim$Clim_labels
+    
+    # format the probability of climate scenario
+    clim_p <- percent(clim$Clim_scen)
+    
+    g <- "These policies will take you closest to your goal, given that the <b>climate scenario</b> of "
+    h <- " is also in effect. Out of the two climate scenarios, this one has the chance of "
+    i <- " to bring you closest to your desired outcome. <br><br>"
+    
+    section3 <- HTML(paste0(g, "<b>", clim_s, "</b>", h, "<b>", clim_p, "</b>", i))
+  
+    wholeThing <- HTML(paste(section1, section2, section3))
+    box(wholeThing, width = 12, solidHeader = TRUE)
   })
-  
-  
-  
-  
-  
-  
  
 }
