@@ -197,7 +197,7 @@ body <- dashboardBody(
               column(width = 12,
                      uiOutput("opt_info")
                      ),
-              column(width = 6,
+              column(width = 4,
                      
                      popify(selectInput(inputId = 'Profit',
                                         label = "Minimum acceptable profit",
@@ -206,15 +206,7 @@ body <- dashboardBody(
                      ), title = "Minimum acceptable profit", 
                      content = "Minimum acceptable profit enables selection of the desired lowest limit of annual profitability of fisheries on cod, herring, and sprat in millions of euros."
                      , placement = "right", trigger = "hover", options = list(container = "body")),
-                     
-                     popify(selectInput(inputId = 'Nutr_GES',
-                                        label = "Status of water quality",
-                                        choices = c("Above GES" = "GES", "Below GES" = "Sub-GES"),
-                                        selected = "Above"
-                     ), title = "Status of water quality", 
-                     content = "The indicators of water quality comprise of the average concentrations of nitrogen, phosphorus and chlorophyll <i>a</i>. Low concentrations suggest high probability of reaching the Good Environmental Status (GES) as defined by HELCOM (Baltic Marine Environment Protection Commission – Helsinki Commission)."
-                     , placement = "right", trigger = "hover", options = list(container = "body")),
-                     
+
                      popify(radioButtons(inputId = 'Novelty',
                                          label = "Include expert knowledge",
                                          choices = c("Yes" = "Yes", "No" = "No"),
@@ -224,7 +216,7 @@ body <- dashboardBody(
                      , placement = "right", trigger = "hover", options = list(container = "body"))
                      
                      ),
-              column(width = 6,
+              column(width = 4,
                      
                      popify(selectInput(inputId = 'F_GES',
                                         label = "Environmental status of fish stocks",
@@ -236,11 +228,22 @@ body <- dashboardBody(
                      , placement = "right", trigger = "hover", options = list(container = "body")),
                      
                      popify(radioButtons(inputId = 'Ref_point',
-                                         label = "Reference point",
+                                         label = "Fish stock reference point",
                                          choices = c("Blim" = "Blim", "B MSY trigger" = "B MSY"),
                                          selected = "Blim"
                      ), title = "Reference point", 
                      content = "Blim is the reference point describing the limit below which there is a high risk of reduced recruitment. <br><br> B MSY trigger (or BMSYtrigger) is considered as the lower bound of spawning–stock biomass fluctuation below which fishing needs to be reduced to allow a fish stock to rebuild to levels capable of producing maximum sustainable yield (MSY)."
+                     , placement = "right", trigger = "hover", options = list(container = "body"))
+                     
+                     ),
+              column(width = 4,
+                     
+                     popify(selectInput(inputId = 'Nutr_GES',
+                                        label = "Status of water quality",
+                                        choices = c("Above GES" = "GES", "Below GES" = "Sub-GES"),
+                                        selected = "Above"
+                     ), title = "Status of water quality", 
+                     content = "The indicators of water quality comprise of the average concentrations of nitrogen, phosphorus and chlorophyll <i>a</i>. Low concentrations suggest high probability of reaching the Good Environmental Status (GES) as defined by HELCOM (Baltic Marine Environment Protection Commission – Helsinki Commission)."
                      , placement = "right", trigger = "hover", options = list(container = "body"))
                      
                      )
