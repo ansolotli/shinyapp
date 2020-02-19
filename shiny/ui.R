@@ -8,6 +8,8 @@ suppressPackageStartupMessages({
   library(reshape2)
   library(shinyjs)
   library(patchwork)
+  library(dplyr)
+  library(scales)
 })
 
 # Header
@@ -192,6 +194,9 @@ body <- dashboardBody(
             titlePanel("What would be your preferred outcome in the future Central Baltic Sea?"),
             
             fluidRow(
+              column(width = 12,
+                     uiOutput("opt_info")
+                     ),
               column(width = 6,
                      
                      popify(selectInput(inputId = 'Profit',
@@ -243,8 +248,7 @@ body <- dashboardBody(
             
             fluidRow(
               column(width = 12,
-                     uiOutput("opt_info"),
-                     plotOutput("opt_plots")
+                     htmlOutput("opt_scens")
             )
     ))),
     # CSS
