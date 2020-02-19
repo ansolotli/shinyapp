@@ -118,49 +118,8 @@ sidebar <- dashboardSidebar(
       ), tabName = "novelty"),
     
     convertMenuItem(
-      menuItem("Optimize", tabName = "optimize",
-               popify(selectInput(inputId = 'Profit',
-                                       label = "Minimum acceptable profit",
-                                       choices = c("No profit", "Profit larger than 0", "Profit larger than 100", "Profit larger than 200"),
-                                       selected = "Profit larger than 100"
-               ), title = "Minimum acceptable profit", 
-               content = "Minimum acceptable profit enables selection of the desired lowest limit of annual profitability of fisheries on cod, herring, and sprat in millions of euros."
-               , placement = "right", trigger = "hover", options = list(container = "body")),
+      menuItem("Optimize", tabName = "optimize"
                
-               popify(selectInput(inputId = 'F_GES',
-                                       label = "Environmental status of fish stocks",
-                                       choices = c("All stocks above the ref. point" = "All above", "One stock below the ref. point" = "One below",
-                                                   "Two stocks below the ref. point" = "Two below", "All stocks below the ref. point" = "All below"),
-                                       selected = "All above"
-               ), title = "Environmental status of fish stocks", 
-               content = "The spawning-stock biomass of the three major fish species (i.e. cod, herring and sprat) in relation to the reference point describes the expected status of these fish stocks. The scale ranges from all three species being above the reference point limit to none of the species faring well."
-               , placement = "right", trigger = "hover", options = list(container = "body")),
-               
-               popify(radioButtons(inputId = 'Ref_point',
-                                   label = "Reference point",
-                                   choices = c("Blim" = "Blim", "B MSY trigger" = "B MSY"),
-                                   selected = "Blim",
-                                   inline = TRUE # horizontal display
-               ), title = "Reference point", 
-               content = "Blim is the reference point describing the limit below which there is a high risk of reduced recruitment. <br><br> B MSY trigger (or BMSYtrigger) is considered as the lower bound of spawning–stock biomass fluctuation below which fishing needs to be reduced to allow a fish stock to rebuild to levels capable of producing maximum sustainable yield (MSY)."
-               , placement = "right", trigger = "hover", options = list(container = "body")),
-               
-               popify(selectInput(inputId = 'Nutr_GES',
-                                       label = "Status of water quality",
-                                       choices = c("Above GES" = "GES", "Below GES" = "Sub-GES"),
-                                       selected = "Above"
-               ), title = "Status of water quality", 
-               content = "The indicators of water quality comprise of the average concentrations of nitrogen, phosphorus and chlorophyll <i>a</i>. Low concentrations suggest high probability of reaching the Good Environmental Status (GES) as defined by HELCOM (Baltic Marine Environment Protection Commission – Helsinki Commission)."
-               , placement = "right", trigger = "hover", options = list(container = "body")),
-                
-               popify(radioButtons(inputId = 'Novelty',
-                                  label = "Include expert knowledge",
-                                  choices = c("Yes" = "Yes", "No" = "No"),
-                                  selected = "Yes",
-                                  inline = TRUE
-               ), title = "Expert knowledge", 
-               content = "Ecological novelty denotes unprecedented, human-mediated changes at different ecological levels. The rapid changes in climate and in other anthropogenic pressures may result in novel species communities and ecosystems without any historical analogue. <br><br> This is difficult to predict with models as novel conditions can not be calibrated against historical observations. Bringing expert knowledge about this uncertainty on top of modelling could increase the certainty of predictions."
-               , placement = "right", trigger = "hover", options = list(container = "body"))
                )
       , tabName = "optimize")
   )
@@ -230,7 +189,58 @@ body <- dashboardBody(
     )
     ,
     tabItem("optimize",
-            titlePanel("Explore the benefits of different scenario outcomes"),
+            titlePanel("What would be your preferred outcome in the future Central Baltic Sea?"),
+            
+            fluidRow(
+              column(width = 6,
+                     
+                     popify(selectInput(inputId = 'Profit',
+                                        label = "Minimum acceptable profit",
+                                        choices = c("No profit", "Profit larger than 0", "Profit larger than 100", "Profit larger than 200"),
+                                        selected = "Profit larger than 100"
+                     ), title = "Minimum acceptable profit", 
+                     content = "Minimum acceptable profit enables selection of the desired lowest limit of annual profitability of fisheries on cod, herring, and sprat in millions of euros."
+                     , placement = "right", trigger = "hover", options = list(container = "body")),
+                     
+                     popify(selectInput(inputId = 'Nutr_GES',
+                                        label = "Status of water quality",
+                                        choices = c("Above GES" = "GES", "Below GES" = "Sub-GES"),
+                                        selected = "Above"
+                     ), title = "Status of water quality", 
+                     content = "The indicators of water quality comprise of the average concentrations of nitrogen, phosphorus and chlorophyll <i>a</i>. Low concentrations suggest high probability of reaching the Good Environmental Status (GES) as defined by HELCOM (Baltic Marine Environment Protection Commission – Helsinki Commission)."
+                     , placement = "right", trigger = "hover", options = list(container = "body")),
+                     
+                     popify(radioButtons(inputId = 'Novelty',
+                                         label = "Include expert knowledge",
+                                         choices = c("Yes" = "Yes", "No" = "No"),
+                                         selected = "Yes"
+                     ), title = "Expert knowledge", 
+                     content = "Ecological novelty denotes unprecedented, human-mediated changes at different ecological levels. The rapid changes in climate and in other anthropogenic pressures may result in novel species communities and ecosystems without any historical analogue. <br><br> This is difficult to predict with models as novel conditions can not be calibrated against historical observations. Bringing expert knowledge about this uncertainty on top of modelling could increase the certainty of predictions."
+                     , placement = "right", trigger = "hover", options = list(container = "body"))
+                     
+                     ),
+              column(width = 6,
+                     
+                     popify(selectInput(inputId = 'F_GES',
+                                        label = "Environmental status of fish stocks",
+                                        choices = c("All stocks above the ref. point" = "All above", "One stock below the ref. point" = "One below",
+                                                    "Two stocks below the ref. point" = "Two below", "All stocks below the ref. point" = "All below"),
+                                        selected = "All above"
+                     ), title = "Environmental status of fish stocks", 
+                     content = "The spawning-stock biomass of the three major fish species (i.e. cod, herring and sprat) in relation to the reference point describes the expected status of these fish stocks. The scale ranges from all three species being above the reference point limit to none of the species faring well."
+                     , placement = "right", trigger = "hover", options = list(container = "body")),
+                     
+                     popify(radioButtons(inputId = 'Ref_point',
+                                         label = "Reference point",
+                                         choices = c("Blim" = "Blim", "B MSY trigger" = "B MSY"),
+                                         selected = "Blim"
+                     ), title = "Reference point", 
+                     content = "Blim is the reference point describing the limit below which there is a high risk of reduced recruitment. <br><br> B MSY trigger (or BMSYtrigger) is considered as the lower bound of spawning–stock biomass fluctuation below which fishing needs to be reduced to allow a fish stock to rebuild to levels capable of producing maximum sustainable yield (MSY)."
+                     , placement = "right", trigger = "hover", options = list(container = "body"))
+                     
+                     )
+            ),
+            
             fluidRow(
               column(width = 12,
                      uiOutput("opt_info"),
