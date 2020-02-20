@@ -556,5 +556,75 @@ server <- function(input, output, session) {
     wholeThing <- HTML(paste(section1, section2, section3, section4))
     box(wholeThing, width = 12, solidHeader = TRUE)
   })
+  
+  opt_fish <- reactive({	
+    
+    ggplot(opt_subset()[1:3,], aes(x = 1, y = F_scen, fill = F_labels)) +	
+      ggtitle("Fishery Policy Scenario") +
+      scale_fill_discrete("Fishery policies", labels = c("Open Access", "Pelagics-Focused", "Sustainable")) +
+      theme_void() + theme(legend.text = element_text(size = 12), legend.title = element_text(size = 14),
+                           title = element_text(size = 14)) +
+      geom_bar(stat = "identity", color = "white")	 +
+      geom_text(data=subset(opt_subset()[1:3,], percent(round(F_scen, 2)) != "0%" & percent(round(F_scen, 2)) != "0.0%"),
+                aes(label = percent(signif(F_scen, 2))), position = position_stack(vjust = 0.5))+
+      coord_polar(theta = "y") 
+  })
+  
+  opt_clim <- reactive({
+    p <- ggplot(opt_subset()[1:2,], aes(x = 1, y = Clim_scen, fill = Clim_labels)) +
+      scale_y_continuous(limits=c(0,1), breaks = scales::pretty_breaks(n = 5)) + 	
+      ggtitle("Climate Scenario") +	
+      scale_fill_discrete("Climate scenarios") +
+      theme_void() + theme(legend.text = element_text(size = 12), legend.title = element_text(size = 14),
+                           title = element_text(size = 14)) +
+      geom_bar(stat = "identity", color = "white")	 +
+      geom_text(data=subset(opt_subset()[1:2,], percent(round(Clim_scen, 2)) != "0%" & percent(round(Clim_scen, 2)) != "0.0%"),
+                aes(label = percent(signif(Clim_scen, 2))), position = position_stack(vjust = 0.5))+
+      coord_polar(theta = "y") 
+    
+    return(p)
+  })
+  
+  opt_nutr <- reactive({
+    p <- ggplot(opt_subset()[1:2,], aes(x = 1, y = Nutr_scen, fill = Nutr_labels)) +	
+      scale_y_continuous(limits=c(0,1), breaks = scales::pretty_breaks(n = 5)) + 	
+      ggtitle("Nutrient Loading Policy Scenario") +	
+      scale_fill_discrete("Nutrient loading policy") +
+      theme_void() + theme(legend.text = element_text(size = 12), legend.title = element_text(size = 14),
+                           title = element_text(size = 14)) +
+      geom_bar(stat = "identity", color = "white")	 +
+      geom_text(data=subset(opt_subset()[1:2,], percent(round(Nutr_scen, 2)) != "0%" & percent(round(Nutr_scen, 2)) != "0.0%"),
+                aes(label = percent(signif(Nutr_scen, 2))), position = position_stack(vjust = 0.5))+
+      coord_polar(theta = "y") 
+    
+    return(p)
+  
+  })
+  
+  opt_dec <- reactive({	
+    p <- ggplot(opt_subset(), aes(x = 1, y = Decade, fill = Dec_labels)) +	
+      scale_y_continuous(limits=c(0,1), breaks = scales::pretty_breaks(n = 5)) + 	
+      ggtitle("Decade") +
+      scale_fill_discrete("Decade") +
+      theme_void() + theme(legend.text = element_text(size = 12), legend.title = element_text(size = 14),
+                           title = element_text(size = 14)) +
+      geom_bar(stat = "identity", color = "white")	 +
+      geom_text(data=subset(opt_subset(), percent(round(Decade, 2)) != "0%" & percent(round(Decade, 2)) != "0.0%"),
+                aes(label = percent(signif(Decade, 2))), position = position_stack(vjust = 0.5))+
+      coord_polar(theta = "y") 
+    
+    return (p)
+  
+  })
+  
+  output$opt_plots <- renderPlot({	
+    
+    p1 <- opt_fish()
+    p2 <- opt_nutr()
+    p3 <- opt_clim()
+    p4 <- opt_dec()
+    wrap_plots(p1, p2, p3, p4)
+  
+  })
  
 }

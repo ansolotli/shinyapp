@@ -251,7 +251,8 @@ body <- dashboardBody(
             
             fluidRow(
               column(width = 12,
-                     htmlOutput("opt_scens")
+                     htmlOutput("opt_scens"),
+                     plotOutput("opt_plots")
             )
     ))),
     # CSS
