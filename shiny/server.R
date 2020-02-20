@@ -537,8 +537,23 @@ server <- function(input, output, session) {
     i <- " to bring you closest to your desired outcome. <br><br>"
     
     section3 <- HTML(paste0(g, "<b>", clim_s, "</b>", h, "<b>", clim_p, "</b>", i))
+    
+    # extract row with highest probability decade
+    dec <- opt_subset()[which.max(opt_subset()$Decade),]
+    
+    # format decade
+    dec_s <- gsub("_", "-", dec$Dec_labels)
+    
+    # format the probability of decade
+    dec_p <- percent(dec$Decade)
+    
+    j <- "The decision support system models the state of the Central Baltic Sea in four decades. With the fishery and nutrient loading policy, and climate scenarios outlined above, you would most likely reach your goal in the decade "
+    k <- " ("  
+    l <- ")."
   
-    wholeThing <- HTML(paste(section1, section2, section3))
+    section4 <- HTML(paste0(j, "<b>", dec_s, "</b>", k, "<b>", dec_p, "</b>", l))
+  
+    wholeThing <- HTML(paste(section1, section2, section3, section4))
     box(wholeThing, width = 12, solidHeader = TRUE)
   })
  
