@@ -219,7 +219,7 @@ body <- dashboardBody(
               column(width = 4,
                      
                      popify(selectInput(inputId = 'F_GES',
-                                        label = "Environmental status of fish stocks",
+                                        label = "Status of fish stocks",
                                         choices = c("All stocks above the ref. point" = "All above", "One stock below the ref. point" = "One below",
                                                     "Two stocks below the ref. point" = "Two below", "All stocks below the ref. point" = "All below"),
                                         selected = "All above"
@@ -242,9 +242,9 @@ body <- dashboardBody(
                                         label = "Status of water quality",
                                         choices = c("Above GES" = "GES", "Below GES" = "Sub-GES"),
                                         selected = "Above"
-                     ), title = "Status of water quality", 
+                     ), title = "Environmental status of water quality", 
                      content = "The indicators of water quality comprise of the average concentrations of nitrogen, phosphorus and chlorophyll <i>a</i>. Low concentrations suggest high probability of reaching the Good Environmental Status (GES) as defined by HELCOM (Baltic Marine Environment Protection Commission – Helsinki Commission)."
-                     , placement = "right", trigger = "hover", options = list(container = "body"))
+                     , placement = "below", trigger = "hover", options = list(container = "body"))
                      
                      )
             ),
