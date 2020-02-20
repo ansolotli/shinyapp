@@ -498,8 +498,8 @@ server <- function(input, output, session) {
     fish_p <- percent(fish$F_scen)
     
     a <- "The highest chance of reaching your desired outcome of profit and environmental status would be to apply "
-    b <- " <b>fishery policy</b>. Out of the three fishery policy options, this one has the highest chance of "
-    c <- " to help you achieve your goal. <br><br>"
+    b <- " <b>fishery policy</b>. Out of the three fishery policy options, this one has the highest chance ("
+    c <- ") to help you achieve your goal. <br><br>"
     
     section1 <- HTML(paste0(a, "<b>", fish_s, "</b>", b, "<b>", fish_p, "</b>", c))
     
@@ -520,8 +520,8 @@ server <- function(input, output, session) {
     nutr_p <- percent(nutr$Nutr_scen)
     
     d <- "The fishery policy should be combined with <b>nutrient loading policy</b> according to the "
-    e <- ". Out of the two nutrient loading policy options, this one has the chance of "
-    f <- " to be the best option. <br><br>"
+    e <- ". Out of the two nutrient loading policy options, this one has the highest chance ("
+    f <- ") of being the best option. <br><br>"
     
     section2 <- HTML(paste0(d, "<b>", nutr_s, "</b>", e, "<b>", nutr_p, "</b>", f))
     
@@ -534,8 +534,8 @@ server <- function(input, output, session) {
     clim_p <- percent(clim$Clim_scen)
     
     g <- "These policies will take you closest to your goal, given that the <b>climate scenario</b> of "
-    h <- " is also in effect. Out of the two climate scenarios, this one has the chance of "
-    i <- " to bring you closest to your desired outcome. <br><br>"
+    h <- " is also in effect. Out of the two climate scenarios, this one has the highest chance ("
+    i <- ") to bring you closest to your desired outcome. <br><br>"
     
     section3 <- HTML(paste0(g, "<b>", clim_s, "</b>", h, "<b>", clim_p, "</b>", i))
     
@@ -548,9 +548,9 @@ server <- function(input, output, session) {
     # format the probability of decade
     dec_p <- percent(dec$Decade)
     
-    j <- "The decision support system models the state of the Central Baltic Sea in four decades. With the fishery and nutrient loading policy, and climate scenarios outlined above, you would most likely reach your goal in the decade "
+    j <- "The decision support system models the state of the Central Baltic Sea in four decades. With the fishery and nutrient loading policy, and climate scenarios outlined above, you would most likely reach your goal in the <b>decade</b> "
     k <- " ("  
-    l <- "). <br><br> If you want to see the probability distribution of all the scenario options under different profit and environmental status choices, take a look below."
+    l <- "). <br><br> If you would like to see the probability distributions of all the scenario options under different profit and environmental status choices, take a closer look below."
   
     section4 <- HTML(paste0(j, "<b>", dec_s, "</b>", k, "<b>", dec_p, "</b>", l))
   
@@ -561,8 +561,7 @@ server <- function(input, output, session) {
   
   # draw pie charts
   opt_fish <- reactive({	
-    
-    ggplot(opt_subset()[1:3,], aes(x = 1, y = F_scen, fill = F_labels)) +	
+    p <- ggplot(opt_subset()[1:3,], aes(x = 1, y = F_scen, fill = F_labels)) +	
       ggtitle("Fishery Policy Scenario") +
       scale_fill_discrete("Fishery policy", labels = c("Open Access", "Pelagics-Focused", "Sustainable")) +
       theme_void() + theme(legend.text = element_text(size = 12), legend.title = element_text(size = 14),
@@ -571,6 +570,8 @@ server <- function(input, output, session) {
       geom_text(data=subset(opt_subset()[1:3,], percent(round(F_scen, 2)) != "0%" & percent(round(F_scen, 2)) != "0.0%"),
                 aes(label = percent(signif(F_scen, 2))), position = position_stack(vjust = 0.5))+
       coord_polar(theta = "y") 
+    
+    return(p)
   })
   
   opt_clim <- reactive({
@@ -600,11 +601,9 @@ server <- function(input, output, session) {
       coord_polar(theta = "y") 
     
     return(p)
-  
   })
   
   opt_dec <- reactive({	
-    
     # format legend labels
     dec_labels <- gsub("_", "-", opt_subset()$Dec_labels)
     
@@ -619,7 +618,6 @@ server <- function(input, output, session) {
       coord_polar(theta = "y") 
     
     return (p)
-  
   })
   
   # hide pie charts

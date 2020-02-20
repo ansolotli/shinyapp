@@ -191,7 +191,7 @@ body <- dashboardBody(
     )
     ,
     tabItem("optimize",
-            titlePanel("What would be your preferred outcome in the future Central Baltic Sea?"),
+            titlePanel("What would be your preferred outcome in the future?"),
             
             fluidRow(
               column(width = 12,
