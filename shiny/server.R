@@ -476,6 +476,7 @@ server <- function(input, output, session) {
     return(a)
   })
   
+  # generate dynamic text
   output$opt_scens <- renderUI({
     
     # extract row with highest probability fishery scenario
@@ -549,7 +550,7 @@ server <- function(input, output, session) {
     
     j <- "The decision support system models the state of the Central Baltic Sea in four decades. With the fishery and nutrient loading policy, and climate scenarios outlined above, you would most likely reach your goal in the decade "
     k <- " ("  
-    l <- ")."
+    l <- "). <br><br> If you want to see the probability distribution of all the scenario options under different profit and environmental status choices, take a look below."
   
     section4 <- HTML(paste0(j, "<b>", dec_s, "</b>", k, "<b>", dec_p, "</b>", l))
   
@@ -557,11 +558,13 @@ server <- function(input, output, session) {
     box(wholeThing, width = 12, solidHeader = TRUE)
   })
   
+  
+  # draw pie charts
   opt_fish <- reactive({	
     
     ggplot(opt_subset()[1:3,], aes(x = 1, y = F_scen, fill = F_labels)) +	
       ggtitle("Fishery Policy Scenario") +
-      scale_fill_discrete("Fishery policies", labels = c("Open Access", "Pelagics-Focused", "Sustainable")) +
+      scale_fill_discrete("Fishery policy", labels = c("Open Access", "Pelagics-Focused", "Sustainable")) +
       theme_void() + theme(legend.text = element_text(size = 12), legend.title = element_text(size = 14),
                            title = element_text(size = 14)) +
       geom_bar(stat = "identity", color = "white")	 +
@@ -574,7 +577,7 @@ server <- function(input, output, session) {
     p <- ggplot(opt_subset()[1:2,], aes(x = 1, y = Clim_scen, fill = Clim_labels)) +
       scale_y_continuous(limits=c(0,1), breaks = scales::pretty_breaks(n = 5)) + 	
       ggtitle("Climate Scenario") +	
-      scale_fill_discrete("Climate scenarios") +
+      scale_fill_discrete("Climate scenario") +
       theme_void() + theme(legend.text = element_text(size = 12), legend.title = element_text(size = 14),
                            title = element_text(size = 14)) +
       geom_bar(stat = "identity", color = "white")	 +
@@ -586,8 +589,7 @@ server <- function(input, output, session) {
   })
   
   opt_nutr <- reactive({
-    p <- ggplot(opt_subset()[1:2,], aes(x = 1, y = Nutr_scen, fill = Nutr_labels)) +	
-      scale_y_continuous(limits=c(0,1), breaks = scales::pretty_breaks(n = 5)) + 	
+    p <- ggplot(opt_subset()[1:2,], aes(x = 1, y = Nutr_scen, fill = Nutr_labels)) + 	
       ggtitle("Nutrient Loading Policy Scenario") +	
       scale_fill_discrete("Nutrient loading policy") +
       theme_void() + theme(legend.text = element_text(size = 12), legend.title = element_text(size = 14),
@@ -602,10 +604,13 @@ server <- function(input, output, session) {
   })
   
   opt_dec <- reactive({	
-    p <- ggplot(opt_subset(), aes(x = 1, y = Decade, fill = Dec_labels)) +	
-      scale_y_continuous(limits=c(0,1), breaks = scales::pretty_breaks(n = 5)) + 	
+    
+    # format legend labels
+    dec_labels <- gsub("_", "-", opt_subset()$Dec_labels)
+    
+    p <- ggplot(opt_subset(), aes(x = 1, y = Decade, fill = Dec_labels)) + 	
       ggtitle("Decade") +
-      scale_fill_discrete("Decade") +
+      scale_fill_discrete("Decade", labels = dec_labels) +
       theme_void() + theme(legend.text = element_text(size = 12), legend.title = element_text(size = 14),
                            title = element_text(size = 14)) +
       geom_bar(stat = "identity", color = "white")	 +
@@ -617,14 +622,25 @@ server <- function(input, output, session) {
   
   })
   
-  output$opt_plots <- renderPlot({	
+  # hide pie charts
+  observeEvent(input$opt_link, {
+    toggle("opt_plots")
     
-    p1 <- opt_fish()
-    p2 <- opt_nutr()
-    p3 <- opt_clim()
-    p4 <- opt_dec()
-    wrap_plots(p1, p2, p3, p4)
-  
+    output$opt_plots <- renderPlot({	
+      p1 <- opt_fish()
+      p2 <- opt_nutr()
+      p3 <- opt_clim()
+      p4 <- opt_dec()
+      wrap_plots(p1, p2, p3, p4)
+    })
+    
+    if (input$opt_link %% 2 == 1) {
+      newlabel <- "Hide pies."
+    } else {
+      newlabel <- "Take a look at the distributions."
+    }
+    updateActionButton(session, "opt_link", label = newlabel)
+    
   })
  
 }

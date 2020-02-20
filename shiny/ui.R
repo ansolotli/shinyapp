@@ -252,7 +252,10 @@ body <- dashboardBody(
             fluidRow(
               column(width = 12,
                      htmlOutput("opt_scens"),
-                     plotOutput("opt_plots")
+                     actionLink("opt_link", "Take a look at the distributions."),
+                     hidden(
+                       plotOutput("opt_plots")
+                     )
             )
     ))),
     # CSS
