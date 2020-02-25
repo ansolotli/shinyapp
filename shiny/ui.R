@@ -139,7 +139,7 @@ body <- dashboardBody(
                 id = "aboutBoxes",
                 tabPanel("Introduction",
                          uiOutput("about_shortly"),
-                         actionLink("aboutLink", "Read more"),
+                         actionLink("about_link", "Read more about the project."),
                          hidden(
                            uiOutput("about_indepth")
                          )

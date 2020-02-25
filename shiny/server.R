@@ -15,19 +15,19 @@ server <- function(input, output, session) {
     includeMarkdown("data/about_intro_short.md")
   })
   
-  observeEvent(input$aboutLink, {
+  observeEvent(input$about_link, {
                # use shinyjs toggle to show and/or hide outputs
                toggle("about_indepth")
                output$about_indepth <- renderUI({
                  includeMarkdown("data/about_intro_long.md")
                })
                
-               if (input$aboutLink %% 2 == 1) {
-                 newlabel <- "Read less"
+               if (input$about_link %% 2 == 1) {
+                 newlabel <- "Hide text."
                } else {
-                 newlabel <- "Read more"
+                 newlabel <- "Read more about the project."
                }
-               updateActionButton(session, "aboutLink", label = newlabel)
+               updateActionButton(session, "about_link", label = newlabel)
   })
   
   output$modelText <- renderUI({
