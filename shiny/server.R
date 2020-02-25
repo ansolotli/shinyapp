@@ -1,7 +1,7 @@
 
 # Load data
-datBio <- read.csv("data/ewe_bio_results_corrected0412.csv", row.names = NULL, sep = ";")
-datCth <- read.csv("data/ewe_catch_results_corrected0412.csv", row.names = NULL, sep = ";")
+datBio <- read.csv("data/ewe_bio_results_SD_corrected_2502.csv", row.names = NULL, sep = ";")
+datCth <- read.csv("data/ewe_catch_results_SD_corrected_2502.csv", row.names = NULL, sep = ";")
 datNov <- read.csv("data/novelty_incl_total.csv", row.names = NULL, sep = ";", stringsAsFactors = FALSE)
 datOpt <- read.csv("data/optimize_2401.csv", row.names = NULL, sep = ";")
 
@@ -94,7 +94,7 @@ server <- function(input, output, session) {
       if("plotCod" %in% input$bioVars){
         
         ggplot(bio_subset(), aes(x = Year, y = Cod)) +
-          scale_y_continuous(limits=c(0,250), breaks = scales::pretty_breaks(n = 5)) +
+          scale_y_continuous(limits=c(0,275), breaks = scales::pretty_breaks(n = 5)) +
           scale_x_continuous(limits=c(2004,2096), breaks = scales::pretty_breaks(n = 5),
                              # increases expansion constant so that all the tick labels fit
                              expand = c(0.02, 0)) +
@@ -194,7 +194,7 @@ server <- function(input, output, session) {
       if("plotZoo" %in% input$bioVars){
         
         ggplot(bio_subset(), aes(x = Year, y = Zooplankton)) +
-          scale_y_continuous(limits=c(0,12.5), breaks = scales::pretty_breaks(n = 5)) +
+          scale_y_continuous(limits=c(0,13), breaks = scales::pretty_breaks(n = 5)) +
           scale_x_continuous(limits=c(2004,2096), breaks = scales::pretty_breaks(n = 5),
                              expand = c(0.02, 0)) +
           ggtitle("Biomass of zooplankton") +
@@ -265,7 +265,7 @@ server <- function(input, output, session) {
       if("plotCodCatch" %in% input$catchVars){
         
         ggplot(cth_subset(), aes(x = Year, y = CodCatch)) +
-          scale_y_continuous(limits=c(0,80), breaks = scales::pretty_breaks(n = 5)) +
+          scale_y_continuous(limits=c(0,85), breaks = scales::pretty_breaks(n = 5)) +
           scale_x_continuous(limits=c(2004,2096), breaks = scales::pretty_breaks(n = 5),
                              # increases expansion constant so that all the tick labels fit
                              expand = c(0.02, 0)) +
