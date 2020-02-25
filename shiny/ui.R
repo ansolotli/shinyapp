@@ -149,9 +149,10 @@ body <- dashboardBody(
                          fluidRow(
                            box(solidHeader = TRUE, width = 12, imageOutput("model", height = "auto"))
                          ),
-                         actionLink("modelLink", "Read more"),
+                         uiOutput("modelText2"),
+                         actionLink("model_link", "Read more about the decision support system."),
                          hidden(
-                           uiOutput("modelText2")
+                           uiOutput("modelText3")
                          )
                 ),
                 tabPanel("Map of the modelled area",

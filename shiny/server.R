@@ -19,7 +19,7 @@ server <- function(input, output, session) {
                # use shinyjs toggle to show and/or hide outputs
                toggle("about_indepth")
                output$about_indepth <- renderUI({
-                 includeMarkdown("data/about_intro_long.md")
+                 includeMarkdown("data/about_intro_hidden.md")
                })
                
                if (input$about_link %% 2 == 1) {
@@ -34,18 +34,22 @@ server <- function(input, output, session) {
     includeMarkdown("data/model_info.md")
   })
   
-  observeEvent(input$modelLink, {
-              toggle("modelText2")
-              output$modelText2 <- renderUI({
-                includeMarkdown("data/model_info2.md")
+  output$modelText2 <- renderUI({
+    includeMarkdown("data/model_info2.md")
+  })
+  
+  observeEvent(input$model_link, {
+              toggle("modelText3")
+              output$modelText3 <- renderUI({
+                includeMarkdown("data/model_info_hidden.md")
               })
     
-             if (input$modelLink %% 2 == 1) {
-                newlabel <- "Read less"
+             if (input$model_link %% 2 == 1) {
+                newlabel <- "Hide text."
              } else {
-                newlabel <- "Read more"
+                newlabel <- "Read more about the decision support system."
              }
-             updateActionButton(session, "modelLink", label = newlabel)
+             updateActionButton(session, "model_link", label = newlabel)
     
   })
   
@@ -54,7 +58,7 @@ server <- function(input, output, session) {
   })
   
   output$model <- renderImage({
-    return(list(src = "data/model.png", contentType = "image/png"))
+    return(list(src = "data/dss_circled.png", contentType = "image/png", width = 700))
   }, deleteFile = FALSE)
   
   output$map <- renderImage({
