@@ -578,7 +578,7 @@ server <- function(input, output, session) {
     p <- ggplot(opt_subset()[1:2,], aes(x = 1, y = Clim_scen, fill = Clim_labels)) +
       scale_y_continuous(limits=c(0,1), breaks = scales::pretty_breaks(n = 5)) + 	
       ggtitle("Climate Scenario") +	
-      scale_fill_discrete("Climate scenario") +
+      scale_fill_discrete("Climate scenario", labels = c("RCP 4.5", "RCP 8.5")) +
       theme_void() + theme(legend.text = element_text(size = 12), legend.title = element_text(size = 14),
                            title = element_text(size = 14)) +
       geom_bar(stat = "identity", color = "white")	 +
@@ -592,7 +592,7 @@ server <- function(input, output, session) {
   opt_nutr <- reactive({
     p <- ggplot(opt_subset()[1:2,], aes(x = 1, y = Nutr_scen, fill = Nutr_labels)) + 	
       ggtitle("Nutrient Loading Policy Scenario") +	
-      scale_fill_discrete("Nutrient loading policy") +
+      scale_fill_discrete("Nutrient loading policy", labels = c("Baltic Sea Action Plan", "Reference conditions")) +
       theme_void() + theme(legend.text = element_text(size = 12), legend.title = element_text(size = 14),
                            title = element_text(size = 14)) +
       geom_bar(stat = "identity", color = "white")	 +
