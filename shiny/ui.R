@@ -173,7 +173,13 @@ body <- dashboardBody(
     tabItem("predicted",
             titlePanel("Explore the predicted biomasses and catches in different management scenarios"),
             fluidRow(
-              uiOutput("timeseries_info")
+              box(id = "timeseries_box",
+                uiOutput("timeseries_info"),
+                actionLink("time_series_link", "Show details."),
+                hidden(
+                  uiOutput("timeseries_info2")
+                ),
+                solidHeader = TRUE, width = 12) 
             ),
             fluidRow(
               splitLayout(cellWidths = c("50%", "50%"), 
@@ -187,10 +193,8 @@ body <- dashboardBody(
               column(width = 12,
                      uiOutput('novel_info'),
                      fluidRow(
-                       column(width = 12,
                           box(plotOutput("novel_plot", height = 300), width = 12, solidHeader = TRUE),
                           uiOutput("novel_plot_total")
-                       )
                      ))
             )
     )

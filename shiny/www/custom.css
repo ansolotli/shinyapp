@@ -69,7 +69,11 @@ h2 {
 	font-size: 15px;
 }
 
-#timeseries_info .box {
+#timeseries_info2 {
+	font-size: 15px;
+}
+
+#timeseries_box {
 	background: #d9d9d9;
 	padding: 10px;
 }

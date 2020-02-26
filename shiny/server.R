@@ -81,7 +81,21 @@ server <- function(input, output, session) {
   ##### "PREDICTED TIME SERIES" TAB ######
   
   output$timeseries_info <- renderUI({
-    box(includeMarkdown("data/timeseries_info.md"), width = 12, solidHeader = TRUE)
+    includeMarkdown("data/timeseries_info.md")
+  })
+  
+  observeEvent(input$time_series_link, {
+    toggle("timeseries_info2")
+    output$timeseries_info2 <- renderUI({
+      includeMarkdown("data/timeseries_info_hidden.md")
+    })
+    
+    if (input$time_series_link %% 2 == 1) {
+      newlabel <- "Hide details."
+    } else {
+      newlabel <- "Show details."
+    }
+    updateActionButton(session, "time_series_link", label = newlabel)
   })
   
   ## BIOMASS VARIABLES
