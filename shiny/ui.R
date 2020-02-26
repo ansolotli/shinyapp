@@ -110,9 +110,9 @@ sidebar <- dashboardSidebar(
                                content = "Cod spawns in the open sea and the eggs drift in the water. The <b>reproductive volume</b> indicates changes in the size of the water layer where salinity is high enough and thereby also the density of the water (weight of water per its unit volume) is high enough to prevent the eggs from sinking in the oxygen deficient deep water. Eutrophication and less saline water inflow to the Baltic Sea via the Danish Straits tend to decrease the reproductive volume of cod. <br><br> The <b>temperature</b> variables present the water temperature in the surface layer (0-50m for March-May temperatures and 0-60m for August temperatures) of the water column during spring months and in the summer. <br><br> <b>Inverse hypoxic area</b> is the inverse of the deep water area that has gone hypoxic i.e. this variable describes the proportion of the study area where oxygen concentration in the deep water is above 2 mg/l."
                                , placement = "right", trigger = "hover", options = list(container = "body")),
                         
-                        popify(checkboxInput(inputId = "novelTotal", 
+                        popify(checkboxInput(inputId = "novelTotal",
                                       label = "Total abiotic novelty", value = TRUE),
-                               title = "Total abiotic novelty", 
+                               title = "Total abiotic novelty",
                                content = "Total abiotic novelty is the sum of other novelty variables (five water quality variables, each scaled between 0 and 1, 0 denoting values falling in the 95% confidence interval from observational data, and 1 denoting the extreme values of the model predictions till the end of the 21st century) and describes the total novelty expected to occur in the Central Baltic Sea in the current century."
                                , placement = "right", trigger = "hover", options = list(container = "body"))
                  )
@@ -186,8 +186,12 @@ body <- dashboardBody(
             fluidRow(
               column(width = 12,
                      uiOutput('novel_info'),
-                     uiOutput("novel_plot_render"),
-                     uiOutput("novel_plot_total"))
+                     fluidRow(
+                       column(width = 12,
+                          box(plotOutput("novel_plot", height = 300), width = 12, solidHeader = TRUE),
+                          uiOutput("novel_plot_total")
+                       )
+                     ))
             )
     )
     ,

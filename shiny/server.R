@@ -435,18 +435,11 @@ server <- function(input, output, session) {
                                  legend.text=element_text(size=11),
                                  legend.position = c(0.15,0.75)
         ) +
-        geom_line(stat = "identity", size = 1) +
-        scale_color_discrete(name="Variables",
-                           labels=c("Cod reproductive volume","Spring temperature","August temperature","Inverse hypoxic area"))
+        geom_line(stat = "identity", size = 0.5) + 
+        scale_colour_manual(name="Variables",
+                            labels=c("codRV" = "Cod reproductive volume","T_050_MarchMay" = "Spring temperature","Aug060mT" = "August temperature","notHypoxicA" = "Inverse hypoxic area"),
+                            values = c("codRV" = "navyblue", "T_050_MarchMay" = "darkgreen", "Aug060mT" = "darkmagenta", "notHypoxicA" = "orangered3"))
     })
-
-  output$novel_plot_render <- renderUI(
-    {
-      fluidRow(
-        box(plotOutput("novel_plot", height = 300), width = 12, solidHeader = TRUE)
-      )
-    }
-  )
   
   output$plotTotal <- renderPlot(
     {
@@ -465,17 +458,15 @@ server <- function(input, output, session) {
                            axis.title.x = element_text(size = 13),
                            axis.text.x = element_text(size = 11)
         ) +
-        geom_line(stat = "identity", size = 1)
+        geom_line(stat = "identity", size = 0.5)
     }
   )
-  
+
   output$novel_plot_total <- renderUI({
     # only make room for this plot in the app if it's selected
     if(input$novelTotal == TRUE) {
       # wrapping elements inside a fluidRow function extends the white space of the main panel accordingly
-      fluidRow(
           box(plotOutput("plotTotal", height = 300), width = 12, solidHeader = TRUE)
-        )
     }
   })
   
