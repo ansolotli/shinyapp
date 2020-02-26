@@ -121,6 +121,8 @@ server <- function(input, output, session) {
           ) +
           geom_line(stat = "identity") +
           geom_ribbon(aes(ymin = bio_subset()[,"Cod"] - bio_subset()[,"CodSD"], ymax = bio_subset()[,"Cod"] + bio_subset()[,"CodSD"]), 
+                      linetype = 2, alpha = 0.3) +
+          geom_ribbon(aes(ymin = bio_subset()[,"Cod"] - bio_subset()[,"CodSD_95"], ymax = bio_subset()[,"Cod"] + bio_subset()[,"CodSD_95"]), 
                       linetype = 2, alpha = 0.2)
       }
     }
@@ -154,6 +156,8 @@ server <- function(input, output, session) {
           ) +
           geom_line(stat = "identity") +
           geom_ribbon(aes(ymin = bio_subset()[,"Herring"] - bio_subset()[,"HerringSD"], ymax = bio_subset()[,"Herring"] + bio_subset()[,"HerringSD"]), 
+                      linetype = 2, alpha = 0.3) +
+          geom_ribbon(aes(ymin = bio_subset()[,"Herring"] - bio_subset()[,"HerringSD_95"], ymax = bio_subset()[,"Herring"] + bio_subset()[,"HerringSD_95"]), 
                       linetype = 2, alpha = 0.2)
       }
     }
@@ -187,6 +191,8 @@ server <- function(input, output, session) {
           ) +
           geom_line(stat = "identity") +
           geom_ribbon(aes(ymin = bio_subset()[,"Sprat"] - bio_subset()[,"SpratDS"], ymax = bio_subset()[,"Sprat"] + bio_subset()[,"SpratDS"]), 
+                      linetype = 2, alpha = 0.3) +
+          geom_ribbon(aes(ymin = bio_subset()[,"Sprat"] - bio_subset()[,"SpratDS_95"], ymax = bio_subset()[,"Sprat"] + bio_subset()[,"SpratDS_95"]), 
                       linetype = 2, alpha = 0.2)
       }
     }
@@ -290,7 +296,9 @@ server <- function(input, output, session) {
           ) +
           geom_line(stat = "identity") +
           geom_ribbon(aes(ymin = cth_subset()[,"CodCatch"] - cth_subset()[,"CodSD"], ymax = cth_subset()[,"CodCatch"] + cth_subset()[,"CodSD"]), 
-                      linetype = 2, alpha = 0.2)
+                      linetype = 2, alpha = 0.3) +
+          geom_ribbon(aes(ymin = cth_subset()[,"CodCatch"] - cth_subset()[,"CodSD_95"], ymax = cth_subset()[,"CodCatch"] + cth_subset()[,"CodSD_95"]), 
+                      linetype = 2, alpha = 0.2) 
       }
     }
   )  
@@ -322,6 +330,8 @@ server <- function(input, output, session) {
           ) +
           geom_line(stat = "identity") +
           geom_ribbon(aes(ymin = cth_subset()[,"HerringCatch"] - cth_subset()[,"HerringSD"], ymax = cth_subset()[,"HerringCatch"] + cth_subset()[,"HerringSD"]), 
+                      linetype = 2, alpha = 0.3) +
+          geom_ribbon(aes(ymin = cth_subset()[,"HerringCatch"] - cth_subset()[,"HerringSD_95"], ymax = cth_subset()[,"HerringCatch"] + cth_subset()[,"HerringSD_95"]), 
                       linetype = 2, alpha = 0.2)
       }
     }
@@ -354,6 +364,8 @@ server <- function(input, output, session) {
           ) +
           geom_line(stat = "identity") +
           geom_ribbon(aes(ymin = cth_subset()[,"SpratCatch"] - cth_subset()[,"SpratDS"], ymax = cth_subset()[,"SpratCatch"] + cth_subset()[,"SpratDS"]), 
+                      linetype = 2, alpha = 0.3) +
+          geom_ribbon(aes(ymin = cth_subset()[,"SpratCatch"] - cth_subset()[,"SpratDS_95"], ymax = cth_subset()[,"SpratCatch"] + cth_subset()[,"SpratDS_95"]), 
                       linetype = 2, alpha = 0.2)
       }
     }
