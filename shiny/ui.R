@@ -39,17 +39,17 @@ sidebar <- dashboardSidebar(
                            choices = c("Sustainable" = "Sus", "Pelagics-Focused" = "Pel", "Open Access" = "OA"), 
                            selected = "Sus"
                ), "Fishery policies", 
-               content = "Sustainable fishery policy explores if this option would provide healthy states of all three major fish stocks (i.e. cod, herring and sprat) as well as support a healthy and functioning food web, therefore providing a basis for developing a sustainable exploitation of the Baltic Sea. <br><br> Pelagics-Focused scenario explores the option that given the climate change and nutrient load scenarios, prioritisation of herring and sprat over cod would be the preferred fisheries management strategy. <br><br> Open access scenario enables exploring the impacts of largely unregulated fisheries management on the status of the fish stocks, the food web and the economic outcomes from fisheries in the future Baltic Sea."
+               content = "<b>Sustainable fishery policy</b> assumes healthy states of all three major fish stocks (i.e. cod, herring and sprat) as well as a healthy and functioning food web, therefore providing a basis for developing a sustainable exploitation of the Baltic Sea. <br><br> <b>Pelagics-Focused</b> scenario explores the option where, given the climate change and nutrient loading scenarios, the preferred fisheries management strategy would be prioritisation of herring and sprat over cod. <br><br> <b>Open access</b> scenario enables exploring the impacts of largely unregulated fisheries management on the status of the fish stocks, the food web and the economic outcomes from fisheries in the future Baltic Sea."
                , placement = "right", trigger = "hover", 
                #increase the size of the popover according to the length of content
                options = list(container = "body")),
                
                popify(selectInput(inputId = 'Nutr_scen', 
                            label = "Nutrient Loading Policy",
-                           choices = c("Baltic Sea Action Plan" = "BSAP", "Average 1995-2002" = "Ref"),
+                           choices = c("Baltic Sea Action Plan" = "BSAP", "Reference conditions" = "Ref"),
                            selected = "BSAP"
                ), "Nutrient loading policies", 
-               content = "Nutrient loads were modelled both according to the higher reference conditions between 1995 and 2002 and the lower nutrient loads outlined in the Baltic Sea Action Plan programme by HELCOM (Baltic Marine Environment Protection Commission – Helsinki Commission)."
+               content = "Nutrient loads were modelled both according to the lower nutrient loads outlined in the <b>Baltic Sea Action Plan</b> (BSAP) by HELCOM (Baltic Marine Environment Protection Commission – Helsinki Commission), and the higher reference conditions. <br><br> The <b>reference conditions</b> are based on the HELCOM assessment of the average nutrient loads between 1995 and 2002, and correspond with the current level of nutrient loading in the Baltic Sea."
                , placement = "right", trigger = "hover", options = list(container = "body")),
                
                popify(selectInput(inputId = 'Climate', 
@@ -57,7 +57,7 @@ sidebar <- dashboardSidebar(
                            choices = c("RCP4.5", "RCP8.5"), 
                            selected = "RCP4.5"
                ), "Climate scenarios", 
-               content = "Climate scenarios follow Representative Concentration Pathways (RCP) 4.5 and 8.5 according to the ICPP 2014. These describe the greenhouse gas concentrations in the atmosphere, with higher concentrations resulting in higher warming effect on earth."
+               content = "The two climate scenarios follow Representative Concentration Pathways (RCP) <b>4.5</b> and <b>8.5</b>, according to the fifth Assessment Report of the Intergovernmental Panel on Climate Change (IPCC) in 2014. <br><br> These pathways describe the greenhouse gas concentrations in the atmosphere, with higher concentrations resulting in higher warming effects on earth."
                , placement = "right", trigger = "hover", options = list(container = "body")),
                
                # Create the two colums of checkbox groups (biomass and catch)
@@ -83,17 +83,21 @@ sidebar <- dashboardSidebar(
     convertMenuItem(
       menuItem("Novelty", tabName = "novelty",
                # Create the dropdowns of scenario options
-               selectInput(inputId = 'Nutr_scen_nov', 
-                           label = "Nutrient Loading Policy",
-                           choices = c("Baltic Sea Action Plan" = "BSAP", "Average 1995-2002" = "Ref"),
-                           selected = "BSAP"
-               ),
+               popify(selectInput(inputId = 'Nutr_scen_nov', 
+                                  label = "Nutrient Loading Policy",
+                                  choices = c("Baltic Sea Action Plan" = "BSAP", "Reference conditions" = "Ref"),
+                                  selected = "BSAP"
+               ), "Nutrient loading policies", 
+               content = "Nutrient loads were modelled both according to the lower nutrient loads outlined in the <b>Baltic Sea Action Plan</b> (BSAP) by HELCOM (Baltic Marine Environment Protection Commission – Helsinki Commission), and the higher reference conditions. <br><br> The <b>reference conditions</b> are based on the HELCOM assessment of the average nutrient loads between 1995 and 2002, and correspond with the current level of nutrient loading in the Baltic Sea."
+               , placement = "right", trigger = "hover", options = list(container = "body")),
                
-               selectInput(inputId = 'Climate_nov', 
-                           label = "Climate Change Scenario - Representative Concentration Pathways",
-                           choices = c("RCP4.5", "RCP8.5"), 
-                           selected = "RCP4.5"
-               ),
+               popify(selectInput(inputId = 'Climate_nov', 
+                                  label = "Climate Change Scenario - Representative Concentration Pathways",
+                                  choices = c("RCP4.5", "RCP8.5"), 
+                                  selected = "RCP4.5"
+               ), "Climate scenarios", 
+               content = "The two climate scenarios follow Representative Concentration Pathways (RCP) <b>4.5</b> and <b>8.5</b>, according to the fifth Assessment Report of the Intergovernmental Panel on Climate Change (IPCC) in 2014. <br><br> These pathways describe the greenhouse gas concentrations in the atmosphere, with higher concentrations resulting in higher warming effects on earth."
+               , placement = "right", trigger = "hover", options = list(container = "body")),
                
                # Create the column of checkbox groups (totalNov, codRV, temp_MarchMay050, temp_Aug060, notHypoxic)
                fluidRow(
@@ -107,13 +111,13 @@ sidebar <- dashboardSidebar(
                                            #choiceValues = list("plotRv", "plotTemp1", "plotTemp2", "plotHyp"),
                                            selected = "codRV"), 
                                title = "Novelty variables", 
-                               content = "Cod spawns in the open sea and the eggs drift in the water. The <b>reproductive volume</b> indicates changes in the size of the water layer where salinity is high enough and thereby also the density of the water (weight of water per its unit volume) is high enough to prevent the eggs from sinking in the oxygen deficient deep water. Eutrophication and less saline water inflow to the Baltic Sea via the Danish Straits tend to decrease the reproductive volume of cod. <br><br> The <b>temperature</b> variables present the water temperature in the surface layer (0-50m for March-May temperatures and 0-60m for August temperatures) of the water column during spring months and in the summer. <br><br> <b>Inverse hypoxic area</b> is the inverse of the deep water area that has gone hypoxic i.e. this variable describes the proportion of the study area where oxygen concentration in the deep water is above 2 mg/l."
+                               content = "Cod spawns in the open sea and the eggs drift in the water. The <b>reproductive volume</b> indicates changes in the size of the water layer where salinity is high enough and thereby also the density of the water (weight of water per its unit volume) is high enough to prevent the eggs from sinking into the oxygen deficient deep water. <br><br> Eutrophication and less saline water inflow to the Baltic Sea via the Danish Straits tend to decrease the reproductive volume of cod. <br><br> The <b>temperature</b> variables describe the water temperature in the surface layer (0-50m for March-May temperatures and 0-60m for August temperatures) of the water column during spring months and in the summer. <br><br> <b>Inverse hypoxic area</b> is the inverse of the deep water area that has gone hypoxic i.e. this variable describes the proportion of the study area where oxygen concentration in the deep water is above 2 mg/l."
                                , placement = "right", trigger = "hover", options = list(container = "body")),
                         
                         popify(checkboxInput(inputId = "novelTotal",
                                       label = "Total abiotic novelty", value = TRUE),
                                title = "Total abiotic novelty",
-                               content = "Total abiotic novelty is the sum of other novelty variables (five water quality variables, each scaled between 0 and 1, 0 denoting values falling in the 95% confidence interval from observational data, and 1 denoting the extreme values of the model predictions till the end of the 21st century) and describes the total novelty expected to occur in the Central Baltic Sea in the current century."
+                               content = "<b>Total abiotic novelty</b> is the sum of other novelty variables and describes the total novelty expected to occur in the Central Baltic Sea in the current century. <br><br>     The five other novelty variables were each scaled between 0 and 1; 0 denoting values falling in the 95% confidence interval from observational data, and 1 denoting the extreme values of the model predictions till the end of the 21st century."
                                , placement = "right", trigger = "hover", options = list(container = "body"))
                  )
                )
@@ -200,7 +204,7 @@ body <- dashboardBody(
     )
     ,
     tabItem("optimize",
-            titlePanel("What would be your preferred outcome in the future?"),
+            titlePanel("How to balance profit and good environmental status?"),
             
             fluidRow(
               column(width = 12,
@@ -221,7 +225,7 @@ body <- dashboardBody(
                                          choices = c("Yes" = "Yes", "No" = "No"),
                                          selected = "Yes"
                      ), title = "Expert knowledge", 
-                     content = "Ecological novelty denotes unprecedented, human-mediated changes at different ecological levels. The rapid changes in climate and in other anthropogenic pressures may result in novel species communities and ecosystems without any historical analogue. <br><br> This is difficult to predict with models as novel conditions can not be calibrated against historical observations. Bringing expert knowledge about this uncertainty on top of modelling could increase the certainty of predictions."
+                     content = "The decision support system includes studies on ecological novelty which denotes unprecedented, human-mediated changes at different ecological levels. The rapid changes in climate and in other anthropogenic pressures may result in novel species communities and ecosystems without any historical analogue. <br><br> Novelty and its effect on a system are difficult to predict with models as novel conditions can not be calibrated against historical observations. <br><br> Adding expert scientific knowledge about this uncertainty on top of the modelling can increase the certainty of modelled predictions."
                      , placement = "right", trigger = "hover", options = list(container = "body"))
                      
                      ),
@@ -232,8 +236,8 @@ body <- dashboardBody(
                                         choices = c("All stocks above the ref. point" = "All above", "One stock below the ref. point" = "One below",
                                                     "Two stocks below the ref. point" = "Two below", "All stocks below the ref. point" = "All below"),
                                         selected = "All above"
-                     ), title = "Environmental status of fish stocks", 
-                     content = "The spawning-stock biomass of the three major fish species (i.e. cod, herring and sprat) in relation to the reference point describes the expected status of these fish stocks. The scale ranges from all three species being above the reference point limit to none of the species faring well."
+                     ), title = "Status of fish stocks", 
+                     content = "The spawning-stock biomass of the three major fish species (i.e. cod, herring and sprat) in relation to the reference point describes the expected status of these fish stocks. The stocks are in good condition if their spawning-stock biomass exceeds the reference point. <br><br> The scale ranges from all three fish species being above the reference point limit to none of the species faring well."
                      , placement = "right", trigger = "hover", options = list(container = "body")),
                      
                      popify(radioButtons(inputId = 'Ref_point',
@@ -241,7 +245,7 @@ body <- dashboardBody(
                                          choices = c("Blim" = "Blim", "B MSY trigger" = "B MSY"),
                                          selected = "Blim"
                      ), title = "Reference point", 
-                     content = "Blim is the reference point describing the limit below which there is a high risk of reduced recruitment. <br><br> B MSY trigger (or BMSYtrigger) is considered as the lower bound of spawning–stock biomass fluctuation below which fishing needs to be reduced to allow a fish stock to rebuild to levels capable of producing maximum sustainable yield (MSY)."
+                     content = "Reference points are indexes applied in the regulation of fisheries. They are defined by the International Council for the Exploration of the Sea (ICES), and describe the status of the fish stocks. <br><br> <b>Blim</b> is the reference point describing the limit below which there is a high risk of reduced recruitment. <br><br> <b>B MSY trigger</b> (or MSYBtrigger) is considered to be the lower bound of spawning–stock biomass fluctuation below which fishing needs to be reduced to allow a fish stock to rebuild to levels capable of producing maximum sustainable yield (MSY)."
                      , placement = "right", trigger = "hover", options = list(container = "body"))
                      
                      ),
@@ -251,8 +255,8 @@ body <- dashboardBody(
                                         label = "Status of water quality",
                                         choices = c("Above GES" = "GES", "Below GES" = "Sub-GES"),
                                         selected = "Above"
-                     ), title = "Environmental status of water quality", 
-                     content = "The indicators of water quality comprise of the average concentrations of nitrogen, phosphorus and chlorophyll <i>a</i>. Low concentrations suggest high probability of reaching the Good Environmental Status (GES) as defined by HELCOM (Baltic Marine Environment Protection Commission – Helsinki Commission)."
+                     ), title = "Status of water quality", 
+                     content = "The indicators of water quality comprise of the average concentrations of nitrogen, phosphorus and chlorophyll <i>a</i>. <br><br> Low concentrations suggest high probability of reaching the Good Environmental Status (GES) as defined by HELCOM (Baltic Marine Environment Protection Commission – Helsinki Commission) whereas high concentrations indicate increased eutrophication."
                      , placement = "below", trigger = "hover", options = list(container = "body"))
                      
                      )
