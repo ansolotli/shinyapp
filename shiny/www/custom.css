@@ -41,6 +41,16 @@ h2 {
 	font-size: 15px;
 }
 
+#about_shortly .box {
+	background: #d9d9d9;
+	padding: 10px;
+}
+
+#about_indepth .box {
+	background: #d9d9d9;
+	padding: 10px;
+}
+
 #modelText {
 	font-size: 15px;
 }
@@ -53,8 +63,28 @@ h2 {
 	font-size: 15px;
 }
 
+#modelText .box {
+	background: #d9d9d9;
+	padding: 10px;
+}
+
+#modelText2 .box {
+	background: #d9d9d9;
+	padding: 10px;
+}
+
+#modelText3 .box {
+	background: #d9d9d9;
+	padding: 10px;
+}
+
 #mapText {
 	font-size: 15px;
+}
+
+#mapText .box {
+	background: #d9d9d9;
+	padding: 10px;
 }
 
 #timeseries_info {

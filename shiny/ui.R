@@ -143,7 +143,7 @@ body <- dashboardBody(
                 id = "aboutBoxes",
                 tabPanel("Introduction",
                          uiOutput("about_shortly"),
-                         actionLink("about_link", "Read more about the project."),
+                         box(actionLink("about_link", "Read more about the project."), width = 12, solidHeader = TRUE),
                          hidden(
                            uiOutput("about_indepth")
                          )
@@ -154,7 +154,7 @@ body <- dashboardBody(
                            box(solidHeader = TRUE, width = 12, imageOutput("model", height = "auto"))
                          ),
                          uiOutput("modelText2"),
-                         actionLink("model_link", "Read more about the decision support system."),
+                         box(actionLink("model_link", "Read more about the decision support system."), width = 12, solidHeader = TRUE),
                          hidden(
                            uiOutput("modelText3")
                          )

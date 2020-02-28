@@ -12,14 +12,14 @@ server <- function(input, output, session) {
   ##### "ABOUT" TAB #####
   
   output$about_shortly <- renderUI({
-    includeMarkdown("data/about_intro_short.md")
+    box(includeMarkdown("data/about_intro_short.md"), width = 12, solidHeader = TRUE)
   })
   
   observeEvent(input$about_link, {
                # use shinyjs toggle to show and/or hide outputs
                toggle("about_indepth")
                output$about_indepth <- renderUI({
-                 includeMarkdown("data/about_intro_hidden.md")
+                 box(includeMarkdown("data/about_intro_hidden.md"), width = 12, solidHeader = TRUE)
                })
                
                if (input$about_link %% 2 == 1) {
@@ -31,17 +31,17 @@ server <- function(input, output, session) {
   })
   
   output$modelText <- renderUI({
-    includeMarkdown("data/model_info.md")
+    box(includeMarkdown("data/model_info.md"), width = 12, solidHeader = TRUE)
   })
   
   output$modelText2 <- renderUI({
-    includeMarkdown("data/model_info2.md")
+    box(includeMarkdown("data/model_info2.md"), width = 12, solidHeader = TRUE)
   })
   
   observeEvent(input$model_link, {
               toggle("modelText3")
               output$modelText3 <- renderUI({
-                includeMarkdown("data/model_info_hidden.md")
+                box(includeMarkdown("data/model_info_hidden.md"), width = 12, solidHeader = TRUE)
               })
     
              if (input$model_link %% 2 == 1) {
@@ -54,7 +54,7 @@ server <- function(input, output, session) {
   })
   
   output$mapText <- renderUI({
-    includeMarkdown("data/map_info.md")
+    box(includeMarkdown("data/map_info.md"), width = 12, solidHeader = TRUE)
   })
   
   output$model <- renderImage({
