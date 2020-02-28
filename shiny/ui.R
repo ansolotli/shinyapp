@@ -142,28 +142,29 @@ body <- dashboardBody(
               tabBox(width = 12,
                 id = "aboutBoxes",
                 tabPanel("Introduction",
-                         uiOutput("about_shortly"),
-                         box(actionLink("about_link", "Read more about the project."), width = 12, solidHeader = TRUE),
-                         hidden(
-                           uiOutput("about_indepth")
-                         )
+                         fluidRow(
+                           uiOutput("about_shortly"),
+                           actionLink("about_link", "Read more about the project."),
+                           hidden(
+                              uiOutput("about_indepth")
+                           ))
                 ),
                 tabPanel("The decision support system",
-                         uiOutput("modelText"),
                          fluidRow(
-                           box(solidHeader = TRUE, width = 12, imageOutput("model", height = "auto"))
-                         ),
-                         uiOutput("modelText2"),
-                         box(actionLink("model_link", "Read more about the decision support system."), width = 12, solidHeader = TRUE),
-                         hidden(
-                           uiOutput("modelText3")
-                         )
+                           uiOutput("modelText"),
+                           box(solidHeader = TRUE, width = 12, imageOutput("model", height = "auto")),
+                           uiOutput("modelText2"),
+                           actionLink("model_link", "Read more about the decision support system."),
+                           hidden(
+                             uiOutput("modelText3")
+                           ))
+                         
                 ),
                 tabPanel("Map of the modelled area",
                          fluidRow(
-                           box(solidHeader = TRUE, imageOutput("map", height = "auto"))
-                         ),
-                         uiOutput("mapText")
+                           box(solidHeader = TRUE, imageOutput("map", height = "auto")),
+                           uiOutput("mapText")
+                         )
                 ))
             )  
     ),
@@ -196,12 +197,11 @@ body <- dashboardBody(
                                 uiOutput("novel_plot_total")
                               )),
                      tabPanel("What is novelty?",
-                              uiOutput("aboutNovelty"),
                               fluidRow(
-                                box(solidHeader = TRUE, width = 12, imageOutput("noveltyci", height = "auto"))
-                              ),
-                              uiOutput("aboutNovelty2")
-                     )
+                                uiOutput("aboutNovelty"),
+                                box(solidHeader = TRUE, width = 12, imageOutput("noveltyci", height = "auto")),
+                                uiOutput("aboutNovelty2")
+                              ))
             ))
     )
     ,
