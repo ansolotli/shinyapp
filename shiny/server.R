@@ -65,18 +65,6 @@ server <- function(input, output, session) {
     return(list(src = "data/map.png", contentType = "image/png"))
   }, deleteFile = FALSE)
   
-  output$aboutNovelty <- renderUI({
-    includeMarkdown("data/about_novelty.md")
-  })
-  
-  output$aboutNovelty2 <- renderUI({
-    includeMarkdown("data/about_novelty2.md")
-  })
-  
-  output$noveltyci <- renderImage({
-    return(list(src = "data/novelty.png", contentType = "image/png"))
-  }, deleteFile = FALSE)
-  
   
   ##### "PREDICTED TIME SERIES" TAB ######
   
@@ -483,6 +471,18 @@ server <- function(input, output, session) {
           box(plotOutput("plotTotal", height = 300), width = 12, solidHeader = TRUE)
     }
   })
+  
+  output$aboutNovelty <- renderUI({
+    box(includeMarkdown("data/about_novelty.md"), width = 12, solidHeader = TRUE)
+  })
+  
+  output$aboutNovelty2 <- renderUI({
+    box(includeMarkdown("data/about_novelty2.md"), width = 12, solidHeader = TRUE)
+  })
+  
+  output$noveltyci <- renderImage({
+    return(list(src = "data/novelty.png", contentType = "image/png"))
+  }, deleteFile = FALSE)
   
   
   ##### "OPTIMIZE" TAB #####

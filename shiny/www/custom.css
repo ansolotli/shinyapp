@@ -57,14 +57,6 @@ h2 {
 	font-size: 15px;
 }
 
-#aboutNovelty {
-	font-size: 15px;
-}
-
-#aboutNovelty2 {
-	font-size: 15px;
-}
-
 #timeseries_info {
 	font-size: 15px;
 }
@@ -83,6 +75,24 @@ h2 {
 }
 
 #novel_info .box {
+	background: #d9d9d9;
+	padding: 10px;
+}
+
+#aboutNovelty {
+	font-size: 15px;
+}
+
+#aboutNovelty .box {
+	background: #d9d9d9;
+	padding: 10px;
+}
+
+#aboutNovelty2 {
+	font-size: 15px;
+}
+
+#aboutNovelty2 .box {
 	background: #d9d9d9;
 	padding: 10px;
 }

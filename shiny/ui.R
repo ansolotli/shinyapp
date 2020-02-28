@@ -164,13 +164,6 @@ body <- dashboardBody(
                            box(solidHeader = TRUE, imageOutput("map", height = "auto"))
                          ),
                          uiOutput("mapText")
-                ),
-                tabPanel("What is novelty?",
-                         uiOutput("aboutNovelty"),
-                         fluidRow(
-                           box(solidHeader = TRUE, width = 12, imageOutput("noveltyci", height = "auto"))
-                         ),
-                         uiOutput("aboutNovelty2")
                 ))
             )  
     ),
@@ -194,13 +187,22 @@ body <- dashboardBody(
     tabItem("novelty",
             titlePanel("Explore the uncertainty of model forecasts under novel conditions"),
             fluidRow(
-              column(width = 12,
-                     uiOutput('novel_info'),
-                     fluidRow(
-                          box(plotOutput("novel_plot", height = 300), width = 12, solidHeader = TRUE),
-                          uiOutput("novel_plot_total")
-                     ))
-            )
+              tabBox(width = 12,
+                     id = "novelty_boxes",
+                     tabPanel("Novelty in the Baltic Sea",
+                              uiOutput('novel_info'),
+                              fluidRow(
+                                box(plotOutput("novel_plot", height = 300), width = 12, solidHeader = TRUE),
+                                uiOutput("novel_plot_total")
+                              )),
+                     tabPanel("What is novelty?",
+                              uiOutput("aboutNovelty"),
+                              fluidRow(
+                                box(solidHeader = TRUE, width = 12, imageOutput("noveltyci", height = "auto"))
+                              ),
+                              uiOutput("aboutNovelty2")
+                     )
+            ))
     )
     ,
     tabItem("optimize",
@@ -225,7 +227,7 @@ body <- dashboardBody(
                                          choices = c("Yes" = "Yes", "No" = "No"),
                                          selected = "Yes"
                      ), title = "Expert knowledge", 
-                     content = "The decision support system includes studies on ecological novelty which denotes unprecedented, human-mediated changes at different ecological levels. The rapid changes in climate and in other anthropogenic pressures may result in novel species communities and ecosystems without any historical analogue. <br><br> Novelty and its effect on a system are difficult to predict with models as novel conditions can not be calibrated against historical observations. <br><br> Adding expert scientific knowledge about this uncertainty on top of the modelling can increase the certainty of modelled predictions."
+                     content = "The decision support system includes studies on ecological novelty which denotes unprecedented, human-mediated changes at different ecological levels. <br><br> Novelty and its effect on a system are difficult to predict with models as novel conditions can not be calibrated against historical observations. <br><br> Adding expert scientific knowledge about this uncertainty on top of the modelling can increase the certainty of modelled predictions."
                      , placement = "right", trigger = "hover", options = list(container = "body"))
                      
                      ),
