@@ -518,9 +518,9 @@ server <- function(input, output, session) {
     # format the probability of fishery policy
     fish_p <- percent(fish$F_scen)
     
-    a <- "The highest chance of reaching your desired outcome of profit and environmental status would be to apply "
-    b <- " <b>fishery policy</b>. Out of the three fishery policy options, this one has the highest chance ("
-    c <- ") to help you achieve your goal. <br><br>"
+    a <- "To reach the preferred outcome, the "
+    b <- " fishery policy should be applied as it has the highest chance ("
+    c <- ") of being the best option. <br><br>"
     
     section1 <- HTML(paste0(a, "<b>", fish_s, "</b>", b, "<b>", fish_p, "</b>", c))
     
@@ -540,23 +540,24 @@ server <- function(input, output, session) {
     # format the probability of nutrient policy
     nutr_p <- percent(nutr$Nutr_scen)
     
-    d <- "The fishery policy should be combined with <b>nutrient loading policy</b> according to the "
-    e <- ". Out of the two nutrient loading policy options, this one has the highest chance ("
-    f <- ") of being the best option. <br><br>"
+    d <- "The fishery policy should be combined with the nutrient loading policy according to the "
+    e <- " ("
+    f <- "). <br><br>"
     
     section2 <- HTML(paste0(d, "<b>", nutr_s, "</b>", e, "<b>", nutr_p, "</b>", f))
     
     # extract row with highest probability climate scenario
     clim <- opt_subset()[which.max(opt_subset()$Clim_scen),]
     
-    clim_s <- clim$Clim_labels
+    # format climate scenario
+    clim_s <- gsub("RCP", "RCP ", clim$Clim_labels)
     
     # format the probability of climate scenario
     clim_p <- percent(clim$Clim_scen)
     
-    g <- "These policies will take you closest to your goal, given that the <b>climate scenario</b> of "
-    h <- " is also in effect. Out of the two climate scenarios, this one has the highest chance ("
-    i <- ") to bring you closest to your desired outcome. <br><br>"
+    g <- "Applying these management policies will most likely lead to the preferred outcome given that the climate scenario of "
+    h <- " is also in effect ("
+    i <- "). <br><br>"
     
     section3 <- HTML(paste0(g, "<b>", clim_s, "</b>", h, "<b>", clim_p, "</b>", i))
     
@@ -569,11 +570,13 @@ server <- function(input, output, session) {
     # format the probability of decade
     dec_p <- percent(dec$Decade)
     
-    j <- "The decision support system models the state of the Central Baltic Sea in four decades. With the fishery and nutrient loading policy, and climate scenarios outlined above, you would most likely reach your goal in the <b>decade</b> "
+    j <- "The decision support system covers four decades. With the combination of management and climate scenarios outlined above, the preferred outcome would most likely be reached in "
     k <- " ("  
-    l <- "). <br><br> If you would like to see the probability distributions of all the scenario options under different profit and environmental status choices, take a closer look below."
+    l <- "). <br><br>"
+    
+    post <- "Take a closer look at the probability distributions of different management and climate scenario options below."
   
-    section4 <- HTML(paste0(j, "<b>", dec_s, "</b>", k, "<b>", dec_p, "</b>", l))
+    section4 <- HTML(paste0(j, "<b>", dec_s, "</b>", k, "<b>", dec_p, "</b>", l, post))
   
     wholeThing <- HTML(paste(section1, section2, section3, section4))
     box(wholeThing, width = 12, solidHeader = TRUE)
@@ -654,9 +657,9 @@ server <- function(input, output, session) {
     })
     
     if (input$opt_link %% 2 == 1) {
-      newlabel <- "Hide pies."
+      newlabel <- "Hide distributions."
     } else {
-      newlabel <- "Take a look at the distributions."
+      newlabel <- "Show distributions."
     }
     updateActionButton(session, "opt_link", label = newlabel)
     

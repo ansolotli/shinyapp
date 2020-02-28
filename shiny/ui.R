@@ -265,7 +265,7 @@ body <- dashboardBody(
             fluidRow(
               column(width = 12,
                      htmlOutput("opt_scens"),
-                     actionLink("opt_link", "Take a look at the distributions."),
+                     actionLink("opt_link", "Show distributions."),
                      hidden(
                        plotOutput("opt_plots")
                      )
