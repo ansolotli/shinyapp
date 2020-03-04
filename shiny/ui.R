@@ -30,12 +30,12 @@ sidebar <- dashboardSidebar(
     convertMenuItem(
       menuItem("About", tabName = "about"), tabName = "about"),
     convertMenuItem(
-      menuItem("Predicted time series", tabName = "predicted",
+      menuItem(HTML("Predicted time series <br> of fish stocks"), tabName = "predicted",
                
                # Create the dropdowns of scenario options
                # wrap rendered elements and add popovers to them
                popify(selectInput(inputId = 'F',
-                           label = "Fishery Policy Scenario", 
+                           label = "Fishery Policy", 
                            choices = c("Sustainable" = "Sus", "Pelagics-Focused" = "Pel", "Open Access" = "OA"), 
                            selected = "Sus"
                ), "Fishery policies", 
@@ -124,9 +124,7 @@ sidebar <- dashboardSidebar(
       ), tabName = "novelty"),
     
     convertMenuItem(
-      menuItem("Optimize", tabName = "optimize"
-               
-               )
+      menuItem(HTML("Optimize profits and <br> environmental status"), tabName = "optimize")
       , tabName = "optimize")
   )
 )
