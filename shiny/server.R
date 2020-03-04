@@ -540,9 +540,9 @@ server <- function(input, output, session) {
     # format the probability of nutrient policy
     nutr_p <- percent(nutr$Nutr_scen)
     
-    d <- "The fishery policy should be combined with the nutrient loading policy according to the "
+    d <- "The nutrient loading policy according to the "
     e <- " ("
-    f <- "). <br><br>"
+    f <- ") should be applied and combined with the fishery policy outlined above. <br><br>"
     
     section2 <- HTML(paste0(d, "<b>", nutr_s, "</b>", e, "<b>", nutr_p, "</b>", f))
     
