@@ -53,7 +53,7 @@ sidebar <- dashboardSidebar(
                , placement = "right", trigger = "hover", options = list(container = "body")),
                
                popify(selectInput(inputId = 'Climate', 
-                           label = "Climate Change Scenario - Representative Concentration Pathways",
+                           label = "Climate Change Scenario",
                            choices = c("RCP4.5", "RCP8.5"), 
                            selected = "RCP4.5"
                ), "Climate scenarios", 
@@ -92,7 +92,7 @@ sidebar <- dashboardSidebar(
                , placement = "right", trigger = "hover", options = list(container = "body")),
                
                popify(selectInput(inputId = 'Climate_nov', 
-                                  label = "Climate Change Scenario - Representative Concentration Pathways",
+                                  label = "Climate Change Scenario",
                                   choices = c("RCP4.5", "RCP8.5"), 
                                   selected = "RCP4.5"
                ), "Climate scenarios", 
@@ -124,7 +124,7 @@ sidebar <- dashboardSidebar(
       ), tabName = "novelty"),
     
     convertMenuItem(
-      menuItem(HTML("Optimize profits and <br> environmental status"), tabName = "optimize")
+      menuItem(HTML("How to balance profit and <br> good environmental status?"), tabName = "optimize")
       , tabName = "optimize")
   )
 )
@@ -147,7 +147,7 @@ body <- dashboardBody(
                               uiOutput("about_indepth")
                            ))
                 ),
-                tabPanel("The decision support system",
+                tabPanel("Decision tool",
                          fluidRow(
                            uiOutput("modelText"),
                            box(solidHeader = TRUE, width = 12, imageOutput("model", height = "auto")),
@@ -158,7 +158,7 @@ body <- dashboardBody(
                            ))
                          
                 ),
-                tabPanel("Map of the modelled area",
+                tabPanel("Model area",
                          fluidRow(
                            box(solidHeader = TRUE, imageOutput("map", height = "auto")),
                            uiOutput("mapText")
