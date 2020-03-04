@@ -106,7 +106,7 @@ server <- function(input, output, session) {
                              expand = c(0.02, 0)) +
           ggtitle("Biomass of cod") +
           xlab("\nYear") +
-          ylab("Spawning-stock biomass\n") +
+          ylab("Spawning-stock biomass (*1000 tonnes)\n") +
           geom_hline(aes(yintercept = 96.5, col = "red")) +
           annotate("text", x = 2050, y = 106, label = "GES above this line", col = "red", size = 5) +
           geom_vline(xintercept=2014, col = "blue") +
@@ -141,7 +141,7 @@ server <- function(input, output, session) {
                              expand = c(0.02, 0)) +
           ggtitle("Biomass of herring") +
           xlab("\nYear") +
-          ylab("Spawning-stock biomass\n") +
+          ylab("Spawning-stock biomass (*1000 tonnes)\n") +
           geom_hline(aes(yintercept = 430, col = "red")) +
           annotate("text", x = 2040, y = 460, label = "GES above this line", col = "red", size = 5) +
           geom_vline(xintercept=2014, col = "blue") +
@@ -176,7 +176,7 @@ server <- function(input, output, session) {
                              expand = c(0.02, 0)) +
           ggtitle("Biomass of sprat") +
           xlab("\nYear") +
-          ylab("Spawning-stock biomass\n") +
+          ylab("Spawning-stock biomass (*1000 tonnes)\n") +
           geom_hline(aes(yintercept = 410, col = "red")) +
           annotate("text", x = 2040, y = 450, label = "GES above this line", col = "red", size = 5) +
           geom_vline(xintercept=2014, col = "blue") +
@@ -221,7 +221,7 @@ server <- function(input, output, session) {
                              expand = c(0.02, 0)) +
           ggtitle("Cod catch") +
           xlab("\nYear") +
-          ylab("Catch\n") +
+          ylab("Catch (*1000 tonnes)\n") +
           geom_vline(xintercept=2014, col = "blue") +
           annotate(geom = "text", x = 2011, y = 20, label = "Calibration period", size = 4,
                    angle = 90) +
@@ -255,7 +255,7 @@ server <- function(input, output, session) {
                              expand = c(0.02, 0)) +
           ggtitle("Herring catch") +
           xlab("\nYear") +
-          ylab("Catch\n") +
+          ylab("Catch (*1000 tonnes)\n") +
           geom_vline(xintercept=2014, col = "blue") +
           annotate(geom = "text", x = 2011, y = 60, label = "Calibration period", size = 4,
                    angle = 90) +
@@ -289,7 +289,7 @@ server <- function(input, output, session) {
                              expand = c(0.02, 0)) +
           ggtitle("Sprat catch") +
           xlab("\nYear") +
-          ylab("Catch\n") +
+          ylab("Catch (*1000 tonnes)\n") +
           geom_vline(xintercept=2014, col = "blue") +
           annotate(geom = "text", x = 2011, y = 100, label = "Calibration period", size = 4,
                    angle = 90) +
