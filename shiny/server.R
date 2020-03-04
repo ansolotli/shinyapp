@@ -15,19 +15,19 @@ server <- function(input, output, session) {
     box(includeMarkdown("data/about_intro_short.md"), width = 12, solidHeader = TRUE)
   })
   
-  observeEvent(input$about_link, {
+  observeEvent(input$about_button, {
                # use shinyjs toggle to show and/or hide outputs
                toggle("about_indepth")
                output$about_indepth <- renderUI({
                  box(includeMarkdown("data/about_intro_hidden.md"), width = 12, solidHeader = TRUE)
                })
                
-               if (input$about_link %% 2 == 1) {
-                 newlabel <- "Hide text."
+               if (input$about_button %% 2 == 1) {
+                 newlabel <- "Show less."
                } else {
                  newlabel <- "Read more about the project."
                }
-               updateActionButton(session, "about_link", label = newlabel)
+               updateActionButton(session, "about_button", label = newlabel)
   })
   
   output$modelText <- renderUI({
@@ -38,18 +38,18 @@ server <- function(input, output, session) {
     box(includeMarkdown("data/model_info2.md"), width = 12, solidHeader = TRUE)
   })
   
-  observeEvent(input$model_link, {
+  observeEvent(input$model_button, {
               toggle("modelText3")
               output$modelText3 <- renderUI({
                 box(includeMarkdown("data/model_info_hidden.md"), width = 12, solidHeader = TRUE)
               })
     
-             if (input$model_link %% 2 == 1) {
-                newlabel <- "Hide text."
+             if (input$model_button %% 2 == 1) {
+                newlabel <- "Show less."
              } else {
                 newlabel <- "Read more about the decision support system."
              }
-             updateActionButton(session, "model_link", label = newlabel)
+             updateActionButton(session, "model_button", label = newlabel)
     
   })
   
@@ -79,9 +79,9 @@ server <- function(input, output, session) {
     })
     
     if (input$time_series_link %% 2 == 1) {
-      newlabel <- "Hide details."
+      newlabel <- "Show less."
     } else {
-      newlabel <- "Show details."
+      newlabel <- "Show more."
     }
     updateActionButton(session, "time_series_link", label = newlabel)
   })
@@ -645,7 +645,7 @@ server <- function(input, output, session) {
   })
   
   # hide pie charts
-  observeEvent(input$opt_link, {
+  observeEvent(input$opt_button, {
     toggle("opt_plots")
     
     output$opt_plots <- renderPlot({	
@@ -656,12 +656,12 @@ server <- function(input, output, session) {
       wrap_plots(p1, p2, p3, p4)
     })
     
-    if (input$opt_link %% 2 == 1) {
+    if (input$opt_button %% 2 == 1) {
       newlabel <- "Hide distributions."
     } else {
       newlabel <- "Show distributions."
     }
-    updateActionButton(session, "opt_link", label = newlabel)
+    updateActionButton(session, "opt_button", label = newlabel)
     
   })
  

@@ -142,7 +142,7 @@ body <- dashboardBody(
                 tabPanel("Introduction",
                          fluidRow(
                            uiOutput("about_shortly"),
-                           actionLink("about_link", "Read more about the project."),
+                           actionButton("about_button", "Read more about the project."),
                            hidden(
                               uiOutput("about_indepth")
                            ))
@@ -152,7 +152,7 @@ body <- dashboardBody(
                            uiOutput("modelText"),
                            box(solidHeader = TRUE, width = 12, imageOutput("model", height = "auto")),
                            uiOutput("modelText2"),
-                           actionLink("model_link", "Read more about the decision support system."),
+                           actionButton("model_button", "Read more about the decision support system."),
                            hidden(
                              uiOutput("modelText3")
                            ))
@@ -171,7 +171,7 @@ body <- dashboardBody(
             fluidRow(
               box(id = "timeseries_box",
                 uiOutput("timeseries_info"),
-                actionLink("time_series_link", "Show details."),
+                actionLink("time_series_link", "Show more."),
                 hidden(
                   uiOutput("timeseries_info2")
                 ),
@@ -265,7 +265,7 @@ body <- dashboardBody(
             fluidRow(
               column(width = 12,
                      htmlOutput("opt_scens"),
-                     actionLink("opt_link", "Show distributions."),
+                     actionButton("opt_button", "Show distributions."),
                      hidden(
                        plotOutput("opt_plots")
                      )
