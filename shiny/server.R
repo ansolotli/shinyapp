@@ -200,68 +200,6 @@ server <- function(input, output, session) {
     }
   )
   
-  # Zooplankton
-  output$plotZoo <- renderPlot(
-    {
-      if("plotZoo" %in% input$bioVars){
-        
-        ggplot(bio_subset(), aes(x = Year, y = Zooplankton)) +
-          scale_y_continuous(limits=c(0,13), breaks = scales::pretty_breaks(n = 5)) +
-          scale_x_continuous(limits=c(2004,2096), breaks = scales::pretty_breaks(n = 5),
-                             expand = c(0.02, 0)) +
-          ggtitle("Biomass of zooplankton") +
-          xlab("\nYear") +
-          ylab("Biomass\n") +
-          geom_vline(xintercept=2014, col = "blue") +
-          annotate(geom = "text", x = 2011, y = 3, label = "Calibration period", size = 4,
-                   angle = 90) +
-          theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
-                             panel.grid.minor = element_blank(), axis.line = element_line(colour = "grey"),
-                             title = element_text(size = 14),
-                             axis.title.y = element_text(size = 13),
-                             axis.text.y = element_text(size = 11),
-                             axis.title.x = element_text(size = 13),
-                             axis.text.x = element_text(size = 11),
-                             legend.position = "none"
-          ) +
-          geom_line(stat = "identity") +
-          geom_ribbon(aes(ymin = bio_subset()[,"Zooplankton"] - bio_subset()[,"ZooplanktonSD"], ymax = bio_subset()[,"Zooplankton"] + bio_subset()[,"ZooplanktonSD"]), 
-                      linetype = 2, alpha = 0.2)
-      }
-    }
-  )
-  
-  #Phytoplankton
-  output$plotPhy <- renderPlot(
-    {
-      if("plotPhy" %in% input$bioVars){
-        
-        ggplot(bio_subset(), aes(x = Year, y = Phytoplankton)) +
-          scale_y_continuous(limits=c(0,13), breaks = scales::pretty_breaks(n = 5)) +
-          scale_x_continuous(limits=c(2004,2096), breaks = scales::pretty_breaks(n = 5),
-                             expand = c(0.02, 0)) +
-          ggtitle("Biomass of phytoplankton") +
-          xlab("\nYear") +
-          ylab("Biomass\n") +
-          geom_vline(xintercept=2013, col = "blue") +
-          annotate(geom = "text", x = 2011, y = 3, label = "Calibration period", size = 4,
-                   angle = 90) +
-          theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
-                             panel.grid.minor = element_blank(), axis.line = element_line(colour = "grey"),
-                             title = element_text(size = 14),
-                             axis.title.y = element_text(size = 13),
-                             axis.text.y = element_text(size = 11),
-                             axis.title.x = element_text(size = 13),
-                             axis.text.x = element_text(size = 11),
-                             legend.position = "none"
-          ) +
-          geom_line(stat = "identity") +
-          geom_ribbon(aes(ymin = bio_subset()[,"Phytoplankton"] - bio_subset()[,"PhytoplanktonSD"], ymax = bio_subset()[,"Phytoplankton"] + bio_subset()[,"PhytoplanktonSD"]), 
-                      linetype = 2, alpha = 0.2)
-      }
-    }
-  )
-  
   ## CATCH VARIABLES
   
   # subsetting data for catch plots

@@ -65,8 +65,8 @@ sidebar <- dashboardSidebar(
                  column(width = 5,
                         checkboxGroupInput(inputId = "bioVars", 
                                            label = "Biomass Variables",
-                                           choiceNames = list("Cod", "Herring", "Sprat", "Zooplankton", "Phytoplankton"),
-                                           choiceValues = list("plotCod", "plotHer", "plotSpr", "plotZoo", "plotPhy"),
+                                           choiceNames = list("Cod", "Herring", "Sprat"),
+                                           choiceValues = list("plotCod", "plotHer", "plotSpr"),
                                            selected = "plotCod")
                  ),
                  
