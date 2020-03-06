@@ -163,7 +163,15 @@ body <- dashboardBody(
                            box(solidHeader = TRUE, imageOutput("map", height = "auto")),
                            uiOutput("mapText")
                          )
-                ))
+                ),
+                tabPanel("Aknowledgement",
+                         fluidRow(
+                           column(width = 12,
+                                  uiOutput("aknowledgement")
+                           ),
+                           column(width = 12,
+                                  imageOutput("logos", width = 3))
+                         )))
             )  
     ),
     tabItem("predicted",

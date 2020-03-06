@@ -57,12 +57,20 @@ server <- function(input, output, session) {
     box(includeMarkdown("data/map_info.md"), width = 12, solidHeader = TRUE)
   })
   
+  output$aknowledgement <- renderUI({
+    box(includeMarkdown("data/aknowledgement.md"), width = 12, solidHeader = TRUE)
+  })
+  
   output$model <- renderImage({
     return(list(src = "data/dss_circled.png", contentType = "image/png", width = 700))
   }, deleteFile = FALSE)
   
   output$map <- renderImage({
     return(list(src = "data/map.png", contentType = "image/png"))
+  }, deleteFile = FALSE)
+  
+  output$logos <- renderImage({
+    return(list(src = "data/logos.png", contentType = "image/png"))
   }, deleteFile = FALSE)
   
   
