@@ -437,13 +437,13 @@ server <- function(input, output, session) {
   
   # generate dynamic text
   output$opt_scens <- renderUI({
-    
+
     # extract row with highest probability fishery scenario
     fish <- opt_subset()[which.max(opt_subset()$F_scen),]
-    
+
     # format fishery policy
     fish_s <- ""
-    
+
     if (fish$F_labels == "Sus") {
       fish_s <- "Sustainable"
     }
@@ -452,77 +452,78 @@ server <- function(input, output, session) {
     } else {
       fish_s <- "Open Access"
     }
-    
+
     # format the probability of fishery policy
     fish_p <- percent(fish$F_scen)
     
+    title <- "<h3>How to reach your goal?</h3> <br>"
+
     a <- "To reach the preferred outcome, the "
     b <- " fishery policy should be applied as it has the highest chance ("
     c <- ") of being the best option. <br><br>"
-    
-    section1 <- HTML(paste0(a, "<b>", fish_s, "</b>", b, "<b>", fish_p, "</b>", c))
-    
+
+    section1 <- HTML(paste0(title, a, "<b>", fish_s, "</b>", b, "<b>", fish_p, "</b>", c))
+
     # extract row with highest probability nutrient scenario
     nutr <- opt_subset()[which.max(opt_subset()$Nutr_scen),]
-    
+
     # format nutrient policy
     nutr_s <- ""
-    
+
     if (nutr$Nutr_labels == "BSAP") {
       nutr_s <- "Baltic Sea Action Plan (BSAP)"
     }
     else {
       nutr_s <- "Reference conditions"
-    } 
-    
+    }
+
     # format the probability of nutrient policy
     nutr_p <- percent(nutr$Nutr_scen)
-    
+
     d <- "The nutrient loading policy according to the "
     e <- " ("
     f <- ") should be applied and combined with the fishery policy outlined above. <br><br>"
-    
+
     section2 <- HTML(paste0(d, "<b>", nutr_s, "</b>", e, "<b>", nutr_p, "</b>", f))
-    
+
     # extract row with highest probability climate scenario
     clim <- opt_subset()[which.max(opt_subset()$Clim_scen),]
-    
+
     # format climate scenario
     clim_s <- gsub("RCP", "RCP ", clim$Clim_labels)
-    
+
     # format the probability of climate scenario
     clim_p <- percent(clim$Clim_scen)
-    
+
     g <- "Applying these management policies will most likely lead to the preferred outcome given that the climate scenario of "
     h <- " is also in effect ("
     i <- "). <br><br>"
-    
+
     section3 <- HTML(paste0(g, "<b>", clim_s, "</b>", h, "<b>", clim_p, "</b>", i))
-    
+
     # extract row with highest probability decade
     dec <- opt_subset()[which.max(opt_subset()$Decade),]
-    
+
     # format decade
     dec_s <- gsub("_", "-", dec$Dec_labels)
-    
+
     # format the probability of decade
     dec_p <- percent(dec$Decade)
-    
+
     j <- "The decision support system covers four decades. With the combination of management and climate scenarios outlined above, the preferred outcome would most likely be reached in "
-    k <- " ("  
+    k <- " ("
     l <- "). <br><br>"
-    
+
     post <- "Take a closer look at the probability distributions of different management and climate scenario options below."
-  
+
     section4 <- HTML(paste0(j, "<b>", dec_s, "</b>", k, "<b>", dec_p, "</b>", l, post))
-  
+
     wholeThing <- HTML(paste(section1, section2, section3, section4))
     box(wholeThing, width = 12, solidHeader = TRUE)
   })
   
-  
   # draw pie charts
-  opt_fish <- reactive({	
+  output$opt_fish <- renderPlot({	
     p <- ggplot(opt_subset()[1:3,], aes(x = 1, y = F_scen, fill = F_labels)) +	
       ggtitle("Fishery Policy Scenario") +
       scale_fill_discrete("Fishery policy", labels = c("Open Access", "Pelagics-Focused", "Sustainable")) +
@@ -536,7 +537,7 @@ server <- function(input, output, session) {
     return(p)
   })
   
-  opt_clim <- reactive({
+  output$opt_clim <- renderPlot({	
     p <- ggplot(opt_subset()[1:2,], aes(x = 1, y = Clim_scen, fill = Clim_labels)) +
       scale_y_continuous(limits=c(0,1), breaks = scales::pretty_breaks(n = 5)) + 	
       ggtitle("Climate Scenario") +	
@@ -551,7 +552,7 @@ server <- function(input, output, session) {
     return(p)
   })
   
-  opt_nutr <- reactive({
+  output$opt_nutr <- renderPlot({	
     p <- ggplot(opt_subset()[1:2,], aes(x = 1, y = Nutr_scen, fill = Nutr_labels)) + 	
       ggtitle("Nutrient Loading Policy Scenario") +	
       scale_fill_discrete("Nutrient loading policy", labels = c("Baltic Sea Action Plan", "Reference conditions")) +
@@ -565,7 +566,7 @@ server <- function(input, output, session) {
     return(p)
   })
   
-  opt_dec <- reactive({	
+  output$opt_dec <- renderPlot({	
     # format legend labels
     dec_labels <- gsub("_", "-", opt_subset()$Dec_labels)
     
@@ -581,26 +582,13 @@ server <- function(input, output, session) {
     
     return (p)
   })
-  
-  # hide pie charts
-  observeEvent(input$opt_button, {
-    toggle("opt_plots")
-    
-    output$opt_plots <- renderPlot({	
-      p1 <- opt_fish()
-      p2 <- opt_nutr()
-      p3 <- opt_clim()
-      p4 <- opt_dec()
-      wrap_plots(p1, p2, p3, p4)
-    })
-    
-    if (input$opt_button %% 2 == 1) {
-      newlabel <- "Hide distributions."
-    } else {
-      newlabel <- "Show distributions."
-    }
-    updateActionButton(session, "opt_button", label = newlabel)
-    
-  })
+
+  # output$opt_plots <- renderPlot({	
+  #     p1 <- opt_fish()
+  #     p2 <- opt_nutr()
+  #     p3 <- opt_clim()
+  #     p4 <- opt_dec()
+  #     wrap_plots(p1, p2, p3, p4)
+  # })
  
 }

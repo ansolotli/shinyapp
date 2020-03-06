@@ -264,13 +264,18 @@ body <- dashboardBody(
             
             fluidRow(
               column(width = 12,
-                     htmlOutput("opt_scens"),
-                     actionButton("opt_button", "Show distributions."),
-                     hidden(
-                       plotOutput("opt_plots")
-                     )
+                     uiOutput("scens_info")),
+              column(width = 12,
+                     htmlOutput("opt_scens")
+                     ),
+              column(width = 5,
+                     box(plotOutput("opt_fish", height = 200), width = 12, solidHeader = TRUE),
+                     box(plotOutput("opt_clim", height = 200), width = 12, solidHeader = TRUE)),
+              column(width = 5,
+                     box(plotOutput("opt_nutr", height = 200), width = 12, solidHeader = TRUE),
+                     box(plotOutput("opt_dec", height = 200), width = 12, solidHeader = TRUE))
             )
-    ))),
+    )),
     # CSS
     tags$head(tags$link(rel = "stylesheet", type = "text/css", href = "custom.css")) 
 )
