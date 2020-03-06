@@ -46,12 +46,12 @@ h2 {
 }
 
 #about_shortly .box {
-	background: #d9d9d9;
+	background: #BBDEFB;
 	padding: 10px;
 }
 
 #about_indepth .box {
-	background: #d9d9d9;
+	background: #BBDEFB;
 	padding: 10px;
 }
 
@@ -68,17 +68,17 @@ h2 {
 }
 
 #modelText .box {
-	background: #d9d9d9;
+	background: #BBDEFB;
 	padding: 10px;
 }
 
 #modelText2 .box {
-	background: #d9d9d9;
+	background: #BBDEFB;
 	padding: 10px;
 }
 
 #modelText3 .box {
-	background: #d9d9d9;
+	background: #BBDEFB;
 	padding: 10px;
 }
 
@@ -87,7 +87,16 @@ h2 {
 }
 
 #mapText .box {
-	background: #d9d9d9;
+	background: #BBDEFB;
+	padding: 10px;
+}
+
+#aknowledgement {
+	font-size: 15px;
+}
+
+#aknowledgement .box {
+	background: #BBDEFB;
 	padding: 10px;
 }
 
@@ -100,7 +109,7 @@ h2 {
 }
 
 #timeseries_box {
-	background: #d9d9d9;
+	background: #BBDEFB;
 	padding: 10px;
 }
 
@@ -109,7 +118,7 @@ h2 {
 }
 
 #novel_info .box {
-	background: #d9d9d9;
+	background: #BBDEFB;
 	padding: 10px;
 }
 
@@ -118,7 +127,7 @@ h2 {
 }
 
 #aboutNovelty .box {
-	background: #d9d9d9;
+	background: #BBDEFB;
 	padding: 10px;
 }
 
@@ -127,7 +136,7 @@ h2 {
 }
 
 #aboutNovelty2 .box {
-	background: #d9d9d9;
+	background: #BBDEFB;
 	padding: 10px;
 }
 
@@ -136,7 +145,7 @@ h2 {
 }
 
 #opt_info .box {
-	background: #d9d9d9;
+	background: #BBDEFB;
 	padding: 10px;
 }
 
@@ -145,12 +154,16 @@ h2 {
 }
 
 #opt_scens .box {
-	background: #d9d9d9;
+	background: #64B5F6;
 	padding: 10px;
 }
 
+#scens_info {
+	font-size: 15px;
+}
+
 .selectize-control {
-	font-size: 11px;
+	font-size: 12px;
 }
 
 /* tabBox */                    
