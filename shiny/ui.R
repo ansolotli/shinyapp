@@ -276,12 +276,12 @@ body <- dashboardBody(
               column(width = 12,
                      htmlOutput("opt_scens")
                      ),
-              column(width = 5,
-                     box(plotOutput("opt_fish", height = 200), width = 12, solidHeader = TRUE),
-                     box(plotOutput("opt_clim", height = 200), width = 12, solidHeader = TRUE)),
-              column(width = 5,
-                     box(plotOutput("opt_nutr", height = 200), width = 12, solidHeader = TRUE),
-                     box(plotOutput("opt_dec", height = 200), width = 12, solidHeader = TRUE))
+              column(width = 6,
+                     box(plotOutput("opt_fish", height = 300), width = 12, solidHeader = TRUE),
+                     box(plotOutput("opt_clim", height = 300), width = 12, solidHeader = TRUE)),
+              column(width = 6,
+                     box(plotOutput("opt_nutr", height = 300), width = 12, solidHeader = TRUE),
+                     box(plotOutput("opt_dec", height = 300), width = 12, solidHeader = TRUE))
             )
     )),
     # CSS
