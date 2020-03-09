@@ -141,7 +141,9 @@ body <- dashboardBody(
                 id = "aboutBoxes",
                 tabPanel("Introduction",
                          fluidRow(
-                           uiOutput("about_shortly"))
+                           uiOutput("about_shortly"),
+                           box(imageOutput("scenery", height = "auto"), width = 12, solidHeader = TRUE)
+                         )
                 ),
                 tabPanel("Decision tool",
                          fluidRow(

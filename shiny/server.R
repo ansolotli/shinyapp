@@ -50,8 +50,12 @@ server <- function(input, output, session) {
     box(includeMarkdown("data/aknowledgement.md"), width = 12, solidHeader = TRUE)
   })
   
+  output$scenery <- renderImage({
+    return(list(src = "data/scenery.jpg", contentType = "image/jpg", width = 700))
+  }, deleteFile = FALSE)
+  
   output$model <- renderImage({
-    return(list(src = "data/dss_circled.png", contentType = "image/png", width = 700))
+    return(list(src = "data/dss.png", contentType = "image/png", width = 700))
   }, deleteFile = FALSE)
   
   output$map <- renderImage({
