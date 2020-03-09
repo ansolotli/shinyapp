@@ -141,11 +141,7 @@ body <- dashboardBody(
                 id = "aboutBoxes",
                 tabPanel("Introduction",
                          fluidRow(
-                           uiOutput("about_shortly"),
-                           actionButton("about_button", "Read more about the project."),
-                           hidden(
-                              uiOutput("about_indepth")
-                           ))
+                           uiOutput("about_shortly"))
                 ),
                 tabPanel("Decision tool",
                          fluidRow(
@@ -164,9 +160,10 @@ body <- dashboardBody(
                            uiOutput("mapText")
                          )
                 ),
-                tabPanel("Aknowledgement",
+                tabPanel("BLUEWEBS",
                          fluidRow(
                            column(width = 12,
+                                  uiOutput("about_indepth"),
                                   uiOutput("aknowledgement")
                            ),
                            column(width = 12,
@@ -272,17 +269,10 @@ body <- dashboardBody(
             
             fluidRow(
               column(width = 12,
-                     uiOutput("scens_info")),
-              column(width = 12,
-                     htmlOutput("opt_scens")
-                     ),
-              column(width = 6,
-                     box(plotOutput("opt_fish", height = 300), width = 12, solidHeader = TRUE),
-                     box(plotOutput("opt_clim", height = 300), width = 12, solidHeader = TRUE)),
-              column(width = 6,
-                     box(plotOutput("opt_nutr", height = 300), width = 12, solidHeader = TRUE),
-                     box(plotOutput("opt_dec", height = 300), width = 12, solidHeader = TRUE))
-            )
+                     uiOutput("scens_info"),
+                     htmlOutput("opt_scens"),
+                     box(plotOutput("opt_plots", width = 700), width = 12, solidHeader = TRUE)
+            ))
     )),
     # CSS
     tags$head(tags$link(rel = "stylesheet", type = "text/css", href = "custom.css")) 

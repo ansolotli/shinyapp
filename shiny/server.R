@@ -15,21 +15,6 @@ server <- function(input, output, session) {
     box(includeMarkdown("data/about_intro_short.md"), width = 12, solidHeader = TRUE)
   })
   
-  observeEvent(input$about_button, {
-               # use shinyjs toggle to show and/or hide outputs
-               toggle("about_indepth")
-               output$about_indepth <- renderUI({
-                 box(includeMarkdown("data/about_intro_hidden.md"), width = 12, solidHeader = TRUE)
-               })
-               
-               if (input$about_button %% 2 == 1) {
-                 newlabel <- "Show less."
-               } else {
-                 newlabel <- "Read more about the project."
-               }
-               updateActionButton(session, "about_button", label = newlabel)
-  })
-  
   output$modelText <- renderUI({
     box(includeMarkdown("data/model_info.md"), width = 12, solidHeader = TRUE)
   })
@@ -55,6 +40,10 @@ server <- function(input, output, session) {
   
   output$mapText <- renderUI({
     box(includeMarkdown("data/map_info.md"), width = 12, solidHeader = TRUE)
+  })
+  
+  output$about_indepth <- renderUI({
+    box(includeMarkdown("data/about_bluewebs.md"), width = 12, solidHeader = TRUE)
   })
   
   output$aknowledgement <- renderUI({
@@ -531,7 +520,7 @@ server <- function(input, output, session) {
   })
   
   # draw pie charts
-  output$opt_fish <- renderPlot({	
+  opt_fish <- reactive({	
     p <- ggplot(opt_subset()[1:3,], aes(x = 1, y = F_scen, fill = F_labels)) +	
       ggtitle("Fishery Policy Scenario") +
       scale_fill_discrete("Fishery policy", labels = c("Open Access", "Pelagics-Focused", "Sustainable")) +
@@ -545,7 +534,7 @@ server <- function(input, output, session) {
     return(p)
   })
   
-  output$opt_clim <- renderPlot({	
+  opt_clim <- reactive({	
     p <- ggplot(opt_subset()[1:2,], aes(x = 1, y = Clim_scen, fill = Clim_labels)) +
       scale_y_continuous(limits=c(0,1), breaks = scales::pretty_breaks(n = 5)) + 	
       ggtitle("Climate Scenario") +	
@@ -560,7 +549,7 @@ server <- function(input, output, session) {
     return(p)
   })
   
-  output$opt_nutr <- renderPlot({	
+  opt_nutr <- reactive({	
     p <- ggplot(opt_subset()[1:2,], aes(x = 1, y = Nutr_scen, fill = Nutr_labels)) + 	
       ggtitle("Nutrient Loading Policy Scenario") +	
       scale_fill_discrete("Nutrient loading policy", labels = c("Baltic Sea Action Plan", "Reference conditions")) +
@@ -574,7 +563,7 @@ server <- function(input, output, session) {
     return(p)
   })
   
-  output$opt_dec <- renderPlot({	
+  opt_dec <- reactive({	
     # format legend labels
     dec_labels <- gsub("_", "-", opt_subset()$Dec_labels)
     
@@ -591,12 +580,12 @@ server <- function(input, output, session) {
     return (p)
   })
 
-  # output$opt_plots <- renderPlot({	
-  #     p1 <- opt_fish()
-  #     p2 <- opt_nutr()
-  #     p3 <- opt_clim()
-  #     p4 <- opt_dec()
-  #     wrap_plots(p1, p2, p3, p4)
-  # })
+  output$opt_plots <- renderPlot({
+      p1 <- opt_fish()
+      p2 <- opt_nutr()
+      p3 <- opt_clim()
+      p4 <- opt_dec()
+      wrap_plots(p1, p2, p3, p4)
+  })
  
 }
