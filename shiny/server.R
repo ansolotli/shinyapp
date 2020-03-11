@@ -15,27 +15,16 @@ server <- function(input, output, session) {
     box(includeMarkdown("data/about_intro_short.md"), width = 12, solidHeader = TRUE)
   })
   
+  output$about_continued <- renderUI({
+    box(includeMarkdown("data/about_intro_continued.md"), width = 12, solidHeader = TRUE)
+  })
+  
   output$modelText <- renderUI({
     box(includeMarkdown("data/model_info.md"), width = 12, solidHeader = TRUE)
   })
   
   output$modelText2 <- renderUI({
     box(includeMarkdown("data/model_info2.md"), width = 12, solidHeader = TRUE)
-  })
-  
-  observeEvent(input$model_button, {
-              toggle("modelText3")
-              output$modelText3 <- renderUI({
-                box(includeMarkdown("data/model_info_hidden.md"), width = 12, solidHeader = TRUE)
-              })
-    
-             if (input$model_button %% 2 == 1) {
-                newlabel <- "Show less."
-             } else {
-                newlabel <- "Read more about the decision support system."
-             }
-             updateActionButton(session, "model_button", label = newlabel)
-    
   })
   
   output$mapText <- renderUI({
@@ -63,7 +52,7 @@ server <- function(input, output, session) {
   }, deleteFile = FALSE)
   
   output$logos <- renderImage({
-    return(list(src = "data/logos.png", contentType = "image/png"))
+    return(list(src = "data/logos.png", contentType = "image/png", width = 725))
   }, deleteFile = FALSE)
   
   

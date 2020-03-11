@@ -142,19 +142,16 @@ body <- dashboardBody(
                 tabPanel("Introduction",
                          fluidRow(
                            uiOutput("about_shortly"),
-                           box(imageOutput("scenery", height = "auto"), width = 12, solidHeader = TRUE)
+                           box(imageOutput("scenery", height = "auto"), width = 12, solidHeader = TRUE),
+                           uiOutput("about_continued")
                          )
                 ),
                 tabPanel("Decision tool",
                          fluidRow(
                            uiOutput("modelText"),
                            box(solidHeader = TRUE, width = 12, imageOutput("model", height = "auto")),
-                           uiOutput("modelText2"),
-                           actionButton("model_button", "Read more about the decision support system."),
-                           hidden(
-                             uiOutput("modelText3")
-                           ))
-                         
+                           uiOutput("modelText2")
+                           )
                 ),
                 tabPanel("Model area",
                          fluidRow(
@@ -164,13 +161,10 @@ body <- dashboardBody(
                 ),
                 tabPanel("BLUEWEBS",
                          fluidRow(
-                           column(width = 12,
-                                  uiOutput("about_indepth"),
-                                  uiOutput("aknowledgement")
-                           ),
-                           column(width = 12,
-                                  imageOutput("logos", width = 3))
-                         )))
+                            uiOutput("about_indepth"),
+                            uiOutput("aknowledgement"),
+                            box(imageOutput("logos"), width = 12, solidHeader = TRUE))
+                         ))
             )  
     ),
     tabItem("predicted",

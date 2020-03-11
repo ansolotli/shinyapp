@@ -50,6 +50,15 @@ h2 {
 	padding: 10px;
 }
 
+#about_continued {
+	font-size: 15px;
+}
+
+#about_continued .box {
+	background: #BBDEFB;
+	padding: 10px;
+}
+
 #about_indepth .box {
 	background: #BBDEFB;
 	padding: 10px;
