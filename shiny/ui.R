@@ -56,8 +56,8 @@ sidebar <- dashboardSidebar(
                            label = "Climate Change Scenario",
                            choices = c("RCP4.5", "RCP8.5"), 
                            selected = "RCP4.5"
-               ), "Climate scenarios", 
-               content = "The two climate scenarios follow Representative Concentration Pathways (RCP) <b>4.5</b> and <b>8.5</b>, according to the fifth Assessment Report of the Intergovernmental Panel on Climate Change (IPCC) in 2014. <br><br> These pathways describe the greenhouse gas concentrations in the atmosphere, with higher concentrations resulting in higher warming effects on earth."
+               ), "Climate change scenarios", 
+               content = "The two climate change scenarios follow Representative Concentration Pathways (RCP) <b>4.5</b> and <b>8.5</b>, according to the fifth Assessment Report of the Intergovernmental Panel on Climate Change (IPCC) in 2014. <br><br> These pathways describe the greenhouse gas concentrations in the atmosphere, with higher concentrations resulting in higher warming effects on earth."
                , placement = "right", trigger = "hover", options = list(container = "body")),
                
                # Create the two colums of checkbox groups (biomass and catch)
@@ -95,8 +95,8 @@ sidebar <- dashboardSidebar(
                                   label = "Climate Change Scenario",
                                   choices = c("RCP4.5", "RCP8.5"), 
                                   selected = "RCP4.5"
-               ), "Climate scenarios", 
-               content = "The two climate scenarios follow Representative Concentration Pathways (RCP) <b>4.5</b> and <b>8.5</b>, according to the fifth Assessment Report of the Intergovernmental Panel on Climate Change (IPCC) in 2014. <br><br> These pathways describe the greenhouse gas concentrations in the atmosphere, with higher concentrations resulting in higher warming effects on earth."
+               ), "Climate change scenarios", 
+               content = "The two climate change scenarios follow Representative Concentration Pathways (RCP) <b>4.5</b> and <b>8.5</b>, according to the fifth Assessment Report of the Intergovernmental Panel on Climate Change (IPCC) in 2014. <br><br> These pathways describe the greenhouse gas concentrations in the atmosphere, with higher concentrations resulting in higher warming effects on earth."
                , placement = "right", trigger = "hover", options = list(container = "body")),
                
                # Create the column of checkbox groups (totalNov, codRV, temp_MarchMay050, temp_Aug060, notHypoxic)
@@ -124,7 +124,7 @@ sidebar <- dashboardSidebar(
       ), tabName = "novelty"),
     
     convertMenuItem(
-      menuItem(HTML("How to balance profit and <br> good environmental status?"), tabName = "optimize")
+      menuItem(HTML("Balance profit and <br> good environmental status"), tabName = "optimize")
       , tabName = "optimize")
   )
 )

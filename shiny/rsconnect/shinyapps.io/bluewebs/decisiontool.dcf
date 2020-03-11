@@ -1,0 +1,13 @@
+name: decisiontool
+title: decisiontool
+username:
+account: bluewebs
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 1923440
+bundleId: 2867771
+url: https://bluewebs.shinyapps.io/decisiontool/
+when: 1583848948.59026
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: .RData

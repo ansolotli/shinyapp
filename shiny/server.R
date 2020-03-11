@@ -51,7 +51,7 @@ server <- function(input, output, session) {
   })
   
   output$scenery <- renderImage({
-    return(list(src = "data/scenery.jpg", contentType = "image/jpg", width = 700))
+    return(list(src = "data/intro.png", contentType = "image/png", width = 700))
   }, deleteFile = FALSE)
   
   output$model <- renderImage({
@@ -496,7 +496,7 @@ server <- function(input, output, session) {
     # format the probability of climate scenario
     clim_p <- percent(clim$Clim_scen)
 
-    g <- "Applying these management policies will most likely lead to the preferred outcome given that the climate scenario of "
+    g <- "Applying these management policies will most likely lead to the preferred outcome given that the climate change scenario of "
     h <- " is also in effect ("
     i <- "). <br><br>"
 
@@ -511,11 +511,11 @@ server <- function(input, output, session) {
     # format the probability of decade
     dec_p <- percent(dec$Decade)
 
-    j <- "The decision support system covers four decades. With the combination of management and climate scenarios outlined above, the preferred outcome would most likely be reached in "
+    j <- "The decision support system covers four decades. With the combination of management and climate change scenarios outlined above, the preferred outcome would most likely be reached in "
     k <- " ("
     l <- "). <br><br>"
 
-    post <- "Take a closer look at the probability distributions of different management and climate scenario options below."
+    post <- "Take a closer look at the probability distributions of different management and climate change scenario options below."
 
     section4 <- HTML(paste0(j, "<b>", dec_s, "</b>", k, "<b>", dec_p, "</b>", l, post))
 
