@@ -106,7 +106,7 @@ sidebar <- dashboardSidebar(
                                            label = "Novelty variables",
                                            choices = list("Cod reproductive volume" = "codRV", 
                                                           "Spring temperature" = "T_050_MarchMay", 
-                                                          "August temperature" = "Aug060mT",
+                                                          "Summer temperature" = "Aug060mT",
                                                           "Inverse hypoxic area" = "notHypoxicA"),
                                            #choiceValues = list("plotRv", "plotTemp1", "plotTemp2", "plotHyp"),
                                            selected = "codRV"), 
@@ -161,7 +161,7 @@ body <- dashboardBody(
                 ),
                 tabPanel("BLUEWEBS",
                          fluidRow(
-                            uiOutput("about_indepth"),
+                            uiOutput("about_bluewebs"),
                             uiOutput("aknowledgement"),
                             box(imageOutput("logos"), width = 12, solidHeader = TRUE))
                          ))
@@ -198,20 +198,22 @@ body <- dashboardBody(
                      tabPanel("What is novelty?",
                               fluidRow(
                                 uiOutput("aboutNovelty"),
+                                uiOutput("aboutNovelty2"),
                                 box(solidHeader = TRUE, width = 12, imageOutput("noveltyci", height = "auto")),
-                                uiOutput("aboutNovelty2")
+                                uiOutput("aboutNovelty_fig")
                               ))
             ))
     )
     ,
     tabItem("optimize",
-            titlePanel("How to balance profit and good environmental status?"),
+            titlePanel("Balance profit and good environmental status"),
             
             fluidRow(
               column(width = 12,
                      uiOutput("opt_info")
                      ),
-              column(width = 4,
+              box(
+              column(width = 4, 
                      
                      popify(selectInput(inputId = 'Profit',
                                         label = "Minimum acceptable profit",
@@ -260,7 +262,8 @@ body <- dashboardBody(
                      content = "The indicators of water quality comprise of the average concentrations of nitrogen, phosphorus and chlorophyll <i>a</i>. <br><br> Low concentrations suggest high probability of reaching the Good Environmental Status (GES) as defined by HELCOM (Baltic Marine Environment Protection Commission – Helsinki Commission) whereas high concentrations indicate increased eutrophication."
                      , placement = "below", trigger = "hover", options = list(container = "body"))
                      
-                     )
+                     ),
+            width = 12, solidHeader = TRUE, title = "Choose your management goal")
             ),
             
             fluidRow(

@@ -41,7 +41,7 @@ h2 {
 	font-size: 15px;
 }
 
-#about_indepth {
+#about_bluewebs {
 	font-size: 15px;
 }
 
@@ -59,7 +59,7 @@ h2 {
 	padding: 10px;
 }
 
-#about_indepth .box {
+#about_bluewebs .box {
 	background: #BBDEFB;
 	padding: 10px;
 }
@@ -82,11 +82,6 @@ h2 {
 }
 
 #modelText2 .box {
-	background: #E3F2FD;
-	padding: 10px;
-}
-
-#modelText3 .box {
 	background: #BBDEFB;
 	padding: 10px;
 }
@@ -145,6 +140,15 @@ h2 {
 }
 
 #aboutNovelty2 .box {
+	background: #BBDEFB;
+	padding: 10px;
+}
+
+#aboutNovelty_fig {
+	font-size: 15px;
+}
+
+#aboutNovelty_fig .box {
 	background: #E3F2FD;
 	padding: 10px;
 }

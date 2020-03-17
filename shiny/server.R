@@ -31,7 +31,7 @@ server <- function(input, output, session) {
     box(includeMarkdown("data/map_info.md"), width = 12, solidHeader = TRUE)
   })
   
-  output$about_indepth <- renderUI({
+  output$about_bluewebs <- renderUI({
     box(includeMarkdown("data/about_bluewebs.md"), width = 12, solidHeader = TRUE)
   })
   
@@ -367,7 +367,7 @@ server <- function(input, output, session) {
         ) +
         geom_line(stat = "identity", size = 0.5) + 
         scale_colour_manual(name="Variables",
-                            labels=c("codRV" = "Cod reproductive volume","T_050_MarchMay" = "Spring temperature","Aug060mT" = "August temperature","notHypoxicA" = "Inverse hypoxic area"),
+                            labels=c("codRV" = "Cod reproductive volume","T_050_MarchMay" = "Spring temperature","Aug060mT" = "Summer temperature","notHypoxicA" = "Inverse hypoxic area"),
                             values = c("codRV" = "navyblue", "T_050_MarchMay" = "darkgreen", "Aug060mT" = "darkmagenta", "notHypoxicA" = "orangered3"))
     })
   
@@ -406,6 +406,10 @@ server <- function(input, output, session) {
   
   output$aboutNovelty2 <- renderUI({
     box(includeMarkdown("data/about_novelty2.md"), width = 12, solidHeader = TRUE)
+  })
+  
+  output$aboutNovelty_fig <- renderUI({
+    box(includeMarkdown("data/about_novelty_fig.md"), width = 12, solidHeader = TRUE)
   })
   
   output$noveltyci <- renderImage({
