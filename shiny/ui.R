@@ -131,7 +131,7 @@ sidebar <- dashboardSidebar(
 
 # Body
 body <- dashboardBody(
- useShinyjs(),
+ 
   
   tabItems(
     tabItem("about",
@@ -142,7 +142,7 @@ body <- dashboardBody(
                 tabPanel("Introduction",
                          fluidRow(
                            uiOutput("about_shortly"),
-                           box(imageOutput("scenery", height = "auto"), width = 12, solidHeader = TRUE),
+                           box(imageOutput("intro", height = "auto"), width = 12, solidHeader = TRUE),
                            uiOutput("about_continued")
                          )
                 ),
@@ -168,7 +168,7 @@ body <- dashboardBody(
             )  
     ),
     tabItem("predicted",
-            titlePanel("Explore the predicted biomasses and catches in different management scenarios"),
+            titlePanel("Explore the predicted biomasses and catches of fish stocks in different management scenarios"),
             fluidRow(
               box(id = "timeseries_box",
                 uiOutput("timeseries_info"),
@@ -199,8 +199,9 @@ body <- dashboardBody(
                               fluidRow(
                                 uiOutput("aboutNovelty"),
                                 uiOutput("aboutNovelty2"),
-                                box(solidHeader = TRUE, width = 12, imageOutput("noveltyci", height = "auto")),
-                                uiOutput("aboutNovelty_fig")
+                                column(width = 5, uiOutput("aboutNovelty_fig")),
+                                column(width = 7, box(solidHeader = TRUE, width = 12, imageOutput("noveltyci", height = "auto")))
+                                
                               ))
             ))
     )
@@ -259,7 +260,7 @@ body <- dashboardBody(
                                         choices = c("Above GES" = "GES", "Below GES" = "Sub-GES"),
                                         selected = "Above"
                      ), title = "Status of water quality", 
-                     content = "The indicators of water quality comprise of the average concentrations of nitrogen, phosphorus and chlorophyll <i>a</i>. <br><br> Low concentrations suggest high probability of reaching the Good Environmental Status (GES) as defined by HELCOM (Baltic Marine Environment Protection Commission – Helsinki Commission) whereas high concentrations indicate increased eutrophication."
+                     content = "The indicators of water quality comprise of the average concentrations of nitrogen, phosphorus and chlorophyll <i>a</i>. <br><br> Low concentrations suggest high probability of reaching the Good Environmental Status (GES) as defined by HELCOM (Baltic Marine Environment Protection Commission – Helsinki Commission) whereas high concentrations indicate increased eutrophication. <br><br> Being above the GES limit implies good water quality."
                      , placement = "below", trigger = "hover", options = list(container = "body"))
                      
                      ),

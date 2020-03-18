@@ -39,7 +39,7 @@ server <- function(input, output, session) {
     box(includeMarkdown("data/aknowledgement.md"), width = 12, solidHeader = TRUE)
   })
   
-  output$scenery <- renderImage({
+  output$intro <- renderImage({
     return(list(src = "data/intro.png", contentType = "image/png", width = 700))
   }, deleteFile = FALSE)
   
@@ -365,7 +365,7 @@ server <- function(input, output, session) {
                                  legend.text=element_text(size=11),
                                  legend.position = c(0.15,0.75)
         ) +
-        geom_line(stat = "identity", size = 0.5) + 
+        geom_line(stat = "identity", size = 1) + 
         scale_colour_manual(name="Variables",
                             labels=c("codRV" = "Cod reproductive volume","T_050_MarchMay" = "Spring temperature","Aug060mT" = "Summer temperature","notHypoxicA" = "Inverse hypoxic area"),
                             values = c("codRV" = "navyblue", "T_050_MarchMay" = "darkgreen", "Aug060mT" = "darkmagenta", "notHypoxicA" = "orangered3"))
@@ -388,7 +388,7 @@ server <- function(input, output, session) {
                            axis.title.x = element_text(size = 13),
                            axis.text.x = element_text(size = 11)
         ) +
-        geom_line(stat = "identity", size = 0.5)
+        geom_line(stat = "identity", size = 1)
     }
   )
 
@@ -413,9 +413,8 @@ server <- function(input, output, session) {
   })
   
   output$noveltyci <- renderImage({
-    return(list(src = "data/novelty.png", contentType = "image/png"))
+    return(list(src = "data/novelty.png", contentType = "image/png", width = 400))
   }, deleteFile = FALSE)
-  
   
   ##### "OPTIMIZE" TAB #####
   
@@ -452,7 +451,7 @@ server <- function(input, output, session) {
     
     title <- "<h3>How to reach your goal?</h3> <br>"
 
-    a <- "To reach the preferred outcome, the "
+    a <- "To reach your management goal, the "
     b <- " fishery policy should be applied as it has the highest chance ("
     c <- ") of being the best option. <br><br>"
 
@@ -476,7 +475,7 @@ server <- function(input, output, session) {
 
     d <- "The nutrient loading policy according to the "
     e <- " ("
-    f <- ") should be applied and combined with the fishery policy outlined above. <br><br>"
+    f <- ") should be applied and combined with the fishery policy. <br><br>"
 
     section2 <- HTML(paste0(d, "<b>", nutr_s, "</b>", e, "<b>", nutr_p, "</b>", f))
 
@@ -534,8 +533,8 @@ server <- function(input, output, session) {
   opt_clim <- reactive({	
     p <- ggplot(opt_subset()[1:2,], aes(x = 1, y = Clim_scen, fill = Clim_labels)) +
       scale_y_continuous(limits=c(0,1), breaks = scales::pretty_breaks(n = 5)) + 	
-      ggtitle("Climate Scenario") +	
-      scale_fill_discrete("Climate scenario", labels = c("RCP 4.5", "RCP 8.5")) +
+      ggtitle("Climate Change Scenario") +	
+      scale_fill_discrete("Climate change scenario", labels = c("RCP 4.5", "RCP 8.5")) +
       theme_void() + theme(legend.text = element_text(size = 12), legend.title = element_text(size = 14),
                            title = element_text(size = 14)) +
       geom_bar(stat = "identity", color = "white")	 +

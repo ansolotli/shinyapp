@@ -64,6 +64,10 @@ h2 {
 	padding: 10px;
 }
 
+#about_bluewebs a {
+	color: #1976D2;
+}
+
 #modelText {
 	font-size: 15px;
 }
@@ -115,6 +119,10 @@ h2 {
 #timeseries_box {
 	background: #BBDEFB;
 	padding: 10px;
+}
+
+#time_series_link {
+	color: #1976D2;
 }
 
 #novel_info {
