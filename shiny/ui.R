@@ -179,7 +179,7 @@ body <- dashboardBody(
                 hidden(
                   uiOutput("timeseries_info2")
                 ),
-                solidHeader = TRUE, width = 12) 
+                solidHeader = TRUE, width = 12, status = "primary") 
             ),
             fluidRow(
               splitLayout(cellWidths = c("50%", "50%"), 
@@ -209,7 +209,8 @@ body <- dashboardBody(
     )
     ,
     tabItem("optimize",
-            helper(titlePanel("Balance profit and good environmental status"), type = "markdown", content = "optimize_info", icon = "question-circle"),
+            helper(titlePanel("Balance profit and good environmental status"), 
+                   type = "markdown", content = "optimize_info", icon = "question-circle", size = "l"),
             
             fluidRow(
               box(

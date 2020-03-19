@@ -223,4 +223,25 @@ h2 {
 .modal-content {
 	font-size: 15px;
 	background: #E3F2FD;
+	border-color: #0277BD;
+}
+
+.btn {
+	background: #BBDEFB;
+	border-color: #0277BD;
+}
+
+.btn:hover {
+	background: #BBDEFB;
+	border-color: #0277BD;
+}
+
+.btn:focus {
+	background: #BBDEFB;
+	border-color: #0277BD;
+}
+
+.btn:active {
+	background: #BBDEFB;
+	border-color: #0277BD;
 }

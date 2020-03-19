@@ -14,31 +14,31 @@ server <- function(input, output, session) {
   ##### "ABOUT" TAB #####
   
   output$about_shortly <- renderUI({
-    box(includeMarkdown("data/about_intro_short.md"), width = 12, solidHeader = TRUE)
+    box(includeMarkdown("data/about_intro_short.md"), width = 12, solidHeader = TRUE, status = "primary")
   })
   
   output$about_continued <- renderUI({
-    box(includeMarkdown("data/about_intro_continued.md"), width = 12, solidHeader = TRUE)
+    box(includeMarkdown("data/about_intro_continued.md"), width = 12, solidHeader = TRUE, status = "primary")
   })
   
   output$modelText <- renderUI({
-    box(includeMarkdown("data/model_info.md"), width = 12, solidHeader = TRUE)
+    box(includeMarkdown("data/model_info.md"), width = 12, solidHeader = TRUE, status = "primary")
   })
   
   output$modelText2 <- renderUI({
-    box(includeMarkdown("data/model_info2.md"), width = 12, solidHeader = TRUE)
+    box(includeMarkdown("data/model_info2.md"), width = 12, solidHeader = TRUE, status = "primary")
   })
   
   output$mapText <- renderUI({
-    box(includeMarkdown("data/map_info.md"), width = 12, solidHeader = TRUE)
+    box(includeMarkdown("data/map_info.md"), width = 12, solidHeader = TRUE, status = "primary")
   })
   
   output$about_bluewebs <- renderUI({
-    box(includeMarkdown("data/about_bluewebs.md"), width = 12, solidHeader = TRUE)
+    box(includeMarkdown("data/about_bluewebs.md"), width = 12, solidHeader = TRUE, status = "primary")
   })
   
   output$aknowledgement <- renderUI({
-    box(includeMarkdown("data/aknowledgement.md"), width = 12, solidHeader = TRUE)
+    box(includeMarkdown("data/aknowledgement.md"), width = 12, solidHeader = TRUE, status = "primary")
   })
   
   output$intro <- renderImage({
@@ -333,7 +333,7 @@ server <- function(input, output, session) {
   ##### "NOVELTY TAB" #####
   
   output$novel_info <- renderUI({
-      box(includeMarkdown("data/novelty_info.md"), width = 12, solidHeader = TRUE)
+      box(includeMarkdown("data/novelty_info.md"), width = 12, solidHeader = TRUE, status = "primary")
   })
   
   # subset the data for novelty plots
@@ -403,11 +403,11 @@ server <- function(input, output, session) {
   })
   
   output$aboutNovelty <- renderUI({
-    box(includeMarkdown("data/about_novelty.md"), width = 12, solidHeader = TRUE)
+    box(includeMarkdown("data/about_novelty.md"), width = 12, solidHeader = TRUE, status = "primary")
   })
   
   output$aboutNovelty_fig <- renderUI({
-    box(includeMarkdown("data/about_novelty_fig.md"), width = 12, solidHeader = TRUE)
+    box(includeMarkdown("data/about_novelty_fig.md"), width = 12, solidHeader = TRUE, status = "primary")
   })
   
   output$noveltyci <- renderImage({
@@ -506,7 +506,7 @@ server <- function(input, output, session) {
     section4 <- HTML(paste0(j, "<b>", dec_s, "</b>", k, "<b>", dec_p, "</b>", l, post))
 
     wholeThing <- HTML(paste(section1, section2, section3, section4))
-    box(wholeThing, width = 12, solidHeader = TRUE)
+    box(wholeThing, width = 12, solidHeader = TRUE, status = "primary")
   })
   
   # draw pie charts
