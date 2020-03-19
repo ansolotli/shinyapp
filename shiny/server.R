@@ -9,7 +9,7 @@ datOpt <- read.csv("data/optimize_2401.csv", row.names = NULL, sep = ";")
 # Define the server function
 server <- function(input, output, session) {
   
-  observe_helpers(help_dir = "help")
+  observe_helpers(help_dir = "data")
   
   ##### "ABOUT" TAB #####
   
