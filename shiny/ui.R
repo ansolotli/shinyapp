@@ -1,15 +1,16 @@
 suppressPackageStartupMessages({
   library(shiny)
   library(shinydashboard)
-  library(shinyBS) # for popovers
-  library(stringi)
+  library(shinyBS) # popovers
+  library(stringi) 
   library(ggplot2)
-  library(rmarkdown)
+  library(rmarkdown) # needed for deployment
   library(reshape2)
-  library(shinyjs)
-  library(patchwork)
+  library(shinyjs) # enables javascript
+  library(patchwork) # arrange pie charts
   library(dplyr)
   library(scales)
+  library(shinyhelper) # help popovers
 })
 
 # Header
@@ -208,12 +209,9 @@ body <- dashboardBody(
     )
     ,
     tabItem("optimize",
-            titlePanel("Balance profit and good environmental status"),
+            helper(titlePanel("Balance profit and good environmental status"), type = "markdown", content = "optimize_info", icon = "question-circle"),
             
             fluidRow(
-              column(width = 12,
-                     uiOutput("opt_info")
-                     ),
               box(
               column(width = 4, 
                      

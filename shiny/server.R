@@ -9,6 +9,8 @@ datOpt <- read.csv("data/optimize_2401.csv", row.names = NULL, sep = ";")
 # Define the server function
 server <- function(input, output, session) {
   
+  observe_helpers(help_dir = "help")
+  
   ##### "ABOUT" TAB #####
   
   output$about_shortly <- renderUI({
@@ -404,10 +406,6 @@ server <- function(input, output, session) {
     box(includeMarkdown("data/about_novelty.md"), width = 12, solidHeader = TRUE)
   })
   
-  output$aboutNovelty2 <- renderUI({
-    box(includeMarkdown("data/about_novelty2.md"), width = 12, solidHeader = TRUE)
-  })
-  
   output$aboutNovelty_fig <- renderUI({
     box(includeMarkdown("data/about_novelty_fig.md"), width = 12, solidHeader = TRUE)
   })
@@ -417,10 +415,6 @@ server <- function(input, output, session) {
   }, deleteFile = FALSE)
   
   ##### "OPTIMIZE" TAB #####
-  
-  output$opt_info <- renderUI({
-    box(includeMarkdown("data/optimize_info.md"), width = 12, solidHeader = TRUE)
-  })
 
   # subsetting data for the optimizing plots
   opt_subset <- reactive({

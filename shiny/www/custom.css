@@ -215,3 +215,12 @@ h2 {
 	background: #2c3b41;
 	data-html: true;
 }
+
+.fa {
+	color: #222d32;
+}
+
+.modal-content {
+	font-size: 15px;
+	background: #E3F2FD;
+}
