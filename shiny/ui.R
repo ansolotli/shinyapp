@@ -131,8 +131,10 @@ sidebar <- dashboardSidebar(
 
 # Body
 body <- dashboardBody(
- 
   
+  #enable javascript
+  useShinyjs(),
+ 
   tabItems(
     tabItem("about",
             titlePanel("About the decision support tool"),
@@ -198,7 +200,6 @@ body <- dashboardBody(
                      tabPanel("What is novelty?",
                               fluidRow(
                                 uiOutput("aboutNovelty"),
-                                uiOutput("aboutNovelty2"),
                                 column(width = 5, uiOutput("aboutNovelty_fig")),
                                 column(width = 7, box(solidHeader = TRUE, width = 12, imageOutput("noveltyci", height = "auto")))
                                 
