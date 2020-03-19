@@ -39,7 +39,7 @@ sidebar <- dashboardSidebar(
                            choices = c("Sustainable" = "Sus", "Pelagics-Focused" = "Pel", "Open Access" = "OA"), 
                            selected = "Sus"
                ), "Fishery policies", 
-               content = "<b>Sustainable fishery policy</b> assumes healthy states of all three major fish stocks (i.e. cod, herring and sprat) as well as a healthy and functioning food web, therefore providing a basis for developing a sustainable exploitation of the Baltic Sea. <br><br> <b>Pelagics-Focused</b> scenario explores the option where, given the climate change and nutrient loading scenarios, the preferred fisheries management strategy would be prioritisation of herring and sprat over cod. <br><br> <b>Open access</b> scenario enables exploring the impacts of largely unregulated fisheries management on the status of the fish stocks, the food web and the economic outcomes from fisheries in the future Baltic Sea."
+               content = "<b>Sustainable fishery policy</b> sets healthy states of all three major fish stocks (i.e. cod, herring and sprat) in the Central Baltic Sea as a management objective. This policy provides a basis for developing a sustainable exploitation of the Baltic Sea. <br><br> <b>Pelagics-Focused</b> scenario explores the option where fishery on the pelagic stocks (i.e. herring and sprat) would be prioritised over cod. <br><br> <b>Open access</b> scenario enables exploring the impacts of largely unregulated fisheries management in the future Baltic Sea."
                , placement = "right", trigger = "hover", 
                #increase the size of the popover according to the length of content
                options = list(container = "body")),
@@ -49,7 +49,7 @@ sidebar <- dashboardSidebar(
                            choices = c("Baltic Sea Action Plan" = "BSAP", "Reference conditions" = "Ref"),
                            selected = "BSAP"
                ), "Nutrient loading policies", 
-               content = "Nutrient loads were modelled both according to the lower nutrient loads outlined in the <b>Baltic Sea Action Plan</b> (BSAP) by HELCOM (Baltic Marine Environment Protection Commission – Helsinki Commission), and the higher reference conditions. <br><br> The <b>reference conditions</b> are based on the HELCOM assessment of the average nutrient loads between 1995 and 2002, and correspond with the current level of nutrient loading in the Baltic Sea."
+               content = "Nutrient loads were modelled both according to the Baltic Sea Action Plan (BSAP) by HELCOM (Baltic Marine Environment Protection Commission – Helsinki Commission), and the reference conditions. The nutrient loads in the Reference conditions scenario are based on the HELCOM assessment of the average nutrient loads between 1995 and 2002. <br><br> <b>Reference conditions</b> correspond with the current level of nutrient loading in the Baltic Sea whereas nutrient loads outlined in the <b>Baltic Sea Action Plan</b> would be lower."
                , placement = "right", trigger = "hover", options = list(container = "body")),
                
                popify(selectInput(inputId = 'Climate', 
@@ -57,7 +57,7 @@ sidebar <- dashboardSidebar(
                            choices = c("RCP4.5", "RCP8.5"), 
                            selected = "RCP4.5"
                ), "Climate change scenarios", 
-               content = "The two climate change scenarios follow Representative Concentration Pathways (RCP) <b>4.5</b> and <b>8.5</b>, according to the fifth Assessment Report of the Intergovernmental Panel on Climate Change (IPCC) in 2014. <br><br> These pathways describe the greenhouse gas concentrations in the atmosphere, with higher concentrations resulting in higher warming effects on earth."
+               content = "The two climate change scenarios follow Representative Concentration Pathways (RCP) <b>4.5</b> and <b>8.5</b>, according to the fifth Assessment Report of the Intergovernmental Panel on Climate Change (IPCC) in 2014. <br><br> These pathways describe the greenhouse gas concentrations in the atmosphere, with higher concentrations resulting in higher warming effects on earth. <br><br> <b>RCP 4.5</b> is predicted to cause moderate rise in CO<sup>2</sup> emissions, reaching a plateau around 2040. <b>RCP 8.5</b> would lead to steeper rise in CO<sup>2</sup> emissions, with continuous increase."
                , placement = "right", trigger = "hover", options = list(container = "body")),
                
                # Create the two colums of checkbox groups (biomass and catch)
@@ -88,7 +88,7 @@ sidebar <- dashboardSidebar(
                                   choices = c("Baltic Sea Action Plan" = "BSAP", "Reference conditions" = "Ref"),
                                   selected = "BSAP"
                ), "Nutrient loading policies", 
-               content = "Nutrient loads were modelled both according to the lower nutrient loads outlined in the <b>Baltic Sea Action Plan</b> (BSAP) by HELCOM (Baltic Marine Environment Protection Commission – Helsinki Commission), and the higher reference conditions. <br><br> The <b>reference conditions</b> are based on the HELCOM assessment of the average nutrient loads between 1995 and 2002, and correspond with the current level of nutrient loading in the Baltic Sea."
+               content = "Nutrient loads were modelled both according to the Baltic Sea Action Plan (BSAP) by HELCOM (Baltic Marine Environment Protection Commission – Helsinki Commission), and the reference conditions. The nutrient loads in the Reference conditions scenario are based on the HELCOM assessment of the average nutrient loads between 1995 and 2002. <br><br> <b>Reference conditions</b> correspond with the current level of nutrient loading in the Baltic Sea whereas nutrient loads outlined in the <b>Baltic Sea Action Plan</b> would be lower."
                , placement = "right", trigger = "hover", options = list(container = "body")),
                
                popify(selectInput(inputId = 'Climate_nov', 
@@ -96,7 +96,7 @@ sidebar <- dashboardSidebar(
                                   choices = c("RCP4.5", "RCP8.5"), 
                                   selected = "RCP4.5"
                ), "Climate change scenarios", 
-               content = "The two climate change scenarios follow Representative Concentration Pathways (RCP) <b>4.5</b> and <b>8.5</b>, according to the fifth Assessment Report of the Intergovernmental Panel on Climate Change (IPCC) in 2014. <br><br> These pathways describe the greenhouse gas concentrations in the atmosphere, with higher concentrations resulting in higher warming effects on earth."
+               content = "The two climate change scenarios follow Representative Concentration Pathways (RCP) <b>4.5</b> and <b>8.5</b>, according to the fifth Assessment Report of the Intergovernmental Panel on Climate Change (IPCC) in 2014. <br><br> These pathways describe the greenhouse gas concentrations in the atmosphere, with higher concentrations resulting in higher warming effects on earth. <br><br> <b>RCP 4.5</b> is predicted to cause moderate rise in CO<sup>2</sup> emissions, reaching a plateau around 2040. <b>RCP 8.5</b> would lead to steeper rise in CO<sup>2</sup> emissions, with continuous increase."
                , placement = "right", trigger = "hover", options = list(container = "body")),
                
                # Create the column of checkbox groups (totalNov, codRV, temp_MarchMay050, temp_Aug060, notHypoxic)
@@ -229,7 +229,7 @@ body <- dashboardBody(
                                          choices = c("Yes" = "Yes", "No" = "No"),
                                          selected = "Yes"
                      ), title = "Expert knowledge", 
-                     content = "The decision support system includes studies on ecological novelty which denotes unprecedented, human-mediated changes at different ecological levels. <br><br> Novelty and its effect on a system are difficult to predict with models as novel conditions can not be calibrated against historical observations. <br><br> Adding expert scientific knowledge about this uncertainty on top of the modelling can increase the certainty of modelled predictions."
+                     content = "The decision support system includes studies on ecological novelty which denotes unprecedented, human-mediated changes at different ecological levels. <br><br> Novelty and its effect on a system are difficult to predict with models as novel conditions can not be calibrated against historical observations. <br><br> Adding expert scientific knowledge about this uncertainty on top of numerical modelling can increase the certainty of modelled predictions."
                      , placement = "right", trigger = "hover", options = list(container = "body"))
                      
                      ),
