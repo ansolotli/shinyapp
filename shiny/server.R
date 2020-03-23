@@ -9,40 +9,40 @@ datOpt <- read.csv("data/optimize_2401.csv", row.names = NULL, sep = ";")
 # Define the server function
 server <- function(input, output, session) {
   
-  observe_helpers(help_dir = "data")
+  observe_helpers(help_dir = "texts")
   
   ##### "ABOUT" TAB #####
   
   output$about_shortly <- renderUI({
-    box(includeMarkdown("data/about_intro_short.md"), width = 12, solidHeader = TRUE, status = "primary")
+    box(includeMarkdown("texts/about_intro_short.md"), width = 12, solidHeader = TRUE, status = "primary")
   })
   
   output$about_continued <- renderUI({
-    box(includeMarkdown("data/about_intro_continued.md"), width = 12, solidHeader = TRUE, status = "primary")
+    box(includeMarkdown("texts/about_intro_continued.md"), width = 12, solidHeader = TRUE, status = "primary")
   })
   
   output$modelText <- renderUI({
-    box(includeMarkdown("data/model_info.md"), width = 12, solidHeader = TRUE, status = "primary")
+    box(includeMarkdown("texts/model_info.md"), width = 12, solidHeader = TRUE, status = "primary")
   })
   
   output$modelText2 <- renderUI({
-    box(includeMarkdown("data/model_info2.md"), width = 12, solidHeader = TRUE, status = "primary")
+    box(includeMarkdown("texts/model_info2.md"), width = 12, solidHeader = TRUE, status = "primary")
   })
   
   output$foodwebText <- renderUI({
-    box(includeMarkdown("data/foodweb.md"), width = 12, solidHeader = TRUE, status = "primary")
+    box(includeMarkdown("texts/foodweb.md"), width = 12, solidHeader = TRUE, status = "primary")
   })
   
   output$mapText <- renderUI({
-    box(includeMarkdown("data/map_info.md"), width = 12, solidHeader = TRUE, status = "primary")
+    box(includeMarkdown("texts/map_info.md"), width = 12, solidHeader = TRUE, status = "primary")
   })
   
   output$about_bluewebs <- renderUI({
-    box(includeMarkdown("data/about_bluewebs.md"), width = 12, solidHeader = TRUE, status = "primary")
+    box(includeMarkdown("texts/about_bluewebs.md"), width = 12, solidHeader = TRUE, status = "primary")
   })
   
   output$aknowledgement <- renderUI({
-    box(includeMarkdown("data/aknowledgement.md"), width = 12, solidHeader = TRUE, status = "primary")
+    box(includeMarkdown("texts/aknowledgement.md"), width = 12, solidHeader = TRUE, status = "primary")
   })
   
   output$intro <- renderImage({
@@ -69,13 +69,13 @@ server <- function(input, output, session) {
   ##### "PREDICTED TIME SERIES" TAB ######
   
   output$timeseries_info <- renderUI({
-    includeMarkdown("data/timeseries_info.md")
+    includeMarkdown("texts/timeseries_info.md")
   })
   
   observeEvent(input$time_series_link, {
     toggle("timeseries_info2")
     output$timeseries_info2 <- renderUI({
-      includeMarkdown("data/timeseries_info_hidden.md")
+      includeMarkdown("texts/timeseries_info_hidden.md")
     })
     
     if (input$time_series_link %% 2 == 1) {
@@ -341,7 +341,7 @@ server <- function(input, output, session) {
   ##### "NOVELTY TAB" #####
   
   output$novel_info <- renderUI({
-      box(includeMarkdown("data/novelty_info.md"), width = 12, solidHeader = TRUE, status = "primary")
+      box(includeMarkdown("texts/novelty_info.md"), width = 12, solidHeader = TRUE, status = "primary")
   })
   
   # subset the data for novelty plots
@@ -411,11 +411,11 @@ server <- function(input, output, session) {
   })
   
   output$aboutNovelty <- renderUI({
-    box(includeMarkdown("data/about_novelty.md"), width = 12, solidHeader = TRUE, status = "primary")
+    box(includeMarkdown("texts/about_novelty.md"), width = 12, solidHeader = TRUE, status = "primary")
   })
   
   output$aboutNovelty_fig <- renderUI({
-    box(includeMarkdown("data/about_novelty_fig.md"), width = 12, solidHeader = TRUE, status = "primary")
+    box(includeMarkdown("texts/about_novelty_fig.md"), width = 12, solidHeader = TRUE, status = "primary")
   })
   
   output$noveltyci <- renderImage({
