@@ -118,7 +118,7 @@ sidebar <- dashboardSidebar(
                         popify(checkboxInput(inputId = "novelTotal",
                                       label = "Total abiotic novelty", value = TRUE),
                                title = "Total abiotic novelty",
-                               content = "<b>Total abiotic novelty</b> is the sum of other novelty variables and describes the total novelty expected to occur in the Central Baltic Sea in the current century. <br><br>     The five other novelty variables were each scaled between 0 and 1; 0 denoting values falling in the 95% confidence interval from observational data, and 1 denoting the extreme values of the model predictions till the end of the 21st century."
+                               content = "<b>Total abiotic novelty</b> is the sum of other novelty variables and describes the total novelty expected to occur in the Central Baltic Sea in the current century. <br><br> The four other novelty variables were each scaled between 0 and 1; 0 denoting values falling in the 95% confidence interval from observational data, and 1 denoting the extreme values of the model predictions till the end of the 21st century."
                                , placement = "right", trigger = "hover", options = list(container = "body"))
                  )
                )
@@ -223,7 +223,7 @@ body <- dashboardBody(
                                         choices = c("No profit", "Profit larger than 0", "Profit larger than 100", "Profit larger than 200"),
                                         selected = "Profit larger than 100"
                      ), title = "Minimum acceptable profit", 
-                     content = "Minimum acceptable profit enables selection of the desired lowest limit of annual profitability of fisheries on cod, herring, and sprat in millions of euros."
+                     content = "Minimum acceptable profit enables selection of the acceptable lowest limit of annual profitability of fisheries on cod, herring, and sprat in millions of euros."
                      , placement = "right", trigger = "hover", options = list(container = "body")),
 
                      popify(radioButtons(inputId = 'Novelty',
@@ -243,7 +243,7 @@ body <- dashboardBody(
                                                     "Two stocks below the ref. point" = "Two below", "All stocks below the ref. point" = "All below"),
                                         selected = "All above"
                      ), title = "Status of fish stocks", 
-                     content = "The spawning-stock biomass of the three major fish species (i.e. cod, herring and sprat) in relation to the reference point describes the expected status of these fish stocks. The stocks are in good condition if their spawning-stock biomass exceeds the reference point. <br><br> The scale ranges from all three fish species being above the reference point limit to none of the species faring well."
+                     content = "The spawning-stock biomass of the three major commercially exploited fish species (i.e. cod, herring and sprat) in relation to the reference point describes the expected status of these fish stocks. The stocks are considered to be in in good condition if their spawning-stock biomass exceeds the reference point. <br><br> The scale ranges from all three fish species being above the reference point limit to none of the species faring well."
                      , placement = "right", trigger = "hover", options = list(container = "body")),
                      
                      popify(radioButtons(inputId = 'Ref_point',
@@ -251,7 +251,7 @@ body <- dashboardBody(
                                          choices = c("Blim" = "Blim", "B MSY trigger" = "B MSY"),
                                          selected = "Blim"
                      ), title = "Reference point", 
-                     content = "Reference points are indexes applied in the regulation of fisheries. They are defined by the International Council for the Exploration of the Sea (ICES), and describe the status of the fish stocks. <br><br> <b>Blim</b> is the reference point describing the limit below which there is a high risk of reduced recruitment. <br><br> <b>B MSY trigger</b> (or MSYBtrigger) is considered to be the lower bound of spawning–stock biomass fluctuation below which fishing needs to be reduced to allow a fish stock to rebuild to levels capable of producing maximum sustainable yield (MSY)."
+                     content = "Reference points are indexes applied in the regulation of fisheries. They are defined by the International Council for the Exploration of the Sea (ICES), and they aim to describe if the status of the fish stocks is good or if they are overexploited or endangered. <br><br> <b>Blim</b> is the reference point describing the limit below which there is a high risk of reduced recruitment. <br><br> <b>B MSY trigger</b> (or MSYBtrigger) is considered to be the lower bound of spawning–stock biomass fluctuation below which fishing needs to be reduced to allow a fish stock to rebuild to levels capable of producing maximum sustainable yield (MSY)."
                      , placement = "right", trigger = "hover", options = list(container = "body"))
                      
                      ),
