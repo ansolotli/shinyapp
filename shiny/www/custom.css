@@ -90,6 +90,15 @@ h2 {
 	padding: 10px;
 }
 
+#foodwebText {
+	font-size: 15px;
+}
+
+#foodwebText .box {
+	background: #BBDEFB;
+	padding: 10px;
+}
+
 #mapText {
 	font-size: 15px;
 }

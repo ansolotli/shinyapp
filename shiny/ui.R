@@ -153,7 +153,9 @@ body <- dashboardBody(
                          fluidRow(
                            uiOutput("modelText"),
                            box(solidHeader = TRUE, width = 12, imageOutput("model", height = "auto")),
-                           uiOutput("modelText2")
+                           uiOutput("modelText2"),
+                           box(solidHeader = TRUE, width = 12, imageOutput("foodweb", height = "auto")),
+                           uiOutput("foodwebText")
                            )
                 ),
                 tabPanel("Model area",

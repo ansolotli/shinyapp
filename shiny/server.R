@@ -29,6 +29,10 @@ server <- function(input, output, session) {
     box(includeMarkdown("data/model_info2.md"), width = 12, solidHeader = TRUE, status = "primary")
   })
   
+  output$foodwebText <- renderUI({
+    box(includeMarkdown("data/foodweb.md"), width = 12, solidHeader = TRUE, status = "primary")
+  })
+  
   output$mapText <- renderUI({
     box(includeMarkdown("data/map_info.md"), width = 12, solidHeader = TRUE, status = "primary")
   })
@@ -49,8 +53,12 @@ server <- function(input, output, session) {
     return(list(src = "data/dss.png", contentType = "image/png", width = 700))
   }, deleteFile = FALSE)
   
+  output$foodweb <- renderImage({
+    return(list(src = "data/foodweb.png", contentType = "image/png", width = 700))
+  }, deleteFile = FALSE)
+  
   output$map <- renderImage({
-    return(list(src = "data/map.png", contentType = "image/png"))
+    return(list(src = "data/model_area.png", contentType = "image/png", width = 700))
   }, deleteFile = FALSE)
   
   output$logos <- renderImage({
