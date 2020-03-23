@@ -41,6 +41,10 @@ h2 {
 	font-size: 15px;
 }
 
+#about_shortly a {
+	color: #1976D2;
+}
+
 #about_bluewebs {
 	font-size: 15px;
 }
@@ -108,11 +112,11 @@ h2 {
 	padding: 10px;
 }
 
-#aknowledgement {
+#acknowledgement {
 	font-size: 15px;
 }
 
-#aknowledgement .box {
+#acknowledgement .box {
 	background: #E3F2FD;
 	padding: 10px;
 }

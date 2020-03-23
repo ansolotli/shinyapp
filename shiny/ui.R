@@ -167,7 +167,7 @@ body <- dashboardBody(
                 tabPanel("BLUEWEBS",
                          fluidRow(
                             uiOutput("about_bluewebs"),
-                            uiOutput("aknowledgement"),
+                            uiOutput("acknowledgement"),
                             box(imageOutput("logos"), width = 12, solidHeader = TRUE))
                          ))
             )  

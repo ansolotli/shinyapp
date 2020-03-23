@@ -41,8 +41,8 @@ server <- function(input, output, session) {
     box(includeMarkdown("texts/about_bluewebs.md"), width = 12, solidHeader = TRUE, status = "primary")
   })
   
-  output$aknowledgement <- renderUI({
-    box(includeMarkdown("texts/aknowledgement.md"), width = 12, solidHeader = TRUE, status = "primary")
+  output$acknowledgement <- renderUI({
+    box(includeMarkdown("texts/acknowledgement.md"), width = 12, solidHeader = TRUE, status = "primary")
   })
   
   output$intro <- renderImage({
