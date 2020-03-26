@@ -31,6 +31,7 @@ sidebar <- dashboardSidebar(
     convertMenuItem(
       menuItem("About", tabName = "about"), tabName = "about"),
     convertMenuItem(
+      
       menuItem(HTML("Predicted time series <br> of fish stocks"), tabName = "predicted",
                
                # Create the dropdowns of scenario options
@@ -259,10 +260,10 @@ body <- dashboardBody(
                      
                      popify(selectInput(inputId = 'Nutr_GES',
                                         label = "Status of water quality",
-                                        choices = c("Above GES" = "GES", "Below GES" = "Sub-GES"),
+                                        choices = c("In Good Environmental Status" = "GES", "Not in Good Environmental Status" = "Sub-GES"),
                                         selected = "Above"
                      ), title = "Status of water quality", 
-                     content = "The indicators of water quality comprise of the average concentrations of nitrogen, phosphorus and chlorophyll <i>a</i>. <br><br> Low concentrations suggest high probability of reaching the Good Environmental Status (GES) as defined by HELCOM (Baltic Marine Environment Protection Commission – Helsinki Commission) whereas high concentrations indicate increased eutrophication. <br><br> Being above the GES limit implies good water quality."
+                     content = "The indicators of water quality comprise of the average concentrations of nitrogen, phosphorus and chlorophyll <i>a</i>. <br><br> Low concentrations suggest high probability of reaching the <b>Good Environmental Status (GES)</b> as defined by HELCOM (Baltic Marine Environment Protection Commission – Helsinki Commission) whereas high concentrations indicate increased eutrophication."
                      , placement = "below", trigger = "hover", options = list(container = "body"))
                      
                      ),

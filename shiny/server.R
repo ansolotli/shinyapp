@@ -1,9 +1,9 @@
 
 # Load data
-datBio <- read.csv("data/ewe_bio_results_SD_corrected_2502.csv", row.names = NULL, sep = ";")
-datCth <- read.csv("data/ewe_catch_results_SD_corrected_2502.csv", row.names = NULL, sep = ";")
+datBio <- read.csv("data/ewe_bio_results.csv", row.names = NULL, sep = ";")
+datCth <- read.csv("data/ewe_catch_results.csv", row.names = NULL, sep = ";")
 datNov <- read.csv("data/novelty_incl_total.csv", row.names = NULL, sep = ";", stringsAsFactors = FALSE)
-datOpt <- read.csv("data/optimize_2401.csv", row.names = NULL, sep = ";")
+datOpt <- read.csv("data/optimize.csv", row.names = NULL, sep = ";")
 
 
 # Define the server function
@@ -451,7 +451,7 @@ server <- function(input, output, session) {
     # format the probability of fishery policy
     fish_p <- percent(fish$F_scen)
     
-    title <- "<h3>How to reach your goal?</h3> <br>"
+    title <- "<h3>How to most likely reach your goal?</h3> <br>"
 
     a <- "To reach your management goal, the "
     b <- " fishery policy should be applied as it has the highest chance ("
